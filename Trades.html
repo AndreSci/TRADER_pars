@@ -1,0 +1,1976 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/Content/jquery-ui/jquery-ui.min.css">
+
+    <title>Торговые процедуры</title>
+	<link href="/Content/sass/styles.scss" rel="stylesheet"/>
+
+
+    <script src="/Scripts/jquery/jquery-3.2.1.js"></script>
+<script src="/Scripts/jquery/jquery.magnific-popup.js"></script>
+
+    <script src="/Scripts/bootstrap/moment.js"></script>
+<script src="/Scripts/bootstrap/moment-with-locales.js"></script>
+<script src="/Scripts/bootstrap/bootstrap.js"></script>
+<script src="/Scripts/bootstrap/bootstrap-datetimepicker.js"></script>
+
+    <script src="/Scripts/eds/es6-promise.js?v=636203524180000000"></script>
+<script src="/Scripts/eds/eds_utils.js?v=636401240760000000"></script>
+<script src="/Scripts/eds/ie_eventlistner_polyfill.js?v=636203524180000000"></script>
+<script src="/Scripts/eds/cadesplugin_api.js?v=636524064287668894"></script>
+<script src="/Scripts/eds/crypto_NPAPI.js?v=636524872207327713"></script>
+<script src="/Scripts/eds/crypto_common.js?v=636524867762574589"></script>
+<script src="/Scripts/eds/crypto_constants.js?v=636203524180000000"></script>
+<script src="/Scripts/eds/eds.js?v=636524962758366366"></script>
+
+
+    <script src="/Scripts/components/clocks.js?v=636310667280000000"></script>
+<script src="/Scripts/components/app.js?v=636641440095314222"></script>
+
+    <script src="/Scripts/pages/_layout.js?v=636791883073844241"></script>
+<script src="/Scripts/pages/popup.js?v=636390884160000000"></script>
+<script src="/Scripts/pages/login.js?v=636528160721385577"></script>
+<script src="/Scripts/pages/message.js?v=636390884160000000"></script>
+<script src="/Scripts/pages/confirmDialog.js?v=636493626817248360"></script>
+
+
+</head>
+<body>
+<div class="wrapper">
+    <header class="header">
+        <div class="header__tabs">
+    <div class="container">
+        <div class="row  row--v-offset" id="DebtorProprietyType_row">
+            <div class="col col--xs-4 tab tab__selected">
+                БАНКРОТСТВО
+            </div>
+            <div class="col col--xs-4 tab">
+                <a href="http:\\fssp.ru-trade24.ru">АРЕСТОВАННОЕ ИМУЩЕСТВО</a>
+            </div>
+            <div class="col col--xs-4 tab">
+                <a href="http:\\com.ru-trade24.ru">КОММЕРЧЕСКИЕ ТОРГИ</a>
+            </div>
+        </div>
+    </div>
+</div>
+        
+<div class="header__top">
+	<div class="container">
+		<div class="row  row--v-offset">
+			<div class="col col--xs-1">
+				<div id="localtime" class="header__current-time">
+					<div id="ltime" class="header__time"></div>
+					<div id="ldate" class="header__date"></div>
+				</div>
+			</div>
+			<div class="col col--xs-2">
+				<div class="header__time-info header__time-info--first">Местное время</div>
+			</div>
+			<div class="col col--xs-1">
+				<div id="servertime" class="header__current-time">
+					<div id="stime" class="header__time"></div>
+					<div id="sdate" class="header__date"></div>
+				</div>
+			</div>
+			<div class="col col--xs-2">
+				<div class="header__time-info">Серверное время</div>
+			</div>
+			<div class="col col--xs-1"></div>
+			<div class="col col--xs-1">
+				<div class="rate rate--up" id="eurorate">€ 86,20
+				</div>
+			</div>
+			<div class="col col--xs-1">
+				<div class="rate rate--up" id="usdrate">$ 72,37
+				</div>
+			</div>
+				<div class="col col--xs-3">
+					<a class="header__btn btn" href="/accounting/CreateMainInfo">Регистрация</a>
+					<a class="header__btn btn--input js-btnShowLogin js-magnificPopup" tooltip="Вход" href="#loginPopup" data-effect="mfp-zoom-in"></a>
+				</div>
+		</div>
+	</div>
+</div>
+
+<div class="popup popup--login mfp-with-anim mfp-hide" id="loginPopup" data-effect="mfp-zoom-in">
+    <div class="popup__titlelog">Авторизация</div>
+    <div class="popup__content">
+<form action="/profile" class="form" id="logOnFormModal" method="post">            <div class="row  row--v-offset">
+                <div class="col col--xs-12">
+                    <input class="form__input" name="UserName" placeholder="Логин" type="text" />
+                </div>
+            </div>
+            <div class="row  row--v-offset">
+                <div class="col col--xs-12">
+                    <input class="form__input" name="Password" placeholder="Пароль" type="password" />
+                </div>
+            </div>
+            <div class="form__delimiter">или</div>
+            <div class="row  row--v-offset">
+                <div class="col col--xs-12">
+                    <div class="select js-select form__select">
+                        <div class="select__select-input">
+                            <span id="modalEdsLabel" class="select__select js-text">Выберите подпись</span>
+                            <input type="text" id="modalEds" name="modalEds" class="select__input">
+                        </div>
+                        <div id="modalEdsOption" name="modalEdsOption" class="js-option select__option">
+                            <span class="select__el" data-value="F946A0D572B06E19FECE16397A457CE0350F5BCC">1</span>
+                            <span class="select__el" data-value="1350FD1828167FF7FED17EEA4572698C16F736C9">2</span>
+                            <span class="select__el" data-value="53 cc b6 70 f6 20 3f 18 c4 5c 30 64 16 eb b2 2c cf 4b c0 09">3</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" id="SignedData" name="SignedData"/>
+            <div class="form__button-section">
+                <a class="link--orange" href="/accounting/CreateMainInfo">Регистрация</a>
+                <input class="btn" type="submit" onclick="SignLoginData('logOnFormModal', 'modalEds'); return false;" value="Войти">
+            </div>
+</form>    </div>
+</div>
+
+        
+
+<div class="header__middle">
+    <div class="container">
+        <div class="header__logo">
+            <a href="/">
+                <img alt="Логотип ООО СЭлТ" src="/img/layout/logo.png"/>
+            </a>
+        </div>
+        <div class="header__nav nav js-mainNav">
+            <div class="nav__parent-wrap">
+                <a class="nav__main-item noscript" href="/Home/Trades">Торговые процедуры</a>
+            </div>
+            <div class="nav__parent-wrap">
+                <a class="nav__main-item noscript" href="/Home/Eds">ЭЦП</a>
+            </div>
+            
+            
+            
+            <div class="nav__parent-wrap">
+                <a class="nav__main-item noscript" href="/Home/About">О площадке</a>
+                <div class="nav__children-item drop-down-nav hide">
+                    <a class="drop-down-nav__item" href="/Content/RenderContent/7">Документы</a>
+					<a class="drop-down-nav__item" href="/Content/RenderContent/10">Задаток</a>
+                    <a class="drop-down-nav__item" href="/Content/RenderContent/8">Помощь</a>
+                    <a class="drop-down-nav__item" href="/News">Новости</a>
+                </div>
+            </div>            
+
+            <div class="nav__parent-wrap">
+    <a class="nav__main-item noscript" href="/Content/RenderContent/3">Тарифы</a>
+
+</div>
+            <div class="nav__parent-wrap">
+    <a class="nav__main-item noscript" href="/Content/RenderContent/4">Контакты</a>
+
+</div>
+        </div>
+    </div>
+</div>
+
+
+    </header>
+	<main class="content">
+		
+
+<script src="/Scripts/components/lotMediaView.js" type="text/javascript"></script>
+
+<div class="container">
+	<h1>Реестр торгов</h1>
+    <div class="search">
+<form action="/query/Index" method="post">            <input id="searchbox" name="searchbox" class="search__input" placeholder="Поиск"/>
+            <button class="search__btn"></button>
+</form></div>
+
+    <script src="/Scripts/jquery-ui/jquery-ui.js?v=636452139900000000"></script>
+
+<script src="/Scripts/jquery-ui/ui.combobox.js?v=636452139900000000"></script>
+
+<script src="/Scripts/components/ui.lotclassificationedit.js?v=636452139900000000"></script>
+<script src="/Scripts/components/ui.lotpublicofferedit.js?v=636391027040000000"></script>
+
+
+<script type="text/javascript" language="javascript">
+    $(function() {
+        bindCombobox($("select.classificationCode"));
+    });
+</script>
+
+<form action="/query/Filter" enctype="multipart/form-data" id="filter" method="post">    <div class="collaps-block">
+        <div class="collaps-block__title collapsed" data-toggle="collapse" data-target="#tradefilterblock">Фильтр по торгам</div>
+        <div id="tradefilterblock" class="collaps-block__content collapse ">
+            <form class="form">
+                <div class="row  row--v-offset">
+                    <div class="col col--xs-3">
+                        <div class="form__area">Цена</div>
+                        <div class="form__relative form__margin">
+                            <input class="form__input" data-val="true" id="MainPageFilterLotPriceStart" name="MainPageFilterLotPriceStart" placeholder="от"></input>
+                        </div>
+                        <div class="form__margin form__relative">
+                            <input class="form__input" data-val="true" id="MainPageFilterLotPriceEnd" name="MainPageFilterLotPriceEnd" placeholder="до"></input>
+                        </div>
+                    </div>
+                    <div class="col col--xs-3">
+                        <div class="form__area">Прием заявок</div>
+                        <div class="input-group date form__datetimepicker form__input--mini form__margin bsdatetimepicker"><input class="form-control form__input--from" id="MainPageFilterPartpAppDateBegin" name="MainPageFilterPartpAppDateBegin" type="text"></input><span class="input-group-addon"></span><span class="form__hint">с</span></div>
+                        <div class="input-group date form__datetimepicker form__input--mini form__margin bsdatetimepicker"><input class="form-control form__input--from" id="MainPageFilterPartpAppDateEnd" name="MainPageFilterPartpAppDateEnd" type="text"></input><span class="input-group-addon"></span><span class="form__hint">по</span></div>
+                    </div>
+                    <div class="col col--xs-3">
+                        <div class="form__area">Проведение торгов</div>
+                        <div class="input-group date form__datetimepicker form__input--mini form__margin bsdatetimepicker"><input class="form-control form__input--from" id="MainPageFilterDateBegin" name="MainPageFilterDateBegin" type="text"></input><span class="input-group-addon"></span><span class="form__hint">с</span></div>
+                        <div class="input-group date form__datetimepicker form__input--mini form__margin bsdatetimepicker"><input class="form-control form__input--from" id="MainPageFilterDateEnd" name="MainPageFilterDateEnd" type="text"></input><span class="input-group-addon"></span><span class="form__hint">по</span></div>
+                    </div>
+                    <div class="col col--xs-3">
+                        <div class="form__area">Тип торгов</div>
+                        <div class="form__radio-group">
+                            <div class="form__radio-area  form__radio-area--three-in-col">
+                                <input checked="checked" class="form__radio-input" id="Undefined" name="MainPageFilterTradeType" type="radio" value="Undefined" />
+                                <label for="Undefined" class="form__radio-label">Все</label>
+                            </div>
+                            <div class="form__radio-area  form__radio-area--three-in-col">
+                                <input class="form__radio-input" id="OpenAuction" name="MainPageFilterTradeType" type="radio" value="OpenAuction" />
+                                <label for="OpenAuction" class="form__radio-label">Открытый аукцион</label>
+                            </div>
+                            <div class="form__radio-area  form__radio-area--three-in-col">
+                                <input class="form__radio-input" id="PublicOffer" name="MainPageFilterTradeType" type="radio" value="PublicOffer" />
+                                <label for="PublicOffer" class="form__radio-label">Публичное предложение</label>
+                            </div>
+                            <div class="form__radio-area  form__radio-area--three-in-col">
+                                <input class="form__radio-input" id="Contest" name="MainPageFilterTradeType" type="radio" value="Contest" />
+                                <label for="Contest" class="form__radio-label">Конкурс</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row  row--v-offset">
+                    <div class="col col--xs-3">
+                        <div class="form__area"><label for="MainPageFilterDebtor">Должник</label></div>
+                    </div>
+                    <div class="col col--xs-6">
+                        <input class="form__input" id="MainPageFilterDebtor" name="MainPageFilterDebtor" type="text" value="" />
+                    </div>
+                </div>
+                <div class="row  row--v-offset">
+                    <div class="col col--xs-3">
+                        <div class="form__area"><label for="MainPageFilterTrader">Организатор торгов</label></div>
+                    </div>
+                    <div class="col col--xs-6">
+                        <input class="form__input" id="MainPageFilterTrader" name="MainPageFilterTrader" type="text" value="" />
+                    </div>
+                </div>
+                <div class="row  row--v-offset">
+                    <div class="col col--xs-3">
+                        <div class="form__area"><label for="MainPageFilterTradeObject">Предмет торгов</label></div>
+                    </div>
+                    <div class="col col--xs-6">
+                        <input class="form__input" id="MainPageFilterTradeObject" name="MainPageFilterTradeObject" type="text" value="" />
+                    </div>
+                </div>
+
+                <div class="row  row--v-offset">
+                    <div class="col col--xs-3">
+                        <div class="form__area"><label for="LotClassificationCode">Классификатор имущества должников</label></div>
+                    </div>
+                    <div class="col col--xs-6">
+
+                        <select class="classificationCode select--full-width" id="LotClassificationCode" name="LotClassificationCode"><option value="">---Выберите классификатор---</option>
+<option disabled="disabled" value="04">Имущественные права</option>
+<option disabled="disabled" value="0402">&#160;&#160;&#160;Вещные права на имущество</option>
+<option value="0402006">&#160;&#160;&#160;&#160;&#160;&#160;Право аренды</option>
+<option value="0402002">&#160;&#160;&#160;&#160;&#160;&#160;Право оперативного управления имуществом</option>
+<option value="0402003">&#160;&#160;&#160;&#160;&#160;&#160;Право пожизенного наследуемого владения земельным участком</option>
+<option value="0402004">&#160;&#160;&#160;&#160;&#160;&#160;Право постояннного(бессрочного) пользования земельным участком</option>
+<option value="0402001">&#160;&#160;&#160;&#160;&#160;&#160;Право хозяйственного ведения имуществом</option>
+<option value="0402005">&#160;&#160;&#160;&#160;&#160;&#160;Сервитут</option>
+<option value="0401">&#160;&#160;&#160;Права долевой собственности</option>
+<option value="0403">&#160;&#160;&#160;Уступка требований по  кредитным обязательствам с залоговым имуществом</option>
+<option disabled="disabled" value="01">Материальные активы</option>
+<option disabled="disabled" value="0107">&#160;&#160;&#160;Животноводство. Растениеводство </option>
+<option value="0107001">&#160;&#160;&#160;&#160;&#160;&#160;Животные звероферм</option>
+<option value="0107003">&#160;&#160;&#160;&#160;&#160;&#160;Животные зоопарков, цирков, служебные собаки</option>
+<option value="0107009">&#160;&#160;&#160;&#160;&#160;&#160;Корма растительные</option>
+<option value="0107005">&#160;&#160;&#160;&#160;&#160;&#160;Продукция овцеводства, козоводства, кролиководства, коневодства, оленеводства, верблюдоводства</option>
+<option value="0107004">&#160;&#160;&#160;&#160;&#160;&#160;Продукция птицеводства</option>
+<option value="0107006">&#160;&#160;&#160;&#160;&#160;&#160;Продукция пчелеводства, шмелеводства, шелководства</option>
+<option value="0107007">&#160;&#160;&#160;&#160;&#160;&#160;Продукция рыбоводства</option>
+<option value="0107002">&#160;&#160;&#160;&#160;&#160;&#160;Продукция скотоводства</option>
+<option value="0107010">&#160;&#160;&#160;&#160;&#160;&#160;Растения. Луковицы, семена, саженцы, насаждения многолетние, культуры</option>
+<option value="0107008">&#160;&#160;&#160;&#160;&#160;&#160;Удобрения растительного происхождения</option>
+<option disabled="disabled" value="0101">&#160;&#160;&#160;Завершенные здания и сооружения или их части</option>
+<option value="0101016">&#160;&#160;&#160;&#160;&#160;&#160;Жилые здания (помещения)</option>
+<option value="0101015">&#160;&#160;&#160;&#160;&#160;&#160;Здания (кроме жилых) и сооружения, не включенные в другие группировки</option>
+<option value="0101017">&#160;&#160;&#160;&#160;&#160;&#160;Здания (помещения) жилые, не входящие в жилищный фонд</option>
+<option value="0101010">&#160;&#160;&#160;&#160;&#160;&#160;Здания для органов государственного управления, обороны, государственной безопасности, финансов и иностранных представительств</option>
+<option value="0101002">&#160;&#160;&#160;&#160;&#160;&#160;Здания и сооружения машиностроительных предприятий</option>
+<option value="0101003">&#160;&#160;&#160;&#160;&#160;&#160;Здания и сооружения предприятий лесной, деревообрабатывающей, целлюлозно-бумажной, стекольной, фарфоро-фаянсовой, полиграфической промышленности и предприятий промышленности строительных материалов</option>
+<option value="0101006">&#160;&#160;&#160;&#160;&#160;&#160;Здания и сооружения предприятий строительной индустрии, транспорта и связи</option>
+<option value="0101007">&#160;&#160;&#160;&#160;&#160;&#160;Здания и сооружения предприятий торговли, общественного питания, жилищно-коммунального хозяйства</option>
+<option value="0101005">&#160;&#160;&#160;&#160;&#160;&#160;Здания и сооружения сельскохозяйственных предприятий и предприятий лесного хозяйства</option>
+<option value="0101001">&#160;&#160;&#160;&#160;&#160;&#160;Здания и сооружения топливно-энергетических, металлургических, химических и нефтехимических предприятий</option>
+<option value="0101008">&#160;&#160;&#160;&#160;&#160;&#160;Здания предприятий здравоохранения, науки и научного обслуживания, образования, культуры и искусства</option>
+<option value="0101004">&#160;&#160;&#160;&#160;&#160;&#160;Здания предприятий легкой, пищевой, микробиологической, мукомольно-крупяной, комбикормовой и медицинской промышленности</option>
+<option value="0101009">&#160;&#160;&#160;&#160;&#160;&#160;Исторические памятники</option>
+<option value="0101014">&#160;&#160;&#160;&#160;&#160;&#160;Незавершенное строительство</option>
+<option value="0101012">&#160;&#160;&#160;&#160;&#160;&#160;Ограды (заборы), кроме металлических</option>
+<option value="0101011">&#160;&#160;&#160;&#160;&#160;&#160;Сооружения - металлические конструкции. Сооружения хозяйственные металлические</option>
+<option value="0101013">&#160;&#160;&#160;&#160;&#160;&#160;Сооружения спортивно-оздоровительные</option>
+<option disabled="disabled" value="0105">&#160;&#160;&#160;ИНВЕНТАРЬ ПРОИЗВОДСТВЕННЫЙ И ХОЗЯЙСТВЕННЫЙ, ПРИБОРЫ БЫТОВЫЕ</option>
+<option value="0105006">&#160;&#160;&#160;&#160;&#160;&#160;Инвентарь для театрально-зрелищных учреждений и учреждений культуры</option>
+<option value="0105005">&#160;&#160;&#160;&#160;&#160;&#160;Инвентарь спортивный</option>
+<option value="0105009">&#160;&#160;&#160;&#160;&#160;&#160;Инвентарь хозяйственно-бытового назначения</option>
+<option value="0105001">&#160;&#160;&#160;&#160;&#160;&#160;Мебель специальная для производств</option>
+<option value="0105003">&#160;&#160;&#160;&#160;&#160;&#160;Оборудование металлическое для сохранности ценностей (сейфы, несгораемые шкафы, бронированные двери и камеры)</option>
+<option value="0105004">&#160;&#160;&#160;&#160;&#160;&#160;Оборудование учебное</option>
+<option value="0105002">&#160;&#160;&#160;&#160;&#160;&#160;Приборы бытовые</option>
+<option value="0105008">&#160;&#160;&#160;&#160;&#160;&#160;Тара функциональная, емкости, контейнеры</option>
+<option value="0105007">&#160;&#160;&#160;&#160;&#160;&#160;Часы (кроме специальных)</option>
+<option value="0103">&#160;&#160;&#160;Незавершенное строительство - конструкции, сооружения, здания</option>
+<option disabled="disabled" value="0104">&#160;&#160;&#160;Оборудование, машины, инструмент и комплектующие </option>
+<option value="0104001">&#160;&#160;&#160;&#160;&#160;&#160;Вентиляционное и климатическое оборудование</option>
+<option value="0104002">&#160;&#160;&#160;&#160;&#160;&#160;Грузоподъемное оборудование и комплектующие</option>
+<option value="0104003">&#160;&#160;&#160;&#160;&#160;&#160;Измерительное оборудование, инструмент и комплектующие</option>
+<option value="0104004">&#160;&#160;&#160;&#160;&#160;&#160;Клининговое оборудование, комплектующие, инструмент</option>
+<option value="0104005">&#160;&#160;&#160;&#160;&#160;&#160;Компьютерное оборудование, комплектующие и программное обеспечение</option>
+<option value="0104006">&#160;&#160;&#160;&#160;&#160;&#160;Котельное оборудование, инструмент, комплектующие</option>
+<option value="0104023">&#160;&#160;&#160;&#160;&#160;&#160;Машины и оборудование прочие, не включенные в другие группировки</option>
+<option value="0104007">&#160;&#160;&#160;&#160;&#160;&#160;Медицинское оборудование, комплектующие и инструмент</option>
+<option value="0104008">&#160;&#160;&#160;&#160;&#160;&#160;Металлообрабатывающее оборудование, комплектующие, инструмент</option>
+<option value="0104009">&#160;&#160;&#160;&#160;&#160;&#160;Насосное оборудование, комлектующие, сопутствующие</option>
+<option value="0104010">&#160;&#160;&#160;&#160;&#160;&#160;Оборудование для предприятий общественного питания, комплектующие и инструмент</option>
+<option value="0104011">&#160;&#160;&#160;&#160;&#160;&#160;Оборудование, комплектующие и инструмент для ремонта и обслуживания транспорта</option>
+<option value="0104024">&#160;&#160;&#160;&#160;&#160;&#160;Оружие спортивное, охотничье и военная техника двойного применения</option>
+<option value="0104012">&#160;&#160;&#160;&#160;&#160;&#160;Офисная техника, оргтехника и комплектующие</option>
+<option value="0104013">&#160;&#160;&#160;&#160;&#160;&#160;Пожарно-охранное оборудование, комплектующие и инструмент</option>
+<option value="0104014">&#160;&#160;&#160;&#160;&#160;&#160;Полиграфическое оборудование, комплектующие и инструмент</option>
+<option value="0104026">&#160;&#160;&#160;&#160;&#160;&#160;Приборы для научных исследований</option>
+<option value="0104015">&#160;&#160;&#160;&#160;&#160;&#160;Производственное, промышленное оборудование, комплектующие и инструмент</option>
+<option value="0104016">&#160;&#160;&#160;&#160;&#160;&#160;Санитарно-техническое оборудование, комплектующие и инструмент</option>
+<option value="0104017">&#160;&#160;&#160;&#160;&#160;&#160;Спортивное, косметологическое оборудование, комплектующие</option>
+<option value="0104018">&#160;&#160;&#160;&#160;&#160;&#160;Средства связи, комплектующие и инструмент</option>
+<option value="0104019">&#160;&#160;&#160;&#160;&#160;&#160;Строительно-отделочное оборудование, комплектующие и инструмент</option>
+<option value="0104025">&#160;&#160;&#160;&#160;&#160;&#160;Техника электронно-вычислительная</option>
+<option value="0104020">&#160;&#160;&#160;&#160;&#160;&#160;Торгово-складское оборудование, инструмент и комплектующие</option>
+<option value="0104022">&#160;&#160;&#160;&#160;&#160;&#160;Электродвигатели, генераторы и трансформаторы силовые</option>
+<option value="0104021">&#160;&#160;&#160;&#160;&#160;&#160;Электрооборудование, комплектующие и инструмент</option>
+<option value="0102">&#160;&#160;&#160;Предприятия, как имущественный комплекс</option>
+<option disabled="disabled" value="0108">&#160;&#160;&#160;Природные активы</option>
+<option value="0108003">&#160;&#160;&#160;&#160;&#160;&#160;Естественные биологические и водные&#160;ресурсы</option>
+<option value="0108001">&#160;&#160;&#160;&#160;&#160;&#160;Земельные участки</option>
+<option value="0108002">&#160;&#160;&#160;&#160;&#160;&#160;Участки недр</option>
+<option disabled="disabled" value="0106">&#160;&#160;&#160;СРЕДСТВА ТРАНСПОРТНЫЕ</option>
+<option value="0106011">&#160;&#160;&#160;&#160;&#160;&#160;Автобусы, микроавтобусы</option>
+<option value="0106012">&#160;&#160;&#160;&#160;&#160;&#160;Автозапчасти и сопутствующие товары</option>
+<option value="0106008">&#160;&#160;&#160;&#160;&#160;&#160;Автомобили</option>
+<option value="0106007">&#160;&#160;&#160;&#160;&#160;&#160;Аппараты летательные воздушные</option>
+<option value="0106002">&#160;&#160;&#160;&#160;&#160;&#160;Аппараты летательные космические</option>
+<option value="0106003">&#160;&#160;&#160;&#160;&#160;&#160;Велосипеды и коляски инвалидные</option>
+<option value="0106001">&#160;&#160;&#160;&#160;&#160;&#160;Мотоциклы, мотороллеры, мопеды и прицепы к ним</option>
+<option value="0106004">&#160;&#160;&#160;&#160;&#160;&#160;Прицепы и полуприцепы, фургоны</option>
+<option value="0106013">&#160;&#160;&#160;&#160;&#160;&#160;Специализированная техника</option>
+<option value="0106006">&#160;&#160;&#160;&#160;&#160;&#160;Средства транспортные железнодорожные</option>
+<option value="0106010">&#160;&#160;&#160;&#160;&#160;&#160;Средства транспортные прочие, не включенные в другие группировки</option>
+<option value="0106005">&#160;&#160;&#160;&#160;&#160;&#160;Суда спортивные, туристские и прогулочные, водно-моторный транспорт</option>
+<option value="0106009">&#160;&#160;&#160;&#160;&#160;&#160;Суда торговые и пассажирские</option>
+<option disabled="disabled" value="0109">&#160;&#160;&#160;Сырье. Материалы для производства. Продукция промышленных производств</option>
+<option value="0109019">&#160;&#160;&#160;&#160;&#160;&#160;Взрывные устройства и взрывчатые вещества народнохозяйственного назначения</option>
+<option value="0109006">&#160;&#160;&#160;&#160;&#160;&#160;Материалы для упаковки и хранения </option>
+<option value="0109010">&#160;&#160;&#160;&#160;&#160;&#160;Материалы лакокрасочные, полупродукты, кино-, фото- и магнитные материалы и товары бытовой химии</option>
+<option value="0109007">&#160;&#160;&#160;&#160;&#160;&#160;Материалы текстильные. Кожа. Фурнитура </option>
+<option value="0109012">&#160;&#160;&#160;&#160;&#160;&#160;Металлоизделия промышленного назначения. Металлопродукция. Металлопрокат. Арматура трубопроводная</option>
+<option value="0109008">&#160;&#160;&#160;&#160;&#160;&#160;Полимерные материалы и изделия. Асбестотехнические изделия</option>
+<option value="0109016">&#160;&#160;&#160;&#160;&#160;&#160;Продукция лесозаготовительной и лесопильно-деревообрабатывающей промышленности, фанерного производства</option>
+<option value="0109018">&#160;&#160;&#160;&#160;&#160;&#160;Продукция общемашиностроительного применения</option>
+<option value="0109017">&#160;&#160;&#160;&#160;&#160;&#160;Продукция химического и нефтяного машиностроения</option>
+<option value="0109015">&#160;&#160;&#160;&#160;&#160;&#160;Продукция целлюлозно-бумажной промышленности</option>
+<option value="0109013">&#160;&#160;&#160;&#160;&#160;&#160;Прокат цветных металлов</option>
+<option value="0109014">&#160;&#160;&#160;&#160;&#160;&#160;Реактивы химические и вещества высокочистые</option>
+<option value="0109009">&#160;&#160;&#160;&#160;&#160;&#160;Строительные материалы кроме  железобетонных конструкций</option>
+<option value="0109005">&#160;&#160;&#160;&#160;&#160;&#160;Сырье вторичное. Отходы. Лом</option>
+<option value="0109004">&#160;&#160;&#160;&#160;&#160;&#160;Сырье искусственное и синтетическое</option>
+<option value="0109002">&#160;&#160;&#160;&#160;&#160;&#160;Сырье минеральное</option>
+<option value="0109003">&#160;&#160;&#160;&#160;&#160;&#160;Сырье органическое</option>
+<option value="0109001">&#160;&#160;&#160;&#160;&#160;&#160;Сырье топливно-энергетическое</option>
+<option value="0109020">&#160;&#160;&#160;&#160;&#160;&#160;Химико-фармацевтическое сырье, продукция медицинского назначения</option>
+<option value="0109011">&#160;&#160;&#160;&#160;&#160;&#160;Чугун, ферросплавы, лигатуры, сталь</option>
+<option disabled="disabled" value="0110">&#160;&#160;&#160;Товары народного потребления </option>
+<option value="0110001">&#160;&#160;&#160;&#160;&#160;&#160;Аудио-видео-фото техника и комплектующие</option>
+<option value="0110002">&#160;&#160;&#160;&#160;&#160;&#160;Бытовая химия, моющие средства</option>
+<option value="0110003">&#160;&#160;&#160;&#160;&#160;&#160;Галантерея, сувениры, подарки</option>
+<option value="0110004">&#160;&#160;&#160;&#160;&#160;&#160;Зоотовары</option>
+<option value="0110005">&#160;&#160;&#160;&#160;&#160;&#160;Игрушки, игры</option>
+<option value="0110006">&#160;&#160;&#160;&#160;&#160;&#160;Канцелярские товары, офисные принадлежности</option>
+<option value="0110020">&#160;&#160;&#160;&#160;&#160;&#160;Карнизы, гардины, жалюзи</option>
+<option value="0110021">&#160;&#160;&#160;&#160;&#160;&#160;Книги, предметы искусства, издания</option>
+<option value="0110007">&#160;&#160;&#160;&#160;&#160;&#160;Ковры, паласы</option>
+<option value="0110008">&#160;&#160;&#160;&#160;&#160;&#160;Мебель и комплектующие</option>
+<option value="0110009">&#160;&#160;&#160;&#160;&#160;&#160;Обувь</option>
+<option value="0110010">&#160;&#160;&#160;&#160;&#160;&#160;Одежда, спецодежда</option>
+<option value="0110011">&#160;&#160;&#160;&#160;&#160;&#160;Оптические приборы</option>
+<option value="0110012">&#160;&#160;&#160;&#160;&#160;&#160;Парфюмерия, косметика, средства гигиены</option>
+<option value="0110013">&#160;&#160;&#160;&#160;&#160;&#160;Печатная, рекламная продукция</option>
+<option value="0110015">&#160;&#160;&#160;&#160;&#160;&#160;Посуда, сопутствующие товары</option>
+<option value="0110022">&#160;&#160;&#160;&#160;&#160;&#160;Продукция пищевой промышленности. продукция мясной, молочной, рыбной, мукомольно-крупяной, комбикормовой и микробиологической промышленности</option>
+<option value="0110016">&#160;&#160;&#160;&#160;&#160;&#160;Прочие товары</option>
+<option value="0110017">&#160;&#160;&#160;&#160;&#160;&#160;Растения, цветы, сопутствующие товары</option>
+<option value="0110014">&#160;&#160;&#160;&#160;&#160;&#160;Текстиль для дома. Постельные принадлежности, полотенца</option>
+<option value="0110018">&#160;&#160;&#160;&#160;&#160;&#160;Ткани, фурнитура</option>
+<option value="0110019">&#160;&#160;&#160;&#160;&#160;&#160;Товары для дачи, сада</option>
+<option disabled="disabled" value="02">Нематериальные активы</option>
+<option value="0204">&#160;&#160;&#160;ГЕОЛОГОРАЗВЕДОЧНЫЕ РАБОТЫ</option>
+<option disabled="disabled" value="0202">&#160;&#160;&#160;КОМПЬЮТЕРНОЕ ПРОГРАММНОЕ ОБЕСПЕЧЕНИЕ</option>
+<option value="0202001">&#160;&#160;&#160;&#160;&#160;&#160;Базы данных</option>
+<option value="0202002">&#160;&#160;&#160;&#160;&#160;&#160;Системные и прикладные программные средства</option>
+<option disabled="disabled" value="0203">&#160;&#160;&#160;НАУКОЕМКИЕ ПРОМЫШЛЕННЫЕ ТЕХНОЛОГИИ</option>
+<option value="0203003">&#160;&#160;&#160;&#160;&#160;&#160;Биотехнологии</option>
+<option value="0203009">&#160;&#160;&#160;&#160;&#160;&#160;Наукоемкие промышленные технологии в области авиастроения и авиационной техники</option>
+<option value="0203005">&#160;&#160;&#160;&#160;&#160;&#160;Наукоемкие промышленные технологии в области атомной техники</option>
+<option value="0203007">&#160;&#160;&#160;&#160;&#160;&#160;Наукоемкие промышленные технологии в области радиотехники и средств связи</option>
+<option value="0203004">&#160;&#160;&#160;&#160;&#160;&#160;Наукоемкие промышленные технологии в области ракетно-космической техники</option>
+<option value="0203002">&#160;&#160;&#160;&#160;&#160;&#160;Наукоемкие промышленные технологии в области спецхимии</option>
+<option value="0203006">&#160;&#160;&#160;&#160;&#160;&#160;Наукоемкие промышленные технологии в области судостроения</option>
+<option value="0203001">&#160;&#160;&#160;&#160;&#160;&#160;Наукоемкие промышленные технологии в области электронной техники</option>
+<option value="0203008">&#160;&#160;&#160;&#160;&#160;&#160;Наукоемкие промышленные технологии в прочих областях</option>
+<option disabled="disabled" value="0205">&#160;&#160;&#160;НЕМАТЕРИАЛЬНЫЕ ОСНОВНЫЕ ФОНДЫ ПРОЧИЕ</option>
+<option value="0205002">&#160;&#160;&#160;&#160;&#160;&#160;Патенты</option>
+<option value="0205001">&#160;&#160;&#160;&#160;&#160;&#160;Секреты производства (&quot;ноу-хау&quot;)</option>
+<option value="0205004">&#160;&#160;&#160;&#160;&#160;&#160;Топологии интегральных микросхем</option>
+<option value="0205003">&#160;&#160;&#160;&#160;&#160;&#160;Торговые знаки</option>
+<option value="0201">&#160;&#160;&#160;ОРИГИНАЛЬНЫЕ ПРОИЗВЕДЕНИЯ РАЗВЛЕКАТЕЛЬНОГО ЖАНРА, ЛИТЕРАТУРЫ ИЛИ ИСКУССТВА</option>
+<option value="99">Прочее</option>
+<option disabled="disabled" value="03">Финансовые активы</option>
+<option value="0301">&#160;&#160;&#160;Права требования на краткосрочные долговые обязательства (дебиторская задолженность)</option>
+<option value="0303">&#160;&#160;&#160;титулы собственности на капитал (акции и другие финансовые инструменты, подтверждающие заключение сделки по поводу движения финансовых ресурсов)</option>
+<option value="0304">&#160;&#160;&#160;Уступка требований по  кредитным обязательствам</option>
+<option value="0302">&#160;&#160;&#160;ценные бумаги</option>
+</select>
+                    </div>
+                </div>              
+
+                <div class="row  row--v-offset">
+                    <div class="col col--xs-3">
+                        <div class="form__area"><label for="MainPageFilterTradeStatus">Статус</label></div>
+                    </div>
+                    <div class="col col--xs-6">
+                        <div class="select js-select form__select"><div class="select__select-input"><span class="select__select js-text">Не важен</span>
+<input class="select__input" id="MainPageFilterTradeStatus" name="MainPageFilterTradeStatus" type="hidden" value="0"></input></div>
+<div class="js-option select__option" name="MainPageFilterTradeStatusOption">
+<span class="select__el select__el--selected" data-value="0">Не важен</span>
+<span class="select__el" data-value="1">Торги отменены</span>
+<span class="select__el" data-value="2">Торги завершены</span>
+<span class="select__el" data-value="3">Идет подведение итогов</span>
+<span class="select__el" data-value="4">Торги проводятся</span>
+<span class="select__el" data-value="5">Прием заявок окончен</span>
+<span class="select__el" data-value="6">Идет прием заявок</span>
+<span class="select__el" data-value="7">Торги объявлены</span>
+<span class="select__el" data-value="14">Торги приостановлены</span>
+<span class="select__el" data-value="15">Черновик</span></div></div>
+                    </div>
+                    <div class="col col--xs-3">
+                        <input type="submit" class="btn btn--in-line" value="Показать"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</form>
+
+	<div class="sort">
+	    Сортировать по
+	    <a href="/Home/Trades?page=5&amp;sort=tradeId&amp;ascending=True&amp;status=1" class="sort__criterion ">Номеру</a>
+	    <a href="/Home/Trades?page=5&amp;sort=tradeOrganizer&amp;ascending=True&amp;status=1" class="sort__criterion ">Должнику и предмету торгов</a>
+	    <a href="/Home/Trades?page=5&amp;sort=partpApplicationDateTimeBegin&amp;ascending=True&amp;status=1" class="sort__criterion ">Дате начала приема заявок</a>
+	    <a href="/Home/Trades?page=5&amp;sort=tradeType&amp;ascending=True&amp;status=1" class="sort__criterion ">Виду торгов</a>
+	    <a href="/Home/Trades?page=5&amp;sort=Status&amp;ascending=True&amp;status=1" class="sort__criterion ">Статусу</a>
+	</div>
+
+    <ul class="nav nav-tabs">
+        <li class="">
+	        <a href="/Home/Trades">Все</a>
+	    </li>
+	    <li class="active">
+	        <a href="/Home/Trades?status=1">Актуальные</a>
+	    </li>
+	    <li class="">
+	        <a href="/Home/Trades?status=2">Архив</a>
+	    </li>
+    </ul>
+
+    <div id="taball" class="tab-pane fade in active">
+
+<div class="row  row--v-offset trade-card">
+    <a href="/bidding/AnounsmentDetails/5535">
+        <div class="col col--xs-3">
+            <div class="trade-card__name">Матвеева Людмила Юрьевна</div>
+            <div class="trade-card__type">Публичное предложение № 5535</div>
+        </div>
+    </a>
+	<div class="col col--xs-9">
+        <a href="/bidding/AnounsmentDetails/5535">
+            <div class="row  row--v-offset">
+                <div class="col col--xs-8">
+                    <div class="trade-card__title">Должник:</div>
+                    <p>Общество с ограниченной ответственностью &#171;НПА-СЕГМЕНТ&#187;</p>
+                </div>
+                <div class="col col--xs-4">
+                    <div class="trade-card__status trade-card__status--isParticipanceOpened">Идет прием заявок</div>
+                    <p>до 23.08.2021 0:00:00 по МСК</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="/bidding/AnounsmentDetails/5535">
+            <div class="row  row--v-offset">
+                <div class="col col--xs-8">
+                    <div class="trade-card__title">Описание:</div>
+                </div>
+                <div class="col col--xs-4">
+                    <div class="trade-card__title">Стартовая цена</div>
+                </div>
+            </div>
+        </a>
+
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9123">Лот № 1</div>
+	                <div id="desc9123" class="collapse">Право требования возврата задолженности к ООО «Юридическая компания «ОРЕОЛ» (ИНН 7715959165) в размере 22 000 000 рублей. Получение дополнительной информации производится по адресу: г. Владимир, ул. Мира, д. 15а, этаж 1 с 10:00 до 17:00 по моск. времени, ежедневно кроме выходных и праздничных дней. Тел: 8(4922)32-61-33. Почтовый адрес: 600005, г. Владимир, а/я 56. Адрес электронной почты: matveeva.consult@gmail.com</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">22&#160;000&#160;000,00</div> 
+	            </div>
+	        </div>
+	</div>
+</div>
+
+<div class="row  row--v-offset trade-card">
+    <a href="/bidding/AnounsmentDetails/5534">
+        <div class="col col--xs-3">
+            <div class="trade-card__name">Серебрянский Александр Валерьевич</div>
+            <div class="trade-card__type">Торги на повышение № 5534</div>
+        </div>
+    </a>
+	<div class="col col--xs-9">
+        <a href="/bidding/AnounsmentDetails/5534">
+            <div class="row  row--v-offset">
+                <div class="col col--xs-8">
+                    <div class="trade-card__title">Должник:</div>
+                    <p>Общество с ограниченной ответственностью &quot;Торговый дом &quot;КОНТИНЕНТ&quot;</p>
+                </div>
+                <div class="col col--xs-4">
+                    <div class="trade-card__status trade-card__status--isParticipanceOpened">Идет прием заявок</div>
+                    <p>до 12.07.2021 16:00:00 по МСК</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="/bidding/AnounsmentDetails/5534">
+            <div class="row  row--v-offset">
+                <div class="col col--xs-8">
+                    <div class="trade-card__title">Описание:</div>
+                </div>
+                <div class="col col--xs-4">
+                    <div class="trade-card__title">Стартовая цена</div>
+                </div>
+            </div>
+        </a>
+
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9088">Лот № 1</div>
+	                <div id="desc9088" class="collapse">Автомобиль ВОЛЬВО ХС90, идентификационный номер (VIN) YV1LCA4BCG1007940, год изготовления 2015, двигатель № D420T111230806, кузов № YV1LCA4BCG1007940, цвет Жемчужно-белый, мощность двигателя 224 л.с., тип двигателя – дизельный. Паспорт ТС № 77 ОТ 718960 выдан 23.11.2018 г. Пробег – 127 075 км. Порядок ознакомления и дополнительная информация у организатора торгов по запросу на электронную почту au-serebr@yandex.ru или по телефону 89155662003</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">2&#160;520&#160;000,00</div> 
+	            </div>
+	        </div>
+	</div>
+</div>
+
+<div class="row  row--v-offset trade-card">
+    <a href="/bidding/AnounsmentDetails/5533">
+        <div class="col col--xs-3">
+            <div class="trade-card__name">Ковшова Полина Витальевна</div>
+            <div class="trade-card__type">Торги на повышение № 5533</div>
+        </div>
+    </a>
+	<div class="col col--xs-9">
+        <a href="/bidding/AnounsmentDetails/5533">
+            <div class="row  row--v-offset">
+                <div class="col col--xs-8">
+                    <div class="trade-card__title">Должник:</div>
+                    <p>Закрытое акционерное общество &#171;ДЕТИ&#187; </p>
+                </div>
+                <div class="col col--xs-4">
+                    <div class="trade-card__status trade-card__status--isParticipanceOpened">Идет прием заявок</div>
+                    <p>до 13.07.2021 23:59:00 по МСК</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="/bidding/AnounsmentDetails/5533">
+            <div class="row  row--v-offset">
+                <div class="col col--xs-8">
+                    <div class="trade-card__title">Описание:</div>
+                </div>
+                <div class="col col--xs-4">
+                    <div class="trade-card__title">Стартовая цена</div>
+                </div>
+            </div>
+        </a>
+
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9084">Лот № 1</div>
+	                <div id="desc9084" class="collapse">В состав лота после актуализации входят следующие права требования на автотранспортные средства: 1.27959 D, 2008 г/в, VIN XUH27959D80000070 гос. номер В115ССМ98 (в наличии отсутствует, местонахождение не известно) 38 700 2. 474ОРТ, 2010 г/в, VIN X89474PTA0AB986 гос. номер В737ХВ98 (в наличии отсутствует, местонахождение не известно) 86 400 3.28186-0000, 2010 г/в, VIN Z8J28186GA0000125 гос. номер В771ХН98 (в наличии отсутствует, местонахождение не известно) 26 100 428186-0000, 2010 г/в, VIN Z8J28186GA0000137 гос. номер В700ХТ98 (в наличии отсутствует, местонахождение не известно) 6 300 5.ФИАТ DUСATO, 2011 г/в, VIN Z7G244000BS035458 гос. номер В279ЕТ178 (в наличии отсутствует, местонахождение не известно) 82 800 6.БЕЗ МАРКИ 28186-0000010-10, 2011 г/в, VIN Z8J28186GB0000992 гос. номер В713ВН178 (в наличии отсутствует, местонахождение не известно) 61 875 7.БЕЗ МАРКИ 28186-0000010-10, 2010 г/в, VIN Z8J28186GA0000138 гос. номер В687ХТ98 (в наличии отсутствует, местонахождение не известно) 72 800 8.МЕРСЕДЕС BENZ S 450, 2007 г/в VIN WDD2211841A127308 гос. номер В585УА47 (в наличии отсутствует, местонахождение не известно) 62 250 9.28187-0000010-70, 2013 г/в, Z8J2818ZUE0000081 гос. номер Р468АЕ750 (в наличии отсутствует, местонахождение не известно) 74 250 10.ФИАТ DUСATO, 2013 г/в, VIN ZFA25000002428522 гос. номер В126СХ178 (в наличии отсутствует, местонахождение не известно) 45 000 11.МЕРСЕДЕС SPRINTER CLASSIC, 2014 г/в, VIN XDN9096321B103840 гос. номер В139ТТ178 (в наличии отсутствует, местонахождение не известно) 108 000 12. 199210 2014 г/в, VIN XE8199210E0000006 гос. номер Т339МА77 (в наличии отсутствует, местонахождение не известно) 63 000 13.КИА К 2500 ИЗОМЕТРИЧЕСКИЙ 2013 г/в, VIN KNCSJX76FT7780151 гос. номер Т340МА77 (в наличии отсутствует, местонахождение не известно) 72 000 14.НИССАН TEANA 2014 г/в, VIN Z8NBAAL33ES000238 гос. номер В433УА178 (в наличии отсутствует, местонахождение не известно) 63 000 15.МЕРСЕДЕС SPRINTER CLASSIC 311 CDI 2014 г/в, VIN XDN9096331B104488 гос. номер В444УА178 (в наличии отсутствует, местонахождение не известно) 108 000 16.МЕРСЕДЕС SPRINTER CLASSIC 311 CDI 2014 г/в, VIN XDN9096321B103913 гос. номер В445УА178 (в наличии отсутствует, местонахождение не известно) 108 000 17. 373110 2015 г/в, VIN XDU373110F0000015 гос. номер Н440ЕА77 (в наличии отсутствует, местонахождение не известно) 63 000 18. 373110 2015 г/в, VIN XDU373110F0000016 гос. номер Н689ЕА77 (в наличии отсутствует, местонахождение не известно) 63 000 19. НИССАН TEANA 2014 г/в, VIN Z8NBAAL33ES000370 гос. номер В071УА178 (в наличии отсутствует, местонахождение не известно) 63 000
+
+Дополнительную информацию можно получить с момента публикации сообщения о торгах и до окончания периода приема заявок по будням с 10:00 до 17:00 ч. по реквизитам КУ, а также на ЭТП и на ЕФРСБ.</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">1&#160;265&#160;675,40</div> 
+	            </div>
+	        </div>
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9086">Лот № 2</div>
+	                <div id="desc9086" class="collapse">Лот №2 -КИА ХМ FL, 2014 г/в, VIN XWEKU814DEC003044 гос. номер В494УА178 снят с торгов в связи с поступлением виндикационного иска в Выборгский районный суд Санкт-Петербурга (дело № 2-7254/2021)
+
+
+Автомобиль</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">1,00</div> 
+	            </div>
+	        </div>
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9087">Лот № 3</div>
+	                <div id="desc9087" class="collapse">РЕНО ЛОГАН, 2010 г/в, VIN X7LLSRB2HAH315584 гос. номер В678АО178 (не на ходу, является доказательством по уголовному делу, находится на ответственном хранении)
+
+Дополнительную информацию об имуществе можно получить с момента публикации сообщения о торгах и до окончания периода приема заявок по будням с 10:00 до 17:00 ч. (здесь и далее время мск) по электронному адресу конкурсного управляющего 9112279312@mail.ru, а также на ЭТП и на ЕФРСБ</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">117&#160;000,00</div> 
+	            </div>
+	        </div>
+	</div>
+</div>
+
+<div class="row  row--v-offset trade-card">
+    <a href="/bidding/AnounsmentDetails/5531">
+        <div class="col col--xs-3">
+            <div class="trade-card__name">Симакова Алла Сергеевна</div>
+            <div class="trade-card__type">Торги на повышение № 5531</div>
+        </div>
+    </a>
+	<div class="col col--xs-9">
+        <a href="/bidding/AnounsmentDetails/5531">
+            <div class="row  row--v-offset">
+                <div class="col col--xs-8">
+                    <div class="trade-card__title">Должник:</div>
+                    <p>Акционерное общество &#171;Завод путевых конструкций&#187; </p>
+                </div>
+                <div class="col col--xs-4">
+                    <div class="trade-card__status trade-card__status--isParticipanceOpened">Идет прием заявок</div>
+                    <p>до 20.07.2021 10:00:00 по МСК</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="/bidding/AnounsmentDetails/5531">
+            <div class="row  row--v-offset">
+                <div class="col col--xs-8">
+                    <div class="trade-card__title">Описание:</div>
+                </div>
+                <div class="col col--xs-4">
+                    <div class="trade-card__title">Стартовая цена</div>
+                </div>
+            </div>
+        </a>
+
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9082">Лот № 1</div>
+	                <div id="desc9082" class="collapse">Лот №1: Недвижимое имущество, находящееся в залоге АКБ «ПЕРЕСВЕТ» (ПАО): Земельный участок, категория земель: земли промышленности, энергетики, транспорта, связи, радиовещания, телевидения, информатики, земли для обеспечения космической деятельности, земли обороны, безопасности и земли иного специального назначения, разрешенное использование: для эксплуатации базы, площадь 6567кв.м., кад. №47:07:0953001:35, адрес: Ленинградская область, Всеволожский район, местечко Углово; Недвижимое имущество, расположенное по адресу: Ленинградская обл. Всеволожский р-н, д.Углово, д.18, корп.96, а именно: Нежилое здание, Склад №88, 1-этажный, площадь 860кв.м.. кад.№47:07:0910001:105; Нежилое здание, Склад №87, этажность -1, площадь 860кв.м., кад.№47:07:0910001:57; Нежилое здание, Склад №96, этажность – 1, площадь 860кв.м., кад.№47:07:0910001:103; Нежилое здание, Склад №2, кол-во этажей 1, площадь, 30,8кв.м., кад.№47:07:0953001:107, адрес: Ленинградская обл., Всеволожский муниципальный р-н, д.Углово, №9Г, лит.2; Нежилое здание, пристрой к складу, назначение: нежилое, площадь 74,50 кв.м, количество этажей: 1, кад.№47:07:0953001:108, адрес: Ленинградская обл., Всеволожский муниципальный р-н, Романовское сельское поселение, мест. Углово, № 9Г лит.1; Нежилое здание, контрольно-пропускной пункт КПП-2, назначение: нежилое, площадь 19,30 кв.м, количество этажей: 1, кад.№47:07:0910001:238, адрес: Ленинградская обл., Всеволожский р-н, массив Углово, д.18/69. Движимое имущество, свободное от залога: Блок контейнер, Гидравлический пресс №1, Станок фрезерный с ЧПУ, Пресс для гибки рельсов ТК-34, Пресс гидравлический ДГ 2436, Гидравлический пресс №2, Универсальный фрезерный станок без ЧПУ, Кран мостовой электрический однопролетный (г/п 5 тонн) №1, Кран мостовой электрический однопролетный (г/п 5 тонн) №2, Кран мостовой электрический однопролетный (г/п 5 тонн) №3, Пресс П6332, Вертикально-фрезерный станок ВМ 127, Ножницы гильотинные Н3121, Токарно-винторезный станок мод.1К62, Горизонтально-фрезерный станок TOS FA5AU, Универсально-заточной станок 3Е642, Ленточнопильный станок 510/320 DGH, Вертикально-фрезерный станок 6Р13, Полуавтомат двухкорпусной KIT 600WS с механизмом подачи проволоки, Автопогрузчик YALE GDP25RK, Рама для шлифовальной машины ШМ-РО, Резьбонарезной станок RIDGID 300 Compact, Конструкция алюминиевая, Станок сверлильный вертикальный 2Н135, Станок радиально-сверлильный 2532 ЛАС(Специальный переносной), Заточной двухсторонний станок 3К634, Станок рельсосверлильный РСМ-1М с электродвигателем, Однокорпусный полуавтомат KIT 305, Электродвигатель,
+Ленточнопильный станок JET MBS-708CS/910CS, Станок для резки арматурной стали ОЗЖ 72А, Весы крановые МК-10000Д, Станок СМЖ-172А, Ноутбук-трансформер Acer Aspire, Лазерное МФУ Xerox WorkCentre, Открытая площадка с бетонно монолитной плитой перед складом №96.
+Ознакомление со сведениями об имуществе, его составе, характеристиках осуществляется в срок приема заявок, в рабочие дни с 11.00ч до 16.00ч через Организатора торгов по тел. +79216517593 или адресу эл.почты bankrot2019@inbox.ru.</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">55&#160;106&#160;900,70</div> 
+	            </div>
+	        </div>
+	</div>
+</div>
+
+<div class="row  row--v-offset trade-card">
+    <a href="/bidding/AnounsmentDetails/5530">
+        <div class="col col--xs-3">
+            <div class="trade-card__name">ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ &quot;РЕГИОН-ТОРГИ&quot;</div>
+            <div class="trade-card__type">Торги на повышение № 5530</div>
+        </div>
+    </a>
+	<div class="col col--xs-9">
+        <a href="/bidding/AnounsmentDetails/5530">
+            <div class="row  row--v-offset">
+                <div class="col col--xs-8">
+                    <div class="trade-card__title">Должник:</div>
+                    <p>СЕЛЬСКОХОЗЯЙСТВЕННЫЙ ПРОИЗВОДСТВЕННЫЙ КООПЕРАТИВ &quot;СОСНОВЫЙ БОР&quot;</p>
+                </div>
+                <div class="col col--xs-4">
+                    <div class="trade-card__status trade-card__status--isParticipanceOpened">Идет прием заявок</div>
+                    <p>до 14.07.2021 18:00:00 по МСК</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="/bidding/AnounsmentDetails/5530">
+            <div class="row  row--v-offset">
+                <div class="col col--xs-8">
+                    <div class="trade-card__title">Описание:</div>
+                </div>
+                <div class="col col--xs-4">
+                    <div class="trade-card__title">Стартовая цена</div>
+                </div>
+            </div>
+        </a>
+
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9078">Лот № 1</div>
+	                <div id="desc9078" class="collapse">Лот №2: Здание полевого стана, площадью 273,2 кв. м., Литер А, кадастровый №61:04:0600007:203:9, Зерноочистительные сооружения, площадь 88,9 кв. м., Литер И, кадастровый №61:04:0600007:203:7, Зерноочистительные сооружения, площадь 86,4 кв. м, Литер К, кадастровый №61:04:0600007:203:4, Зерносклад, площадь 1242,7 кв. м., Литер Д, кадастровый №61:04:0600007:203:10, Зерносклад, площадь 936 кв. м., Литер Е, кадастровый №61:04:0600007:203:5, Здание весовой, площадь 27 кв. м., Литер Г, кадастровый №61:04:0600007:203:11, Земельный участок, категория земель: земли сельскохозяйственного назначения – под зданиями и сооружениями полевого стана, площадь 111561 кв. м., кадастровый №61:04:0600007:203, адрес (местоположение): Ростовская обл., Белокалитвинский р-н, п. Сосны. 
+
+Справки о порядке оформления участия в торгах, ознакомление с документацией по лоту, согласование порядка осмотра, иное осуществляется по адресу: г. Ростов-на-Дону, пр-т Буденновский, 21/50, офис 405, 8(863)2982066, regiontorgi@mail.ru, а также на сайте: www.ru-trade24.ru.</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">4&#160;053&#160;887,00</div> 
+	            </div>
+	        </div>
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9079">Лот № 2</div>
+	                <div id="desc9079" class="collapse">Лот №3: Земельный участок, категория земель: земли населенных пунктов, площадь 1476 кв. м., кадастровый №61:04:0150403:143, с расположенным на нем нежилым помещением минипекарни, с нежилыми помещениями, адрес (местоположение): Ростовская обл., Белокалитвинский р-н, п. Сосны, ул. Пролетарская, участок 2/1.
+
+Справки о порядке оформления участия в торгах, ознакомление с документацией по лоту, согласование порядка осмотра, иное осуществляется по адресу: г. Ростов-на-Дону, пр-т Буденновский, 21/50, офис 405, 8(863)2982066, regiontorgi@mail.ru, а также на сайте: www.ru-trade24.ru.</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">257&#160;000,00</div> 
+	            </div>
+	        </div>
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9080">Лот № 3</div>
+	                <div id="desc9080" class="collapse">Лот №4: Административное здание, назначение: нежилое, площадь общая 595,50 кв. м., Инв. № 11797, Литер А, этажность 2, подземная этажность 1, кадастровый №61:04:0150403:142:87, адрес (местоположение): Ростовская обл., Белокалитвинский р-н, п. Сосны, ул. Пролетарская, д. 1"б", Земельный участок, категория земель: земли населенных пунктов - под административное здание, площадь 5350 кв. м., кадастровый №61:04:0150403:142, адрес (местоположение): Ростовская , обл., Белокалитвинский р-н, п. Сосны, ул. Пролетарская, участок 1 "б" 
+Справки о порядке оформления участия в торгах, ознакомление с документацией по лоту, согласование порядка осмотра, иное осуществляется по адресу: г. Ростов-на-Дону, пр-т Буденновский, 21/50, офис 405, 8(863)2982066, regiontorgi@mail.ru, а также на сайте: www.ru-trade24.ru.</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">1&#160;432&#160;333,00</div> 
+	            </div>
+	        </div>
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9081">Лот № 4</div>
+	                <div id="desc9081" class="collapse">Лот №5: Здание кормового склада, назначение: нежилое, площадь общая 645,10 кв. м., Инв., № 11399, Литер П, этажность 1, кадастровый №61:04:0600007:205:14, адрес (местоположение): Ростовская обл., Белокалитвинский р-н, с/ц Нижнепоповское, п. Сосны, Здание, склада, назначение: нежилое, площадь общая 419,90 кв. м., Инв. № 11399, Литер Р, этажность 1, кадастровый №61.04:0600007:205: 15, адрес, (местоположение): Ростовская обл. Белокалитвинский р-н, с/п Нижнепоповское, п. Сосны, Земельный; участок, категория, земель,: земли с/х назначения –под зданиями склада и кормового склада, площадь 11680 кв. м., кадастровый №61:04:0600007:205, адрес (местоположение): Ростовская обл., Белокалитвинский р-н, п. Сосны, Свинарник, назначение: нежилое, площадь общая 837,20 кв. м., Инв. № 11344, Литер А1, этажность 1, кадастровый номер 61:04:0600007:0:19, адрес (местоположение): Ростовская обл., Белокалитвинский р-н, с/п Нижнепоповское, п. Сосны; Свинарник, назначение: нежилое, площадь общая 1559,40 кв. м., Инв. № 11344, Литер А2, этажность 1, кадастровый номер 61:04:0600007:0:18, адрес (местоположение): Ростовская обл., Белокалитвинский р-н, с/п Нижепоповское, п. Сосны, Земельный участок, категория земель: земли с/х назначения – под зданиями свинарников, площадь 65000 кв. м., кадастровый номер 61:04:0600007:207, адрес (местоположение): Ростовская обл., Белокалитвинский р-н, п. Сосны.
+
+Справки о порядке оформления участия в торгах, ознакомление с документацией по лоту, согласование порядка осмотра, иное осуществляется по адресу: г. Ростов-на-Дону, пр-т Буденновский, 21/50, офис 405, 8(863)2982066, regiontorgi@mail.ru, а также на сайте: www.ru-trade24.ru.</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">4&#160;037&#160;725,00</div> 
+	            </div>
+	        </div>
+	</div>
+</div>
+
+<div class="row  row--v-offset trade-card">
+    <a href="/bidding/AnounsmentDetails/5526">
+        <div class="col col--xs-3">
+            <div class="trade-card__name">Губанов  Александр Сергеевич</div>
+            <div class="trade-card__type">Торги на повышение № 5526</div>
+        </div>
+    </a>
+	<div class="col col--xs-9">
+        <a href="/bidding/AnounsmentDetails/5526">
+            <div class="row  row--v-offset">
+                <div class="col col--xs-8">
+                    <div class="trade-card__title">Должник:</div>
+                    <p>Лучка  Василий Иванович</p>
+                </div>
+                <div class="col col--xs-4">
+                    <div class="trade-card__status trade-card__status--isParticipanceOpened">Идет прием заявок</div>
+                    <p>до 07.07.2021 23:59:00 по МСК</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="/bidding/AnounsmentDetails/5526">
+            <div class="row  row--v-offset">
+                <div class="col col--xs-8">
+                    <div class="trade-card__title">Описание:</div>
+                </div>
+                <div class="col col--xs-4">
+                    <div class="trade-card__title">Стартовая цена</div>
+                </div>
+            </div>
+        </a>
+
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9074">Лот № 1</div>
+	                <div id="desc9074" class="collapse">здание (нежилого), расположение по адресу: Архангельская область, Няндомский 
+район, г. Няндома, ул. Красноармейкая, д. 1, площадью 180,70 кв. м. и земельного участка, 
+местоположение установлено относительно ориентира, расположенного в границах 
+участка; почтовый адрес ориентира: установлено относительно ориентира, расположенного 
+в границах участка, ориентир магазин, почтовый адрес ориентира: Архангельская область, 
+Няндомский район, г. Няндома, ул. Красноармейкая, д. 1; площадь 495 кв.м.
+Ознакомление с документами по запросу на электронную почту: gubanov0707@gmail.com.</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">1&#160;145&#160;981,04</div> 
+	            </div>
+	        </div>
+	</div>
+</div>
+
+<div class="row  row--v-offset trade-card">
+    <a href="/bidding/AnounsmentDetails/5525">
+        <div class="col col--xs-3">
+            <div class="trade-card__name">Левашов Артем Михайлович</div>
+            <div class="trade-card__type">Торги на повышение № 5525</div>
+        </div>
+    </a>
+	<div class="col col--xs-9">
+        <a href="/bidding/AnounsmentDetails/5525">
+            <div class="row  row--v-offset">
+                <div class="col col--xs-8">
+                    <div class="trade-card__title">Должник:</div>
+                    <p>Шурыгин  Владимир  Викторович </p>
+                </div>
+                <div class="col col--xs-4">
+                    <div class="trade-card__status trade-card__status--isParticipanceOpened">Идет прием заявок</div>
+                    <p>до 09.07.2021 12:00:00 по МСК</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="/bidding/AnounsmentDetails/5525">
+            <div class="row  row--v-offset">
+                <div class="col col--xs-8">
+                    <div class="trade-card__title">Описание:</div>
+                </div>
+                <div class="col col--xs-4">
+                    <div class="trade-card__title">Стартовая цена</div>
+                </div>
+            </div>
+        </a>
+
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9073">Лот № 1</div>
+	                <div id="desc9073" class="collapse">здание жилое площадью 131,5 кв.м, общедолевая собственность доля в праве 2/33, адрес: Владимирская область, г. Гусь-Хрустальный, ул. Садовая, д. 10,
+кадастровый номер: 33:25:000027:1112;
+-земельный участок для эксплуатации жилого дома, площадью 1912+/-15, местоположение установлено относительно ориентира, расположенного в границах участка. Ориентир: жилой дом. Почтовый адрес ориентира: Владимирская область, г. Гусь-Хрустальный, ул. Садовая, д. 10. Общедолевая собственность, доля в праве 239/3824 
+Ознакомление с имуществом и имеющейся документацией осуществляется по официальному запросу и предварительной записи с организатором торгов. предварительно согласовав дату и время по тел: 89107763339. Почтовый адрес: 600014, г. Владимир, а/я 4 для Левашова А.М. Адрес электронной почты: am_levashov@bk.ru. Возможны ограничения в последующем использовании объекта имущества. Имущество подлежит продаже в том состоянии, которое оно имеет на дату заключения договора купли-продажи с учетом износа по принципу «как есть». Финансовый управляющий и (или) выбранный им организатор торгов не несут ответственности за возможные убытки, вызванные состоянием имущества, обременениями, ограничениями в использовании и (или) возможными правопритязаниями, существующими и выявленными на дату заключения договора купли-продажи определённого объекта имущества, и (или) появившимися впоследствии, если они не могли быть достоверно установлены финансовым управлявшим на дату проведения описи имущества.</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">500&#160;000,00</div> 
+	            </div>
+	        </div>
+	</div>
+</div>
+
+<div class="row  row--v-offset trade-card">
+    <a href="/bidding/AnounsmentDetails/5524">
+        <div class="col col--xs-3">
+            <div class="trade-card__name">Пермогорский Алексей Валентинович</div>
+            <div class="trade-card__type">Публичное предложение № 5524</div>
+        </div>
+    </a>
+	<div class="col col--xs-9">
+        <a href="/bidding/AnounsmentDetails/5524">
+            <div class="row  row--v-offset">
+                <div class="col col--xs-8">
+                    <div class="trade-card__title">Должник:</div>
+                    <p>муниципальное унитарное предприятие &#171;Жилкомсервис&#187; администрации муниципального образования &#171;Коношское&#187;</p>
+                </div>
+                <div class="col col--xs-4">
+                    <div class="trade-card__status trade-card__status--isPending">Торги объявлены</div>
+                    <p>до 15.08.2021 23:59:00 по МСК</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="/bidding/AnounsmentDetails/5524">
+            <div class="row  row--v-offset">
+                <div class="col col--xs-8">
+                    <div class="trade-card__title">Описание:</div>
+                </div>
+                <div class="col col--xs-4">
+                    <div class="trade-card__title">Стартовая цена</div>
+                </div>
+            </div>
+        </a>
+
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9072">Лот № 1</div>
+	                <div id="desc9072" class="collapse">Лот №2 Очистные сооружения ККЗ, участок № 1. здание 1, сооружение 2-4,этажность здания 1, расположенные по адресу: п. Коноша, 242 квартал Коношского лесничества; Водоразборная колонка, расположенная по адресу: п. Коноша, ул.Солнечная; Водоразборная колонка, расположенная по адресу: п. Коноша, ул.Дачная; Водоразборная колонка, расположенная по адресу: п. Коноша, ул.Молодежная у ж/д № 16; Водоразборная колонка, расположенная по адресу: п. Коноша, ул.Молодежная у м-на Виктория (Бристоль); Водоразборная колонка, расположенная по адресу: п. Коноша, ул.Архангельская у ж/д № 20; Водоразборная колонка, расположенная по адресу: п. Коноша, пр.Октябрьский, 110; Водоразборная колонка у артезианской скважины «Пионерская», расположенная по адресу: п. Коноша, ул. Пионерская; Водоразборная колонка, расположенная по адресу: п. Коноша, ул.Энгельса; Водоразборная колонка, расположенная по адресу: п. Коноша, ул.Рабочая; Водоразборная колонка, расположенная по адресу: п. Коноша, ул.Красные Зори; Водоразборная колонка, расположенная по адресу: п. Коноша, ул.Мамонова, напротив здания № 42; Водоразборная колонка, расположенная по адресу: п. Коноша, ул.Молодежная, 5; Водоразборная колонка, расположенная по адресу: п. Коноша, ул.Первомайская, 25; Водоразборная колонка, расположенная по адресу: п. Коноша, ул.Энергетиков, 7; Водоразборная колонка, расположенная по адресу: п. Коноша, ул.Ломоносова, 8; Водонапорная башня, расположенная по адресу: п. Коноша, ул. Энгельса, дом 26, сооружение 2; Водонапорная башня ПМК, расположенная по адресу: п. Коноша, пр. Октябрьский, дом 108 а; Артезианская скважина № 1502, расположенная по адресу: п. Коноша, пр. Октябрьский, д. 121. сооружение 1 этажность здания – 1; Канализационная насосная станция «ККЗ», кад.№ 29:06:120114:395, расположенная по адресу: п. Коноша, ул. Первомайская, д. 44 сооружение 1, этажность здания – 1; Ж/б резервуар, кад.№ 29:06:120114:393, расположенный по адресу: п. Коноша, ул. Первомайская, д. 44, сооружение 3; Станция обезжелезивания, расположенная по адресу: п. Коноша, ул. Первомайская, д. 44, сооружение 4; Артезианская скважина № 1456, кад.№29:06:120114:394 расположенная по адресу: п. Коноша, ул. Первомайская, д. 44 сооружение 5, этажность здания – 1; Артезианская скважина № 2107, кад.№29:06:120114:396, расположенная по адресу: п. Коноша, ул. Первомайская, д. 44, сооружение 7, этажность здания – 1; Канализационная насосная станция «Речная», кад.№ 29:06:120124:836, расположенная по адресу: п. Коноша, ул. Речная, д. 4, сооружение 1, этажность здания – 1; Здание артезианской скважины № 224, кад.№29:06:000000:1638, расположенное по адресу: п. Коноша, ул. Пионерская, д. 28, сооружение 1, этажность здания – 1; Водопровод кад.№29:06:000000:1042, расположенный по адресу: п. Коноша; Водопровод протяжённостью 602,10 м, расположенный по адресу: п. Коноша, пер. Сентябрьский; Сети канализации микрорайона ПГС - 2550 м, расположенные по адресу: п. Коноша; Канализационные колодцы в количестве 77 штук, расположенная по адресу: Архангельская область, Коношский район, п. Коноша, микрорайон ПГС, ул. Новолесная, ул. Довоселов, ул. Строителей, ул.Таежная; Артезианская скважина № 1547, расположенная по адресу: п. Коноша, ул. Набережная, д. 1, сооружение 1, этажность здания -1; Артезианская скважина № 1548, расположенная по адресу: п. Коноша, ул. Набережная, д. 1 сооружение 2, этажность здания – 1; Артезианская скважина № 1549, расположенная по адресу: п. Коноша, ул. Набережная, д. 1, сооружение 3, этажность здания – 1; Артезианская скважина № 1 с резервуаром, кад.№29:06:000000:1635, расположенная по адресу: п. Коноша, ул. Дружбы, д. 5 «а», сооружение 2, этажность здания – 1; Артезианская скважина № 243, расположенная по адресу: п. Коноша, ул. Рабочая, д. 8 «а», сооружение 1, этажность здания – 1; Водонапорная башня, расположенная по адресу: п. Коноша, ул. Рабочая, д. 8 «а», сооружение 2; Скважина № 222, расположенная по адресу: п. Коноша, ул. Речная, д. 15, сооружение 1, этажность здания – 1; Скважина № 2004, расположенная по адресу: п. Коноша, ул. Совхозная, д. 17, сооружение 1, этажность здания – 1; Скважина № 102, кад.№ 29:06:120124:837, расположенная по адресу: п. Коноша, ул. Советская, д. 29, сооружение 1, этажность здания – 1; Артезианская скважина № 1684, кад.№29:06:000000:1634, расположенная по адресу: п. Коноша, 235 квартал Коношского лесничества, участок № 2, сооружение 2, этажность здания – 1; Артезианская скважина № 1688, расположенная по адресу: п. Коноша, 235 квартал Коношского лесничества, участок № 2, сооружение 3, этажность здания – 1; Артезианская скважина № 1714, расположенная по адресу: п. Коноша, 235 квартал Коношского лесничества, участок № 2, сооружение 4, этажность здания – 1; Артезианская скважина № 1716, кад.№29:08:081701:128 расположенная по адресу: п. Коноша, 235 квартал Коношского лесничества, участок № 2, сооружение 5, этажность здания – 1; Артезианская скважина № б/н, расположенная по адресу: п. Коноша, 235 квартал Коношского лесничества, сооружение 6, этажность здания – 1; Насосная станция с нулевой артезианской скважиной № 1681, расположенная по адресу: п. Коноша, 235 квартал Коношского лесничества, участок № 2, здание 1, этажность здания – 1; Артезианская скважина № 2172, расположенная по адресу: п. Коноша, ул. Энгельса, д.26, сооружение 1, этажность здания – 1; Артезианская скважина № 965, кад.№29:06:120134:437, расположенная по адресу: п. Коноша, пр. Октябрьский, д. 108 «а», сооружение 1, этажность здания – 1; Артезианская скважина № 361, расположенная по адресу: п. Коноша, ул. Садовая, д.22 «а», сооружение 1, этажность здания -1; Артезианская скважина № 1661, расположенная по адресу: п. Вересово, ул. Бовы, этажность здания -1; Артезианская скважина № 5067, расположенная по адресу: ж.д.ст.Вересово, этажность здания – 1; Артезианская скважина № 235, расположенная по адресу: п. Коноша, ул. Вологодская, д. 25 сооружение 2, этажность здания – 1; Очистные сооружения «Совхозные», кад.№ 29:06:080901:72, расположенные по адресу: п.Коноша, 236 квартал Коношского лесничества, участок № 1, сооружение - 2, 3, 4. 5, 6, 9, этажность здания -1, 2; Очистные сооружение «СХТ», расположенные по адресу: п. Коноша, ул. Западная, д. 2; Очистные сооружение «Полярник», расположенные по адресу: пос. Заречный, ул. Заречная, д. 18, строение 32 для очистки сточных вод; Канализационные сети протяженностью 16,9 км, расположенная по адресу: п. Коноша; Артезианская скважина № 297 «Чублак», расположенная по адресу:д. Чублак, Коношского района, этажность здания – 1; Артезианская скважина № 387 «Кремлево», расположенная по адресу: д. Кремлево. Коношского района, этажность здания – 1; Артезианская скважина № 403 «Пархачевская», расположенная поадресу: д. Пархачевская, Коношского района этажность здания – 1; Артезианская скважина № 544 «Харламовская», расположенная по адресу: д. Харламовская, Коношского района, этажность здания – 1; Ж/б резервуар для воды, расположенный по адресу: п. Коноша; Подземный водозабор, расположенный по адресу: п. Коноша; Внутриплощадочный водозабор (осн. магистраль), расположенный по адресу: п. Коноша; Канализационная насосная станция №101, кад.№ 29:06:120133:121, расположенная по адресу: п. Коноша, пр. Октябрьский, д. 122, сооружение 1, этажность здания- 1; Сети водопровода протяженность 837 метров (в том числе 3 - водоразборных устройства, 11 задвижек, 12 смотровых колодцев), расположенные по адресу: п. Коноша, ул. Западная; Сети канализации протяженность 945,5 метров (в том числе смотровые колодцы - 48 шт.), расположенная по адресу: п. Коноша, ул. Западная; Насосная станция, расположенная по адресу: п. Коноша, ул. Западная, площадь 16,6 кв.м.; Скважина № 1559, расположенная по адресу: д. Толстая, Коношского района, этажность здания – 1; Скважина № 373, кад.№ 29:06:120128:720, расположенная по адресу: п. Коноша, ул. Молодежная, д.5 «а», сооружение 2, этажность здания – 1; Скважина № 1536, расположенная по адресу: п. Коноша, ул. Западная, этажность здания – 1; Водоскважина и сети водопровода, общей протяженностью 366 метров, расположенная по адресу: п. Коноша, ул. Рождественская; Сети водопровода, протяжённостью 24,49 м. расположенные от жилого дома № 29 по ул. Театральная до здания ГБУ СОН «Коношский КЦСО, расположенные по адресу: п. Коноша, ул. Театральная, д.24; Сети водопровода, протяжённостью 76,8 м, от жилого дома № 10 по ул. Мамонова до распределительного узла по ул. Спортивная, расположенные по адресу: п. Коноша; Сети водопровода, расположенные от границы собственника центрального водопровода (ОАО РЖД) до внешних стен многоквартирных домов № 7, 9, 11 по ул. Новолесная, дома №2 по ул. Новосёлов, домов № 2,4 по ул. Строителей; Артезианская скважина, расположенная по адресу Архангельская область, Коношский район, п. Коноша, ул. Горная, 19; Водозаборная колонка, расположенная в 63 м. на юго-запад относительно ориентира водонапорной башни, адрес ориентира: Архангельская обл., п. Коноша, ул. Горная. 19; Сети водопровода, протяжённостью 215 м. от жилых домов № 4а и 4г по ул. Горная до артезианской скважины по ул. Горная, 19, п. Коноша и от артезианской скважины до водоразборной колонки, расположенной в 63 м. на юго-запад относительно ориентира водонапорной башни, адрес ориентира Архангельская обл., п. Коноша, ул.Горная, д. 19; Сети канализации, протяжённостью 112,5 м., от жилых домов № 4а и 4г по ул. Горная до септика, расположенного по ул. Горная до септика, расположенного по ул. Горная. 2 п. Коноша; Артезианская скважина № 2091, расположенная по адресу: п. Коноша, ул. Первомайская, д. 44, соор.6; Артезианская скважина № 1431, расположенная по адресу: п. Коноша, ул. Первомайская, д. 44, соор.2; Артезианская скважина № 1-Д, кад.№ 29:06:000000:1643, расположенная по адресу: п. Коноша, ул. Речная, д77, соор.1. Место и время ознакомления с имуществом необходимо согласовать по тел.: 89115208353 или по электронной почте a.p.69@list.ru.</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">14&#160;268&#160;600,00</div> 
+	            </div>
+	        </div>
+	</div>
+</div>
+
+<div class="row  row--v-offset trade-card">
+    <a href="/bidding/AnounsmentDetails/5523">
+        <div class="col col--xs-3">
+            <div class="trade-card__name">Пермогорский Алексей Валентинович</div>
+            <div class="trade-card__type">Торги на повышение № 5523</div>
+        </div>
+    </a>
+	<div class="col col--xs-9">
+        <a href="/bidding/AnounsmentDetails/5523">
+            <div class="row  row--v-offset">
+                <div class="col col--xs-8">
+                    <div class="trade-card__title">Должник:</div>
+                    <p>Общество с ограниченной ответственностью &quot;Прожектор&quot;</p>
+                </div>
+                <div class="col col--xs-4">
+                    <div class="trade-card__status trade-card__status--isParticipanceOpened">Идет прием заявок</div>
+                    <p>до 12.07.2021 23:59:00 по МСК</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="/bidding/AnounsmentDetails/5523">
+            <div class="row  row--v-offset">
+                <div class="col col--xs-8">
+                    <div class="trade-card__title">Описание:</div>
+                </div>
+                <div class="col col--xs-4">
+                    <div class="trade-card__title">Стартовая цена</div>
+                </div>
+            </div>
+        </a>
+
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9071">Лот № 1</div>
+	                <div id="desc9071" class="collapse">Телятник Никулино, условный номер 35-35-01/070/2011-114, кад. номер 35:25:0703018:1545; Телятник 200 голов, кад. номер 35:25:0602006:59; Комплекс Сокольниково 400 голов, кад. номер 35:25:0404026:11; Элементы конструкции телятник Коренево; Телятник Сусолово №1, кад. номер 35:25:0602014:47; Телятник, кад. номер 35:25:0404026:18; Металлический склад под сенную резку Янгосарь; Склад Янгосарь; Телятник Сусолово №2, кад. номер35:25:0602014:81; Земельный участок, кад.№ 35:25:0602077:589; Земельный участок, кад.№ 35:25:0602077:590; Земельный участок, кад.№ 35:25:0602077:592; Земельный участок, кад.№ 35:25:0602077:593; Земельный участок, кад.№ 35:25:0602078:962; Земельный участок, кад.№ 35:25:0602077:594; Земельный участок, кад.№ 35:25:0602077:591; Силосная траншея Никулино; Силосная траншея Прокино 500т; Силосная траншея Сокольниково 1000т ; Артскважина Коренево; Артскважина Никулино; Артскважина Сокольниково; Артскважина Сокольниково; Башня Рожновского; Артскважина Коренево; Башня БР-15; Силосная траншея Сокольниково; Башня БР-25. Ознакомление с имуществом согласовать по тел.: 89115208353.</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">4&#160;319&#160;550,00</div> 
+	            </div>
+	        </div>
+	</div>
+</div>
+
+<div class="row  row--v-offset trade-card">
+    <a href="/bidding/AnounsmentDetails/5522">
+        <div class="col col--xs-3">
+            <div class="trade-card__name">Скворцов Георгий Валентинович</div>
+            <div class="trade-card__type">Торги на повышение № 5522</div>
+        </div>
+    </a>
+	<div class="col col--xs-9">
+        <a href="/bidding/AnounsmentDetails/5522">
+            <div class="row  row--v-offset">
+                <div class="col col--xs-8">
+                    <div class="trade-card__title">Должник:</div>
+                    <p>Тихомиров Игорь Александрович</p>
+                </div>
+                <div class="col col--xs-4">
+                    <div class="trade-card__status trade-card__status--isParticipanceOpened">Идет прием заявок</div>
+                    <p>до 08.07.2021 10:00:00 по МСК</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="/bidding/AnounsmentDetails/5522">
+            <div class="row  row--v-offset">
+                <div class="col col--xs-8">
+                    <div class="trade-card__title">Описание:</div>
+                </div>
+                <div class="col col--xs-4">
+                    <div class="trade-card__title">Стартовая цена</div>
+                </div>
+            </div>
+        </a>
+
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9070">Лот № 1</div>
+	                <div id="desc9070" class="collapse">Имущество, находящееся в залоге у ООО «Сетелем Банк» (ИНН 6452010742): Лот №1: Автомобиль (легковой седан), ХЕНДЭ САНТА ФЕ (Hyundai Santa Fe), VIN XWES381CDK0001552, гос. знак С773ТО750. Получить дополнительную информацию об имуществе, ознакомиться с порядком, сроками и условиями продажи имущества, договора о задатке и проектом договора купли-продажи имущества должника можно на сайте электронной торговой площадки http://ru-trade24.ru либо по телефону 89859976979 или эл.почте gvstorgi@yandex.ru в срок приема заявок, в рабочие дни с 11.00 до 17.00.</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">2&#160;295&#160;000,00</div> 
+	            </div>
+	        </div>
+	</div>
+</div>
+
+<div class="row  row--v-offset trade-card">
+    <a href="/bidding/AnounsmentDetails/5520">
+        <div class="col col--xs-3">
+            <div class="trade-card__name">Разуленко Олег Аркадьевич</div>
+            <div class="trade-card__type">Торги на повышение № 5520</div>
+        </div>
+    </a>
+	<div class="col col--xs-9">
+        <a href="/bidding/AnounsmentDetails/5520">
+            <div class="row  row--v-offset">
+                <div class="col col--xs-8">
+                    <div class="trade-card__title">Должник:</div>
+                    <p>Аржаников Николай Николаевич</p>
+                </div>
+                <div class="col col--xs-4">
+                    <div class="trade-card__status trade-card__status--isParticipanceOpened">Идет прием заявок</div>
+                    <p>до 26.07.2021 18:00:00 по МСК</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="/bidding/AnounsmentDetails/5520">
+            <div class="row  row--v-offset">
+                <div class="col col--xs-8">
+                    <div class="trade-card__title">Описание:</div>
+                </div>
+                <div class="col col--xs-4">
+                    <div class="trade-card__title">Стартовая цена</div>
+                </div>
+            </div>
+        </a>
+
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9069">Лот № 1</div>
+	                <div id="desc9069" class="collapse">земельный участок площадью 960 +/- 271 кв.м., расположенный по адресу: Челябинская обл, р-н Аргаяшский, д. Крутолапова, юго-западная часть квартала, кадастровый номер: 74:02:0000000:1104. Ознакомление с документами на имущество производится по рабочим дням, по предварительному согласованию путем направления заявки на электронную почту финансового управляющего: 9637757@mail.ru. Осмотр участка осуществляется участниками торгов самостоятельно.</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">140&#160;000,00</div> 
+	            </div>
+	        </div>
+	</div>
+</div>
+
+<div class="row  row--v-offset trade-card">
+    <a href="/bidding/AnounsmentDetails/5519">
+        <div class="col col--xs-3">
+            <div class="trade-card__name">Глушко Ирина Алексеевна</div>
+            <div class="trade-card__type">Публичное предложение № 5519</div>
+        </div>
+    </a>
+	<div class="col col--xs-9">
+        <a href="/bidding/AnounsmentDetails/5519">
+            <div class="row  row--v-offset">
+                <div class="col col--xs-8">
+                    <div class="trade-card__title">Должник:</div>
+                    <p>Казаков Андрей Валерьевич</p>
+                </div>
+                <div class="col col--xs-4">
+                    <div class="trade-card__status trade-card__status--isParticipanceOpened">Идет прием заявок</div>
+                    <p>до 26.09.2021 10:00:00 по МСК</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="/bidding/AnounsmentDetails/5519">
+            <div class="row  row--v-offset">
+                <div class="col col--xs-8">
+                    <div class="trade-card__title">Описание:</div>
+                </div>
+                <div class="col col--xs-4">
+                    <div class="trade-card__title">Стартовая цена</div>
+                </div>
+            </div>
+        </a>
+
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9067">Лот № 1</div>
+	                <div id="desc9067" class="collapse">ЛОТ № 2:
+Земельный участок (кадастровый №: 47:21:0103001:25) площадью 1 050 кв.м, категория земель – земли сельскохозяйственного назначения, разрешенное использование – для ведения гражданами садоводства и огородничества, расположенный по адресу: Ленинградская область, Кингисеппский муниципальный район, Ивангородское городское поселение, ст «Северное», ул. Дальняя, уч. 39. Претендентам на участие в торгах предоставляется возможность ознакомления с имуществом, выставляемым на торги (по месту его нахождения) с обязательным предварительным (не менее, чем за 2 рабочих дня) согласованием в рабочие дни с 10-00 до 18-00 с финансовым управляющим по телефону: +7(921)4096189 или адресу электронной почты: glushko-irina5@mail.ru.</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">152&#160;100,00</div> 
+	            </div>
+	        </div>
+	</div>
+</div>
+
+<div class="row  row--v-offset trade-card">
+    <a href="/bidding/AnounsmentDetails/5518">
+        <div class="col col--xs-3">
+            <div class="trade-card__name">Глушко Ирина Алексеевна</div>
+            <div class="trade-card__type">Публичное предложение № 5518</div>
+        </div>
+    </a>
+	<div class="col col--xs-9">
+        <a href="/bidding/AnounsmentDetails/5518">
+            <div class="row  row--v-offset">
+                <div class="col col--xs-8">
+                    <div class="trade-card__title">Должник:</div>
+                    <p>Казаков Андрей Валерьевич</p>
+                </div>
+                <div class="col col--xs-4">
+                    <div class="trade-card__status trade-card__status--isParticipanceOpened">Идет прием заявок</div>
+                    <p>до 26.09.2021 10:00:00 по МСК</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="/bidding/AnounsmentDetails/5518">
+            <div class="row  row--v-offset">
+                <div class="col col--xs-8">
+                    <div class="trade-card__title">Описание:</div>
+                </div>
+                <div class="col col--xs-4">
+                    <div class="trade-card__title">Стартовая цена</div>
+                </div>
+            </div>
+        </a>
+
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9066">Лот № 1</div>
+	                <div id="desc9066" class="collapse">ЛОТ № 1:
+Земельный участок (кадастровый №: 47:21:0103001:20) площадью 1 050 кв.м, категория земель – земли сельскохозяйственного назначения, разрешенное использование – для ведения гражданами садоводства и огородничества, расположенный по адресу: Ленинградская область, Кингисеппский муниципальный район, Ивангородское городское поселение, ст «Северное», ул. Дальняя, уч. 41. Претендентам на участие в торгах предоставляется возможность ознакомления с имуществом, выставляемым на торги (по месту его нахождения) с обязательным предварительным (не менее, чем за 2 рабочих дня) согласованием в рабочие дни с 10-00 до 18-00 с финансовым управляющим по телефону: +7(921)4096189 или адресу электронной почты: glushko-irina5@mail.ru.</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">152&#160;100,00</div> 
+	            </div>
+	        </div>
+	</div>
+</div>
+
+<div class="row  row--v-offset trade-card">
+    <a href="/bidding/AnounsmentDetails/5517">
+        <div class="col col--xs-3">
+            <div class="trade-card__name">Глушко Ирина Алексеевна</div>
+            <div class="trade-card__type">Торги на повышение № 5517</div>
+        </div>
+    </a>
+	<div class="col col--xs-9">
+        <a href="/bidding/AnounsmentDetails/5517">
+            <div class="row  row--v-offset">
+                <div class="col col--xs-8">
+                    <div class="trade-card__title">Должник:</div>
+                    <p>Солодовникова Светлана Леонидовна</p>
+                </div>
+                <div class="col col--xs-4">
+                    <div class="trade-card__status trade-card__status--isParticipanceOpened">Идет прием заявок</div>
+                    <p>до 07.07.2021 10:00:00 по МСК</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="/bidding/AnounsmentDetails/5517">
+            <div class="row  row--v-offset">
+                <div class="col col--xs-8">
+                    <div class="trade-card__title">Описание:</div>
+                </div>
+                <div class="col col--xs-4">
+                    <div class="trade-card__title">Стартовая цена</div>
+                </div>
+            </div>
+        </a>
+
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9065">Лот № 1</div>
+	                <div id="desc9065" class="collapse">Организатор торгов сообщает о проведении торгов в форме открытого аукциона с подачей заявок в открытой форме по цене имущества (далее – торги) на право заключения договора купли-продажи имущества Солодовниковой Светланы Леонидовны:
+ЛОТ № 1: Транспортное средство: автомобиль марки Ford Fusion, 2008 г.в., тип – легковой, двигатель № F6JB 8E24447, кузов № WF0UXXGAJU8E24447, VIN WF0UXXGAJU8E24447, шасси (рама) № отсутствует, цвет: серебристый, мощность двигателя – 68 л.с. (50 кВт), рабочий объем двигателя – 1399 куб. см, тип двигателя – дизельный. Паспорт транспортного средства 78 УС 382467, выдан 20.02.2012 г. Свидетельство о регистрации транспортного средства 78 52 № 922870, выдано 09.09.2017 г. Указанное транспортное средство является предметом залога, обеспечивающего исполнение обязательств Должника перед ПАО «Совкомбанк» по кредитному договору № 1342591340 от 02.09.2017 г.
+Техническое состояние по результатам осмотра финансового управляющего: Автомобиль не заводится, пробег неизвестен. Повреждения переднего бампера, неисправность аккумуляторной батареи, коррозия кузова. Автомобиль не на ходу.</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">198&#160;000,00</div> 
+	            </div>
+	        </div>
+	</div>
+</div>
+
+<div class="row  row--v-offset trade-card">
+    <a href="/bidding/AnounsmentDetails/5516">
+        <div class="col col--xs-3">
+            <div class="trade-card__name">Сыромятников Вадим Евгеньевич</div>
+            <div class="trade-card__type">Торги на повышение № 5516</div>
+        </div>
+    </a>
+	<div class="col col--xs-9">
+        <a href="/bidding/AnounsmentDetails/5516">
+            <div class="row  row--v-offset">
+                <div class="col col--xs-8">
+                    <div class="trade-card__title">Должник:</div>
+                    <p>ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ &quot;СТРОИТЕЛЬНОЕ УПРАВЛЕНИЕ-813&quot;</p>
+                </div>
+                <div class="col col--xs-4">
+                    <div class="trade-card__status trade-card__status--isParticipanceClosed">Прием заявок окончен</div>
+                    <p>до 29.06.2021 20:00:00 по МСК</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="/bidding/AnounsmentDetails/5516">
+            <div class="row  row--v-offset">
+                <div class="col col--xs-8">
+                    <div class="trade-card__title">Описание:</div>
+                </div>
+                <div class="col col--xs-4">
+                    <div class="trade-card__title">Стартовая цена</div>
+                </div>
+            </div>
+        </a>
+
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9044">Лот № 1</div>
+	                <div id="desc9044" class="collapse">Автогрейдер Mista RD 165C КА 8559 82 2007, VIN 0270239, имеются ограничения необходимо проверить по сайтам ГАИ и Гостехнадзора, ознакомление на основании заявки по месту нахождения в Р. Крым Симферополь, пос. Ключи, пос. Молочное, предварительная запись по телефону организатора торгов.</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">3&#160;938&#160;000,00</div> 
+	            </div>
+	        </div>
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9045">Лот № 2</div>
+	                <div id="desc9045" class="collapse">Асфальтоукладчик VOGELE Super 1800-1 КА 3136 82 2004, VIN 07820255,имеются ограничения необходимо проверить по сайтам ГАИ и Гостехнадзора, ознакомление на основании заявки по месту нахождения в Р. Крым Симферополь, пос. Ключи, пос. Молочное, предварительная запись по телефону организатора торгов.</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">5&#160;112&#160;000,00</div> 
+	            </div>
+	        </div>
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9046">Лот № 3</div>
+	                <div id="desc9046" class="collapse">Бульдозер гусеничный Dressta TD-20 КА 0398 82 2007, VIN 4900001P052667имеются ограничения необходимо проверить по сайтам ГАИ и Гостехнадзора, ознакомление на основании заявки по месту нахождения в Р. Крым Симферополь, пос. Ключи, пос. Молочное, предварительная запись по телефону организатора торгов.</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">4&#160;593&#160;000,00</div> 
+	            </div>
+	        </div>
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9047">Лот № 4</div>
+	                <div id="desc9047" class="collapse">Бульдозер гусеничный Shantui SD23 КА 8515 82 2008, VIN SD23AA100829имеются ограничения необходимо проверить по сайтам ГАИ и Гостехнадзора, ознакомление на основании заявки по месту нахождения в Р. Крым Симферополь, пос. Ключи, пос. Молочное, предварительная запись по телефону организатора торгов.</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">3&#160;119&#160;000,00</div> 
+	            </div>
+	        </div>
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9048">Лот № 5</div>
+	                <div id="desc9048" class="collapse">Буровая установка CASAGRANDE B 180 HD КА 3134 82 2010, VIN B180UZ0306имеются ограничения необходимо проверить по сайтам ГАИ и Гостехнадзора, ознакомление на основании заявки по месту нахождения в Р. Крым Симферополь, пос. Ключи, пос. Молочное, предварительная запись по телефону организатора торгов.</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">22&#160;398&#160;000,00</div> 
+	            </div>
+	        </div>
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9049">Лот № 6</div>
+	                <div id="desc9049" class="collapse">Каток асфальтный гладковальцовый тандемный AMMANN AV 85-2 КА 3125 82 2007, VIN 106698/0223имеются ограничения необходимо проверить по сайтам ГАИ и Гостехнадзора, ознакомление на основании заявки по месту нахождения в Р. Крым Симферополь, пос. Ключи, пос. Молочное, предварительная запись по телефону организатора торгов.</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">2&#160;055&#160;000,00</div> 
+	            </div>
+	        </div>
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9050">Лот № 7</div>
+	                <div id="desc9050" class="collapse">Каток асфальтный гладковальцовый тандемный AMMANN AV 95-2 КА 3126 82 2007, VIN 106698/0206имеются ограничения необходимо проверить по сайтам ГАИ и Гостехнадзора, ознакомление на основании заявки по месту нахождения в Р. Крым Симферополь, пос. Ключи, пос. Молочное, предварительная запись по телефону организатора торгов.</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">2&#160;013&#160;000,00</div> 
+	            </div>
+	        </div>
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9051">Лот № 8</div>
+	                <div id="desc9051" class="collapse">Каток асфальтный гладковальцовый тандемный AMMANN AV 110-Х КА 3127 82 2007, VIN 03750А/0095имеются ограничения необходимо проверить по сайтам ГАИ и Гостехнадзора, ознакомление на основании заявки по месту нахождения в Р. Крым Симферополь, пос. Ключи, пос. Молочное, предварительная запись по телефону организатора торгов.</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">2&#160;299&#160;000,00</div> 
+	            </div>
+	        </div>
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9052">Лот № 9</div>
+	                <div id="desc9052" class="collapse">Каток асфальтный гладковальцовый тандемный Lutong LTC 212 КА 3122 82 2008, VIN 192имеются ограничения необходимо проверить по сайтам ГАИ и Гостехнадзора, ознакомление на основании заявки по месту нахождения в Р. Крым Симферополь, пос. Ключи, пос. Молочное, предварительная запись по телефону организатора торгов.</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">1&#160;592&#160;000,00</div> 
+	            </div>
+	        </div>
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9053">Лот № 10</div>
+	                <div id="desc9053" class="collapse">Погрузчик фронтальный New Holland W 190В КА 3129 82 2008, VIN N8F203879имеются ограничения необходимо проверить по сайтам ГАИ и Гостехнадзора, ознакомление на основании заявки по месту нахождения в Р. Крым Симферополь, пос. Ключи, пос. Молочное, предварительная запись по телефону организатора торгов.</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">3&#160;170&#160;000,00</div> 
+	            </div>
+	        </div>
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9054">Лот № 11</div>
+	                <div id="desc9054" class="collapse">Экскаватор гусеничный Hyundai R250LC-7 КА 2918 82 2010, VIN HHIHN701KA0002049имеются ограничения необходимо проверить по сайтам ГАИ и Гостехнадзора, ознакомление на основании заявки по месту нахождения в Р. Крым Симферополь, пос. Ключи, пос. Молочное, предварительная запись по телефону организатора торгов.</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">4&#160;027&#160;000,00</div> 
+	            </div>
+	        </div>
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9055">Лот № 12</div>
+	                <div id="desc9055" class="collapse">Экскаватор Hyundai R 300 LC-9SH-1 КА 3133 2013, VIN HHKHZ808TD0000138имеются ограничения необходимо проверить по сайтам ГАИ и Гостехнадзора, ознакомление на основании заявки по месту нахождения в Р. Крым Симферополь, пос. Ключи, пос. Молочное, предварительная запись по телефону организатора торгов.</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">4&#160;377&#160;000,00</div> 
+	            </div>
+	        </div>
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9056">Лот № 13</div>
+	                <div id="desc9056" class="collapse">автомобиль MAN TG S33\440 2011, VIN WMA26SZZ2BP029792имеются ограничения необходимо проверить по сайтам ГАИ и Гостехнадзора, ознакомление на основании заявки по месту нахождения в Р. Крым Симферополь, пос. Ключи, пос. Молочное, предварительная запись по телефону организатора торгов.</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">2&#160;720&#160;000,00</div> 
+	            </div>
+	        </div>
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9057">Лот № 14</div>
+	                <div id="desc9057" class="collapse">Дорожная фреза ZOOMLION BG 2000 КА 3524 2006, VIN 1120049имеются ограничения необходимо проверить по сайтам ГАИ и Гостехнадзора, ознакомление на основании заявки по месту нахождения в Р. Крым Симферополь, пос. Ключи, пос. Молочное, предварительная запись по телефону организатора торгов.</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">6&#160;255&#160;000,00</div> 
+	            </div>
+	        </div>
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9058">Лот № 15</div>
+	                <div id="desc9058" class="collapse">Бульдозер гусеничный Dressta TD-20 Н КА 2916 2007, VIN 4900001P052670имеются ограничения необходимо проверить по сайтам ГАИ и Гостехнадзора, ознакомление на основании заявки по месту нахождения в Р. Крым Симферополь, пос. Ключи, пос. Молочное, предварительная запись по телефону организатора торгов.</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">4&#160;464&#160;000,00</div> 
+	            </div>
+	        </div>
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9059">Лот № 16</div>
+	                <div id="desc9059" class="collapse">Асфальтоукладчик VOLVO 7820 КА 3135 2008, VIN 782021292имеются ограничения необходимо проверить по сайтам ГАИ и Гостехнадзора, ознакомление на основании заявки по месту нахождения в Р. Крым Симферополь, пос. Ключи, пос. Молочное, предварительная запись по телефону организатора торгов.</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">5&#160;893&#160;000,00</div> 
+	            </div>
+	        </div>
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9060">Лот № 17</div>
+	                <div id="desc9060" class="collapse">Минипогрузчик New Holland L 170 КА 3130 2008, VIN N7M456368имеются ограничения необходимо проверить по сайтам ГАИ и Гостехнадзора, ознакомление на основании заявки по месту нахождения в Р. Крым Симферополь, пос. Ключи, пос. Молочное, предварительная запись по телефону организатора торгов.</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">198&#160;000,00</div> 
+	            </div>
+	        </div>
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9061">Лот № 18</div>
+	                <div id="desc9061" class="collapse">Каток асфальтный гладковальцовый тандемный Lutong LTC 212 КА 3123 2008, VIN 185имеются ограничения необходимо проверить по сайтам ГАИ и Гостехнадзора, ознакомление на основании заявки по месту нахождения в Р. Крым Симферополь, пос. Ключи, пос. Молочное, предварительная запись по телефону организатора торгов.</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">1&#160;592&#160;000,00</div> 
+	            </div>
+	        </div>
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9062">Лот № 19</div>
+	                <div id="desc9062" class="collapse">каток грунтовый YZ 12 КА 2919 2008, VIN 0727043имеются ограничения необходимо проверить по сайтам ГАИ и Гостехнадзора, ознакомление на основании заявки по месту нахождения в Р. Крым Симферополь, пос. Ключи, пос. Молочное, предварительная запись по телефону организатора торгов.</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">130&#160;000,00</div> 
+	            </div>
+	        </div>
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9063">Лот № 20</div>
+	                <div id="desc9063" class="collapse">Автогрейдер ZOOMLION PY 190 КА 3126 82 2007, VIN 2302080имеются ограничения необходимо проверить по сайтам ГАИ и Гостехнадзора, ознакомление на основании заявки по месту нахождения в Р. Крым Симферополь, пос. Ключи, пос. Молочное, предварительная запись по телефону организатора торгов.</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">141&#160;000,00</div> 
+	            </div>
+	        </div>
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9064">Лот № 21</div>
+	                <div id="desc9064" class="collapse">Экскаватор-погрузчик New Holland B 110-4PT КА 8516 82 2008, VIN N7GH12819имеются ограничения необходимо проверить по сайтам ГАИ и Гостехнадзора, ознакомление на основании заявки по месту нахождения в Р. Крым Симферополь, пос. Ключи, пос. Молочное, предварительная запись по телефону организатора торгов.</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">313&#160;000,00</div> 
+	            </div>
+	        </div>
+	</div>
+</div>
+
+<div class="row  row--v-offset trade-card">
+    <a href="/bidding/AnounsmentDetails/5513">
+        <div class="col col--xs-3">
+            <div class="trade-card__name">Скляревский Евгений Генрихович</div>
+            <div class="trade-card__type">Торги на повышение № 5513</div>
+        </div>
+    </a>
+	<div class="col col--xs-9">
+        <a href="/bidding/AnounsmentDetails/5513">
+            <div class="row  row--v-offset">
+                <div class="col col--xs-8">
+                    <div class="trade-card__title">Должник:</div>
+                    <p>Общество с ограниченной ответственностью &quot;ВЕКТОР&quot;</p>
+                </div>
+                <div class="col col--xs-4">
+                    <div class="trade-card__status trade-card__status--isParticipanceOpened">Идет прием заявок</div>
+                    <p>до 06.07.2021 17:00:00 по МСК</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="/bidding/AnounsmentDetails/5513">
+            <div class="row  row--v-offset">
+                <div class="col col--xs-8">
+                    <div class="trade-card__title">Описание:</div>
+                </div>
+                <div class="col col--xs-4">
+                    <div class="trade-card__title">Стартовая цена</div>
+                </div>
+            </div>
+        </a>
+
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9040">Лот № 1</div>
+	                <div id="desc9040" class="collapse">5 единиц Блок-контейнеров (строительные бытовки) 6,0х2,4 (5 штук). Ознакомление с Имуществом производится по предварительной договоренности по рабочим дням: вторник, среда и четверг с 10.00 до 16.00, контактный телефон: 8 (495)9897718 (КУ).</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">153&#160;000,00</div> 
+	            </div>
+	        </div>
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9041">Лот № 2</div>
+	                <div id="desc9041" class="collapse">Плоттер HP Designjet T250. Ознакомление с Имуществом производится по предварительной договоренности по рабочим дням: вторник, среда и четверг с 10.00 до 16.00, контактный телефон: 8 (495)9897718 (КУ).</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">15&#160;300,00</div> 
+	            </div>
+	        </div>
+	</div>
+</div>
+
+<div class="row  row--v-offset trade-card">
+    <a href="/bidding/AnounsmentDetails/5511">
+        <div class="col col--xs-3">
+            <div class="trade-card__name">Общество с ограниченной ответственностью &quot;Инфотек&quot;</div>
+            <div class="trade-card__type">Публичное предложение № 5511</div>
+        </div>
+    </a>
+	<div class="col col--xs-9">
+        <a href="/bidding/AnounsmentDetails/5511">
+            <div class="row  row--v-offset">
+                <div class="col col--xs-8">
+                    <div class="trade-card__title">Должник:</div>
+                    <p>Закрытое акционерное общество &#171;Ивановский проектный институт по градостроительству промышленности и изысканиям №6&#187; </p>
+                </div>
+                <div class="col col--xs-4">
+                    <div class="trade-card__status trade-card__status--isParticipanceOpened">Идет прием заявок</div>
+                    <p>до 03.07.2021 10:00:00 по МСК</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="/bidding/AnounsmentDetails/5511">
+            <div class="row  row--v-offset">
+                <div class="col col--xs-8">
+                    <div class="trade-card__title">Описание:</div>
+                </div>
+                <div class="col col--xs-4">
+                    <div class="trade-card__title">Стартовая цена</div>
+                </div>
+            </div>
+        </a>
+
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9039">Лот № 1</div>
+	                <div id="desc9039" class="collapse">Лот №3. Право требования(дебиторская задолженность) ЗАО «ИвПроект ГПИ-6» к ОАО "Ивановская Домостроительная Компания"(ИНН 3728000058) в размере 728964,70руб., ИП Мущинина А.В.(ИНН 370215210522) в размере 502119,83 руб., ОАО "Строммашина"(ИНН 3711003090) в размере 3359927,86руб., ООО "Дом"(ИНН 3702183329) в размере 800000,00 руб. 
+Состав лота может быть изменен в случае, если дебиторская задолженность будет погашена дебитором или иным(третьим) лицом полностью или частично, если дебитор будет исключен из ЕГРЮЛ или судебный акт об отказе в удовлетворении требований вступит в силу. В указанном случае объем передаваемых прав уменьшится на соответствующую сумму с пропорциональным снижением цены продаваемого лота, по результатам итогов торгов, при заключении договора цессии. 
+Ознакомление с имуществом осуществляется в период приема заявок на участие в торгах по эл. почте ot.infotek@gmail.com или тел.89163249027.</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">5&#160;391&#160;012,39</div> 
+	            </div>
+	        </div>
+	</div>
+</div>
+
+<div class="row  row--v-offset trade-card">
+    <a href="/bidding/AnounsmentDetails/5510">
+        <div class="col col--xs-3">
+            <div class="trade-card__name">Общество с ограниченной ответственностью &quot;Инфотек&quot;</div>
+            <div class="trade-card__type">Публичное предложение № 5510</div>
+        </div>
+    </a>
+	<div class="col col--xs-9">
+        <a href="/bidding/AnounsmentDetails/5510">
+            <div class="row  row--v-offset">
+                <div class="col col--xs-8">
+                    <div class="trade-card__title">Должник:</div>
+                    <p>Закрытое акционерное общество &#171;Ивановский проектный институт по градостроительству промышленности и изысканиям №6&#187; </p>
+                </div>
+                <div class="col col--xs-4">
+                    <div class="trade-card__status trade-card__status--isParticipanceOpened">Идет прием заявок</div>
+                    <p>до 03.07.2021 10:00:00 по МСК</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="/bidding/AnounsmentDetails/5510">
+            <div class="row  row--v-offset">
+                <div class="col col--xs-8">
+                    <div class="trade-card__title">Описание:</div>
+                </div>
+                <div class="col col--xs-4">
+                    <div class="trade-card__title">Стартовая цена</div>
+                </div>
+            </div>
+        </a>
+
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9038">Лот № 1</div>
+	                <div id="desc9038" class="collapse">Лот №2. Право требования (дебиторская задолженность) ЗАО «ИвПроект ГПИ-6» к ООО "РУСТ"(ИНН 3702013655) в размере 41391,09руб., АО "Строительное Управление № 155"(ИНН 7736003162) в размере 9392408,55руб. 
+Состав лота может быть изменен в случае, если дебиторская задолженность будет погашена дебитором или иным(третьим) лицом полностью или частично, если дебитор будет исключен из ЕГРЮЛ или судебный акт об отказе в удовлетворении требований вступит в силу. В указанном случае объем передаваемых прав уменьшится на соответствующую сумму с пропорциональным снижением цены продаваемого лота, по результатам итогов торгов, при заключении договора цессии. 
+Ознакомление с имуществом осуществляется в период приема заявок на участие в торгах по эл. почте ot.infotek@gmail.com или тел.89163249027.</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">9&#160;433&#160;799,64</div> 
+	            </div>
+	        </div>
+	</div>
+</div>
+
+<div class="row  row--v-offset trade-card">
+    <a href="/bidding/AnounsmentDetails/5508">
+        <div class="col col--xs-3">
+            <div class="trade-card__name">Сергеева Юлия Анатольевна </div>
+            <div class="trade-card__type">Торги на повышение № 5508</div>
+        </div>
+    </a>
+	<div class="col col--xs-9">
+        <a href="/bidding/AnounsmentDetails/5508">
+            <div class="row  row--v-offset">
+                <div class="col col--xs-8">
+                    <div class="trade-card__title">Должник:</div>
+                    <p>Шаврова   Ольга Александровна</p>
+                </div>
+                <div class="col col--xs-4">
+                    <div class="trade-card__status trade-card__status--isParticipanceOpened">Идет прием заявок</div>
+                    <p>до 02.07.2021 23:59:00 по МСК</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="/bidding/AnounsmentDetails/5508">
+            <div class="row  row--v-offset">
+                <div class="col col--xs-8">
+                    <div class="trade-card__title">Описание:</div>
+                </div>
+                <div class="col col--xs-4">
+                    <div class="trade-card__title">Стартовая цена</div>
+                </div>
+            </div>
+        </a>
+
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9036">Лот № 1</div>
+	                <div id="desc9036" class="collapse">Автомобиль легковой: Mazda  3l, 2004  года выпуска; тип ТС седан; Идентификационный номер VIN  JM1BK12F541178254; Цвет сине-зелёный; Кузов № JM1BK12F541178254; Мощность двигателя: 150 л.с., 110.00 кВт; Паспорт транспортного средства (ПТС) 39 ТР № 387182; Свидетельство о регистрации ТС 39 УР 411028. Ознакомление с документами по торгам и имуществом производится в рабочее время по предварительной записи по электронной почте: arbitr.sergeeva@gmail.com.</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">315&#160;000,00</div> 
+	            </div>
+	        </div>
+	</div>
+</div>
+
+<div class="row  row--v-offset trade-card">
+    <a href="/bidding/AnounsmentDetails/5507">
+        <div class="col col--xs-3">
+            <div class="trade-card__name">Голумеев Денис Владимирович</div>
+            <div class="trade-card__type">Публичное предложение № 5507</div>
+        </div>
+    </a>
+	<div class="col col--xs-9">
+        <a href="/bidding/AnounsmentDetails/5507">
+            <div class="row  row--v-offset">
+                <div class="col col--xs-8">
+                    <div class="trade-card__title">Должник:</div>
+                    <p>Ерофеева Наталья Юрьевна</p>
+                </div>
+                <div class="col col--xs-4">
+                    <div class="trade-card__status trade-card__status--isParticipanceOpened">Идет прием заявок</div>
+                    <p>до 15.07.2021 12:00:00 по МСК</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="/bidding/AnounsmentDetails/5507">
+            <div class="row  row--v-offset">
+                <div class="col col--xs-8">
+                    <div class="trade-card__title">Описание:</div>
+                </div>
+                <div class="col col--xs-4">
+                    <div class="trade-card__title">Стартовая цена</div>
+                </div>
+            </div>
+        </a>
+
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9035">Лот № 1</div>
+	                <div id="desc9035" class="collapse">Автомобиль Лифан/Lifan, 2013 г.в., VIN X9W215800D0008075.
+Ознакомиться с характеристиками, состоянием и документами в отношении имущества можно в рабочее время, предварительно согласовав время ознакомления по электронной почте: golumeev@mail.ru.</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">205&#160;200,00</div> 
+	            </div>
+	        </div>
+	</div>
+</div>
+
+<div class="row  row--v-offset trade-card">
+    <a href="/bidding/AnounsmentDetails/5505">
+        <div class="col col--xs-3">
+            <div class="trade-card__name">Кузнецов Дмитрий Сергеевич</div>
+            <div class="trade-card__type">Торги на повышение № 5505</div>
+        </div>
+    </a>
+	<div class="col col--xs-9">
+        <a href="/bidding/AnounsmentDetails/5505">
+            <div class="row  row--v-offset">
+                <div class="col col--xs-8">
+                    <div class="trade-card__title">Должник:</div>
+                    <p>ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ &quot;ЛАБИРИНТ&quot;</p>
+                </div>
+                <div class="col col--xs-4">
+                    <div class="trade-card__status trade-card__status--isParticipanceOpened">Идет прием заявок</div>
+                    <p>до 05.07.2021 23:59:00 по МСК</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="/bidding/AnounsmentDetails/5505">
+            <div class="row  row--v-offset">
+                <div class="col col--xs-8">
+                    <div class="trade-card__title">Описание:</div>
+                </div>
+                <div class="col col--xs-4">
+                    <div class="trade-card__title">Стартовая цена</div>
+                </div>
+            </div>
+        </a>
+
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9033">Лот № 1</div>
+	                <div id="desc9033" class="collapse">здание коровника на 400 голов и переход, кадастровый номер: 35:28:0305013:383, площадью 3302,4 кв. м., расположенный по адресу: Вологодская область, р-н Грязовецкий, с Демьяново; земельный участок, кадастровый № 35:28:0305009:105; площадью: 27213 кв. м.; расположенный по адресу: Вологодская обл, р-н Грязовецкий, с/а Демьяновская, вне границ с. Демьяново, категория: земли промышленности, энергетики, транспорта, связи, радиовещания, телевидения, информатики, земли для обеспечения космической деятельности, земли обороны, безопасности и земли иного специального назначения</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">82&#160;000,00</div> 
+	            </div>
+	        </div>
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9034">Лот № 2</div>
+	                <div id="desc9034" class="collapse">здание телятника, кадастровый номер: 35:28:0602041:1528, площадью 1898,8 кв. м., расположенный по адресу: Вологодская область, р-н Грязовецкий, с/а Вохтогская, вне границ деревни Вохтога; земельный участок, кадастровый № 35:28:0602038:224, площадью 5416 кв. м.; расположенный по адресу: Вологодская обл, р-н Грязовецкий, с/а Вохтогская, вне границ д.Вохтога; категория земель: земли сельскохозяйственного назначения</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">336&#160;000,00</div> 
+	            </div>
+	        </div>
+	</div>
+</div>
+
+<div class="row  row--v-offset trade-card">
+    <a href="/bidding/AnounsmentDetails/5504">
+        <div class="col col--xs-3">
+            <div class="trade-card__name">Общество с ограниченной ответственностью &quot;Инфотек&quot;</div>
+            <div class="trade-card__type">Торги на повышение № 5504</div>
+        </div>
+    </a>
+	<div class="col col--xs-9">
+        <a href="/bidding/AnounsmentDetails/5504">
+            <div class="row  row--v-offset">
+                <div class="col col--xs-8">
+                    <div class="trade-card__title">Должник:</div>
+                    <p>ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ &quot;ПРИНТМАРКЕТ ТМ&quot;</p>
+                </div>
+                <div class="col col--xs-4">
+                    <div class="trade-card__status trade-card__status--isParticipanceOpened">Идет прием заявок</div>
+                    <p>до 06.07.2021 10:00:00 по МСК</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="/bidding/AnounsmentDetails/5504">
+            <div class="row  row--v-offset">
+                <div class="col col--xs-8">
+                    <div class="trade-card__title">Описание:</div>
+                </div>
+                <div class="col col--xs-4">
+                    <div class="trade-card__title">Стартовая цена</div>
+                </div>
+            </div>
+        </a>
+
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9031">Лот № 1</div>
+	                <div id="desc9031" class="collapse">Лот № 1 - Доля в уставном капитале ООО «УК «Русь Менеджмент» (ИНН 7708770000) – 90,006%. Начальная продажная цена – 42001000руб, без НДС. 
+Ознакомление со сведениями об имуществе, его составе, характеристиках осуществляется в период приема заявок на участие в торгах по электронной почте ot.infotek@gmail.com или по тел. 89163249027. 
+Продажа доли осуществляется при соблюдении преимущественного права приобретения доли участниками общества. Участники общества вправе реализовать преимущественное право путем участия в торгах и (или) заявления о согласии приобрести долю по цене, сформированной в ходе торгов. Участники Общества вправе воспользоваться преимущественным правом покупки доли или части доли в течение 30 дней с даты получения оферты по цене, сформированной на торгах пропорционально размерам своих долей. При использовании преимущественного права участниками общества, договор купли-продажи с победителем торгов не заключается, а уплаченная сумма задатка возвращается победителю в полном объеме. При использовании участником Общества преимущественного права на покупку не всей доли, а части, договор купли-продажи на оставшуюся часть заключается с победителем торгов, при этом часть суммы уплаченного задатка пропорционально размеру доли, выкупленной участником Общества, возвращается победителю. В случае если в течение указанного срока участники Общества не воспользуются преимущественным правом покупки доли, конкурсный управляющей предлагает заключить Договор купли-продажи победителю торгов. Права и обязанности участника общества переходят к победителю торгов с согласия участников общества, полученного в порядке, установленном п. 10 ст. 21 ФЗ «Об обществах с ограниченной ответственностью». Договор купли-продажи с победителем торгов должен быть заключен в течение 5 дней с даты получения участником, признанным победителем торгов, предложения конкурсного управляющего о заключении соответствующего договора. В случае отказа или уклонения победителя от подписания данного договора в течение пяти дней с даты получения предложения конкурсного управляющего внесенный задаток ему не возвращается и конкурсный управляющий вправе предложить заключить договор купли-продажи участнику торгов, которым предложена наиболее высокая цена по сравнению с ценой, предложенной другими участниками торгов, за исключением победителя торгов. В соответствии с требованиями ст. 38.2 ФЗ 156-ФЗ «Об инвестиционных фондах» покупателю необходимо получить одобрение Банка России на приобретение доли. Требования к учредителям (участникам) управляющей компании установлены в ст. 38.1 ФЗ № 156-ФЗ «Об инвестиционных фондах». Порядок направления и форма ходатайства о получении одобрения Банка России, перечень прилагаемых к нему документов и сведений, порядок получения одобрения Банка России установлены Инструкцией Банка России от 25.12.2017 N 185-И. Банк России не позднее 30 дней со дня получения ходатайства о получении одобрения Банка России на совершение сделки, и всех необходимых документов сообщает заявителю в письменной форме о своем решении - о согласии или об отказе. В случае, если Банк России не сообщил о принятом решении в течение указанного срока, соответствующая сделка (сделки) считается согласованной. В целях заключения договора купли-продажи победитель торгов обязан направить в Банк России ходатайство о получении одобрения с приложением всех необходимых документов в срок не превышающий трех рабочих дней с даты подписания протокола об определении победителя торгов, Договор купли-продажи имущества заключается с покупателем после получения одобрения совершения сделки Банком России, а также в случае неполучения решения Банка России о согласовании сделки в течение 30 дней со дня получения Банком России соответствующего ходатайства. Договор купли-продажи имущества подлежит нотариальному удостоверению.</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">42&#160;001&#160;000,00</div> 
+	            </div>
+	        </div>
+	</div>
+</div>
+
+<div class="row  row--v-offset trade-card">
+    <a href="/bidding/AnounsmentDetails/5503">
+        <div class="col col--xs-3">
+            <div class="trade-card__name">Кацюба Оксана Викторовна</div>
+            <div class="trade-card__type">Торги на повышение № 5503</div>
+        </div>
+    </a>
+	<div class="col col--xs-9">
+        <a href="/bidding/AnounsmentDetails/5503">
+            <div class="row  row--v-offset">
+                <div class="col col--xs-8">
+                    <div class="trade-card__title">Должник:</div>
+                    <p>Общества с ограниченной ответственностью &quot;ЛСК&quot;</p>
+                </div>
+                <div class="col col--xs-4">
+                    <div class="trade-card__status trade-card__status--isParticipanceOpened">Идет прием заявок</div>
+                    <p>до 30.06.2021 18:00:00 по МСК</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="/bidding/AnounsmentDetails/5503">
+            <div class="row  row--v-offset">
+                <div class="col col--xs-8">
+                    <div class="trade-card__title">Описание:</div>
+                </div>
+                <div class="col col--xs-4">
+                    <div class="trade-card__title">Стартовая цена</div>
+                </div>
+            </div>
+        </a>
+
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9029">Лот № 1</div>
+	                <div id="desc9029" class="collapse">Право требования к дебиторам на общую сумму 10 506 265,00 руб., в т.ч. к АО  «ГАРАНТ» ИНН 7815017513 в размере 781 030,00 руб. (требование включено в пятую очередь текущих платежей по делу № А56-75865/2016); к ООО "ДОРТЕХНИКА" в размере 9 725 235,00 руб.ИНН 7805616148 (подтверждено Определением АС СПб и ЛО от 08.04.2021г. по делу № А56-862/2020/тр.1)</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">10&#160;506&#160;265,00</div> 
+	            </div>
+	        </div>
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9030">Лот № 2</div>
+	                <div id="desc9030" class="collapse">Право требования к дебиторам на общую сумму 8 813 073,00 руб., в т.ч. к Лебедеву Александру Викторовичу  в размере 7 104 450,00 руб. (подтверждено Определением АС СПб и ЛО от 05.03.2021г. по делу № А56-88068/2018/сд6); к ООО "ВИДИС ДОРСТРОЙ" ИНН 7802609336 в размере 79 040,00 руб. (подтверждено Решением АС СПб и ЛО от 28.01.2020г. по делу № А56-106573/2019); к ООО "ДСК "ФЕНИКС" ИНН 7804537711 в размере 132 583,00 руб. (подтверждено Решением АС СПб и ЛО от 13.12.2020г. по делу № А56-94281/2019); к ООО «Альтаир» ИНН 7841039231 (подтверждено Определением АС СПб и ЛО от 05.03.2020г. по делу № А56-88068/2018/сд1) в размере 1 497 000,00 руб.</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">8&#160;813&#160;073,00</div> 
+	            </div>
+	        </div>
+	</div>
+</div>
+
+<div class="row  row--v-offset trade-card">
+    <a href="/bidding/AnounsmentDetails/5502">
+        <div class="col col--xs-3">
+            <div class="trade-card__name">Общество с ограниченной ответственностью &quot;Инфотек&quot;</div>
+            <div class="trade-card__type">Торги на повышение № 5502</div>
+        </div>
+    </a>
+	<div class="col col--xs-9">
+        <a href="/bidding/AnounsmentDetails/5502">
+            <div class="row  row--v-offset">
+                <div class="col col--xs-8">
+                    <div class="trade-card__title">Должник:</div>
+                    <p>Открытое акционерное общество &quot;Нижегородкапстрой&quot;</p>
+                </div>
+                <div class="col col--xs-4">
+                    <div class="trade-card__status trade-card__status--isParticipanceOpened">Идет прием заявок</div>
+                    <p>до 06.07.2021 10:00:00 по МСК</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="/bidding/AnounsmentDetails/5502">
+            <div class="row  row--v-offset">
+                <div class="col col--xs-8">
+                    <div class="trade-card__title">Описание:</div>
+                </div>
+                <div class="col col--xs-4">
+                    <div class="trade-card__title">Стартовая цена</div>
+                </div>
+            </div>
+        </a>
+
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9028">Лот № 1</div>
+	                <div id="desc9028" class="collapse">Лот №2: Право требования ОАО «Нижегородкапстрой» к Новикову Олегу Ивановичу в размере 895 845 руб.;
+Если к моменту перехода права собственности на права требования, дебиторская задолженность будет погашена дебитором или иным (третьим) лицом полностью или частично, либо дебитор будет освобожден от долгов в порядке, установленным Федеральным законом от 26.10.2002 № 127-ФЗ «О несостоятельности (банкротстве)», то объем передаваемых прав уменьшается на сумму погашения, сумму освобождения с пропорциональным снижением цены лота.
+Ознакомление с документами и имуществом, предоставление дополнительной информации производится в течение срока приема заявок по телефону 8-916-324-90-27, а также путем направления запроса на ot.infotek@gmail.com.</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">564&#160;382,35</div> 
+	            </div>
+	        </div>
+	</div>
+</div>
+
+<div class="row  row--v-offset trade-card">
+    <a href="/bidding/AnounsmentDetails/5500">
+        <div class="col col--xs-3">
+            <div class="trade-card__name">ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ &quot;СПЕЦИАЛИЗИРОВАННЫЙ АУКЦИОННЫЙ ЦЕНТР&quot;</div>
+            <div class="trade-card__type">Публичное предложение № 5500</div>
+        </div>
+    </a>
+	<div class="col col--xs-9">
+        <a href="/bidding/AnounsmentDetails/5500">
+            <div class="row  row--v-offset">
+                <div class="col col--xs-8">
+                    <div class="trade-card__title">Должник:</div>
+                    <p>ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ &quot;РЕУТОВ-ИНВЕСТ&quot;</p>
+                </div>
+                <div class="col col--xs-4">
+                    <div class="trade-card__status trade-card__status--isPending">Торги объявлены</div>
+                    <p>до 20.08.2021 10:00:00 по МСК</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="/bidding/AnounsmentDetails/5500">
+            <div class="row  row--v-offset">
+                <div class="col col--xs-8">
+                    <div class="trade-card__title">Описание:</div>
+                </div>
+                <div class="col col--xs-4">
+                    <div class="trade-card__title">Стартовая цена</div>
+                </div>
+            </div>
+        </a>
+
+	        <div class="row  row--v-offset">
+	            <div class="col col--xs-8">
+	                <div class="trade-card__lot-name collapsed" data-toggle="collapse" data-target="#desc9026">Лот № 1</div>
+	                <div id="desc9026" class="collapse">Лот №1: право требования (дебиторская задолженность) в сумме 500358171,67 руб, а именно: ООО «Бизнес Строй» (ИНН 7723332258) - 364817429,00 руб, ООО «Сигматон» (ИНН 7730689499) - 61111000,00 руб, ООО «Масштабстрой» (ИНН 5041204884) - 15000,00 руб, ООО «Ринкорн» (ИНН 7730689474) - 10372000,00 руб, ООО «Комгрупп» (ИНН 7730689594) - 10005000,00 руб, ООО «Интердом» (ИНН 7710973310) - 10685792,00 руб, ООО «Альфа Строй» (ИНН 7716576983) - 43351950,67 руб. 
+Состав лота может быть изменен, в случае если дебиторская задолженность будет погашена дебитором или иным (третьим) лицом полностью или частично, если дебитор будет исключен из ЕГРЮЛ или судебный акт об отказе в удовлетворении требований вступит в силу. В указанном случае объем передаваемых прав уменьшится на соответствующую сумму с пропорциональным снижением цены продаваемого лота, по результатам итогов торгов, при заключении договора цессии. 
+Ознакомление со сведениями об имуществе, его составе, характеристиках осуществляется в срок приема заявок, в рабочие дни с 11.00ч до 17.00ч через Организатора торгов по тел. 89154442205 или адресу эл.почты sac@list.ru.</div>
+	            </div>
+	            <div class="col col--xs-4">
+	                <div class="trade-card__price">500&#160;358&#160;171,67</div> 
+	            </div>
+	        </div>
+	</div>
+</div>
+    </div>
+
+	<div class="paging">
+<a class="paging__arrow paging__arrow--prev" href="/Home/Trades?page=4&amp;sort=Id&amp;ascending=False&amp;status=1"></a>		<a class="paging__link" href="/Home/Trades?page=3&amp;sort=Id&amp;ascending=False&amp;status=1">3</a><a class="paging__link" href="/Home/Trades?page=4&amp;sort=Id&amp;ascending=False&amp;status=1">4</a>			    <a href="#" class="paging__link paging__link--active">5</a>
+<a class="paging__link" href="/Home/Trades?page=6&amp;sort=Id&amp;ascending=False&amp;status=1">6</a><a class="paging__link" href="/Home/Trades?page=7&amp;sort=Id&amp;ascending=False&amp;status=1">7</a>
+<a class="paging__arrow paging__arrow--next" href="/Home/Trades?page=6&amp;sort=Id&amp;ascending=False&amp;status=1"></a></div>
+</div>
+
+	</main>
+	<footer class="footer">
+		
+
+<div class="container">
+	<div class="row  row--v-offset">
+		<div class="col col--xs-3">
+			<div class="footer__logo">
+				<a href="/"><img alt="Логотип ООО СЭлТ" src="/img/layout/logo-mini.png" /></a>
+			</div>
+			<div class="footer__copyright">
+				© ООО «Ру-Трейд», 2014 - 2021 <br>
+				Все права защищены
+			</div>
+		</div>
+		<div class="col col--xs-3">
+			<nav class="nav">
+				<a class="nav__foter-item nav__foter-item--main" href="/Home/Help">Помощь</a>
+				<a class="nav__foter-item" href="/Home/Documents">Документы</a>
+				<a class="nav__foter-item" href="/Home/Help">Инструкции по работе с ЭТП</a>
+			</nav>
+		</div>
+		<div class="col col--xs-3">
+			<nav class="nav">
+				<a class="nav__foter-item nav__foter-item--main" href="/Home/Eds">ЭЦП</a>
+				<a class="nav__foter-item" href="/Home/Eds">Проверить ЭЦП</a>
+				<a class="nav__foter-item" href="/Home/Eds">Список удостоверяющих центров</a>
+			</nav>
+		</div>
+		<div class="col col--xs-3">
+			<nav class="nav">
+				<a class="nav__foter-item nav__foter-item--main" href="/Home/Contacts">Контакты</a>
+				<a class="nav__foter-item" href="#">8(499)517-95-89</a>
+			</nav>
+			<div class="search search--mini">
+				
+<form action="/query/Index" method="post">			        <input id="searchbox" name="searchbox" class="search__input search__input--mini" placeholder="Поиск"/>
+			        <button class="search__btn search__btn--mini"></button>
+</form>			</div>
+		</div>
+	</div>
+</div>
+
+
+
+	</footer>
+</div>
+    <div id="messagePopup" class="popup  popup--confirm-form  mfp-with-anim  mfp-hide">
+        <div class="popup__title" data-id="title"></div>
+        <div class="popup__info-text" data-id="text"></div>
+    </div>
+    <div id="confirmDialogPopup" class="popup  popup--confirm-form  mfp-with-anim  mfp-hide">
+        <div class="popup__title" data-id="title"></div>
+        <div class="popup__info-text" data-id="text"></div>
+        <div class="button-section-dialog">
+            <button button-id="btnCancel" class="btn btn--red">Отмена</button>
+            <button button-id="btnOk" class="btn btn--white">Да</button>
+        </div>
+    </div>
+<script language="javascript" type="text/javascript">
+    new InitClock(new Date(), "ldate", "ltime");
+    new InitClock(
+        new Date(
+            2021,5,30,14,23,47,0), "sdate",
+        "stime");
+    var page = new Layout();
+</script>
+
+</body>
+</html>
