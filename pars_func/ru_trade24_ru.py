@@ -39,7 +39,12 @@ def load_page(html: str):   # Получаем нужные участки html
 
 def get_info(cards):    # Получаем данные всех предложений и лотов с страницы
 
+    result_item_cards = list()
+
     for item_card in cards:
+
+        result_item = list()
+
         card_find = item_card.find('div', class_='col col--xs-9')
 
         card_name = item_card.find('div', class_='trade-card__name').get_text()
@@ -50,26 +55,39 @@ def get_info(cards):    # Получаем данные всех предлож�
         # Предполагается что строка будет содержать только одно digit значение
         card_number_dig = ''.join(filter(lambda x: x.isdigit(), card_target))
 
-        print(card_name)
-        print(card_number_dig)
-        print(card_target)
+        # Заполняем лист(result_item) по схеме "Номер /	Имя продавца / тип продажи / Лот №"
+        result_item.append(card_number_dig)
+        result_item.append(card_name)
+        result_item.append(card_target)
 
         index_lot = 1
+        result_lot = dict()
 
         for lot in lots:
             try:    # Вынужденная мера из-за наличия одинаковых имён
                 lots_text = lot.find('div', class_='collapse').get_text()
                 lots_price = lot.find('div', class_='trade-card__price').get_text()
+                # \xa0 is actually non-breaking space in Latin1 (ISO 8859-1),
+                # also chr(160). You should replace it with a space.
+                # Read up on http://docs.python.org/howto/unicode.html
+                lots_price = lots_price.replace(u'\xa0', u' ')
             except:     # Пропускаем этот цикл
                 continue
 
-            print('-----------------------')
-            print(f'Лот № {index_lot}')
-            index_lot += 1
-            print(lots_text)
-            print(f'Цена за лот: {lots_price}')
+            result_lot[index_lot] = list()
+            result_lot[index_lot].append(index_lot)
+            result_lot[index_lot].append(lots_text)
+            result_lot[index_lot].append(lots_price)
 
-        print('################################################################')
+            index_lot += 1
+
+        result_item.append(result_lot)
+        #print(result_item)
+        #print('################################################################')
+
+        result_item_cards.append(result_item)
+    #print(result_item_cards[3][2])
+    return result_item_cards
 
 
 full_info = dict()
