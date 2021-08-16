@@ -9,6 +9,7 @@ logger = logging.getLogger('ParsLots')
 
 ''' УСТАНОВЛИНА МАКСИМАЛЬНОЕ КОЛИЧЕСТВО СТРАНИЦ 50!!!'''
 
+NAME = "ru-trade24.ru"
 URL_01 = 'https://www.ru-trade24.ru/Home/Trades?page='
 URL_02 = '&sort=Id&ascending=False&status=1'
 HEADER = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
@@ -90,38 +91,47 @@ def get_info(cards):    # Получаем данные всех предлож�
     return result_item_cards
 
 
-full_info = dict()
-nextPage = []
-trade_card_pages = []
-page_full = True
-index = 1
+def start_pars():
 
-while(page_full):
-    url_f = f'{URL_01}{index}{URL_02}'
-    html_item = pars(url_f)
+    full_info = dict()
+    full_info[NAME] = list()
 
-    if html_item == False and MAX_PAGE > index:
+    next_page = []
+    trade_card_pages = []
+    page_full = True
+    index = 1
+
+    while(page_full):
+        url_f = f'{URL_01}{index}{URL_02}'
+        html_item = pars(url_f)
+
+        if html_item == False and MAX_PAGE > index:
+            index += 1
+            continue
+        elif MAX_PAGE <= index:
+            print('End work, out of range!')
+            page_full = False
+            break
+
+        next_page.append(html_item)
+
+        card_page = load_page(html_item.text)
+
+        if len(card_page) == 0:
+            break
+
+        trade_card_pages.append(card_page)
+
+        #print(f'done {index} - len = {len(trade_card_pages[index - 1])}')
         index += 1
-        continue
-    elif MAX_PAGE <= index:
-        print('End work, out of range!')
-        page_full = False
-        break
+        time.sleep(1)
 
-    nextPage.append(html_item)
+        break   # Убрать в релизе
 
-    cardPage = load_page(html_item.text)
+    for it in trade_card_pages:
+        full_info[NAME].append(get_info(it))
 
-    if len(cardPage) == 0:
-        break
+    return full_info
 
-    trade_card_pages.append(cardPage)
 
-    print(f'done {index} - len = {len(trade_card_pages[index - 1])}')
-    index += 1
-    time.sleep(1)
-
-    break   # Убрать в релизе
-
-get_info(trade_card_pages[0])
-
+print(start_pars())

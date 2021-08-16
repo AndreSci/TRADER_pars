@@ -2,6 +2,8 @@ import sys
 from PyQt6.QtWidgets import QApplication
 from GUI import ImageDialog
 
+from pars_func import ru_trade24_ru
+
 def create_main_window():
 
     """ pyuic6 -x graphic_main.ui -o graphic_main.py """
@@ -19,3 +21,4 @@ def create_main_window():
 
 if __name__ == "__main__":
     create_main_window()
+
