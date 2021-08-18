@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>834</width>
-    <height>786</height>
+    <width>720</width>
+    <height>686</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -285,33 +285,12 @@ QPushButton:pressed {
              <number>0</number>
             </property>
             <item>
-             <widget class="QProgressBar" name="progressBar">
-              <property name="minimumSize">
-               <size>
-                <width>10</width>
-                <height>0</height>
-               </size>
+             <widget class="QFrame" name="frame_6">
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
               </property>
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>16777215</height>
-               </size>
-              </property>
-              <property name="value">
-               <number>10</number>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-              </property>
-              <property name="textVisible">
-               <bool>false</bool>
-              </property>
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="textDirection">
-               <enum>QProgressBar::TopToBottom</enum>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
               </property>
              </widget>
             </item>
@@ -488,27 +467,70 @@ QPushButton:pressed {
            <number>1</number>
           </property>
           <item>
-           <widget class="QScrollArea" name="scrollArea_Result_Parser">
+           <widget class="QTableWidget" name="table_for_cards">
             <property name="styleSheet">
-             <string notr="true">QScrollArea {
-	border: 1px solid;
-	border-radius: 3px;
+             <string notr="true">QHeaderView::section:horizontal
+{
+    border: 1px solid rgb(32, 34, 42);
+	background-color:rgb(53, 53, 53);
 	color: rgb(255, 255, 255);
-}</string>
+}
+
+ QScrollBar:vertical {
+	border: none;
+    background: rgb(52, 59, 72);
+    width: 14px;
+	border-radius: 0px;
+ }</string>
             </property>
-            <property name="widgetResizable">
+            <property name="frameShape">
+             <enum>QFrame::Box</enum>
+            </property>
+            <property name="autoScroll">
+             <bool>false</bool>
+            </property>
+            <property name="editTriggers">
+             <set>QAbstractItemView::AnyKeyPressed|QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed</set>
+            </property>
+            <property name="sortingEnabled">
              <bool>true</bool>
             </property>
-            <widget class="QWidget" name="scrollAreaWidgetContents">
-             <property name="geometry">
-              <rect>
-               <x>0</x>
-               <y>0</y>
-               <width>689</width>
-               <height>702</height>
-              </rect>
-             </property>
-            </widget>
+            <property name="rowCount">
+             <number>5</number>
+            </property>
+            <property name="columnCount">
+             <number>4</number>
+            </property>
+            <attribute name="horizontalHeaderVisible">
+             <bool>false</bool>
+            </attribute>
+            <attribute name="horizontalHeaderCascadingSectionResizes">
+             <bool>false</bool>
+            </attribute>
+            <attribute name="horizontalHeaderDefaultSectionSize">
+             <number>130</number>
+            </attribute>
+            <attribute name="horizontalHeaderStretchLastSection">
+             <bool>true</bool>
+            </attribute>
+            <attribute name="verticalHeaderVisible">
+             <bool>false</bool>
+            </attribute>
+            <attribute name="verticalHeaderHighlightSections">
+             <bool>false</bool>
+            </attribute>
+            <attribute name="verticalHeaderStretchLastSection">
+             <bool>true</bool>
+            </attribute>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <column/>
+            <column/>
+            <column/>
+            <column/>
            </widget>
           </item>
           <item>

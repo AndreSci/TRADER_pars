@@ -12,7 +12,7 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(720, 883)
+        Dialog.resize(720, 686)
         Dialog.setMinimumSize(QtCore.QSize(720, 400))
         Dialog.setMaximumSize(QtCore.QSize(16777215, 16777215))
         self.verticalLayout = QtWidgets.QVBoxLayout(Dialog)
@@ -116,30 +116,27 @@ class Ui_Dialog(object):
         self.frame_3.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame_3.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame_3.setObjectName("frame_3")
+        self.horizontalLayout_7 = QtWidgets.QHBoxLayout(self.frame_3)
+        self.horizontalLayout_7.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_7.setSpacing(2)
+        self.horizontalLayout_7.setObjectName("horizontalLayout_7")
+        self.frame_6 = QtWidgets.QFrame(self.frame_3)
+        self.frame_6.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.frame_6.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.frame_6.setObjectName("frame_6")
+        self.horizontalLayout_7.addWidget(self.frame_6)
         self.frame = QtWidgets.QFrame(self.frame_3)
-        self.frame.setGeometry(QtCore.QRect(0, 0, 250, 40))
         self.frame.setMinimumSize(QtCore.QSize(250, 0))
+        self.frame.setMaximumSize(QtCore.QSize(250, 16777215))
         self.frame.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame.setObjectName("frame")
-        self.Button_Reset = QtWidgets.QPushButton(self.frame)
-        self.Button_Reset.setGeometry(QtCore.QRect(80, 10, 75, 23))
-        self.Button_Reset.setStyleSheet("QPushButton {\n"
-"    border: 1px solid;\n"
-"    background-color: rgb(109, 109, 109);\n"
-"    border-radius: 3px;\n"
-"    color: rgb(255, 255, 255);\n"
-"}\n"
-"QPushButton:hover {\n"
-"    background-color: rgb(136, 136, 136);\n"
-"\n"
-"}\n"
-"QPushButton:pressed {    \n"
-"    background-color: rgb(85, 170, 255);\n"
-"}")
-        self.Button_Reset.setObjectName("Button_Reset")
+        self.horizontalLayout_8 = QtWidgets.QHBoxLayout(self.frame)
+        self.horizontalLayout_8.setContentsMargins(1, 1, 1, 1)
+        self.horizontalLayout_8.setSpacing(5)
+        self.horizontalLayout_8.setObjectName("horizontalLayout_8")
         self.Button_New = QtWidgets.QPushButton(self.frame)
-        self.Button_New.setGeometry(QtCore.QRect(0, 10, 75, 23))
+        self.Button_New.setMinimumSize(QtCore.QSize(0, 25))
         self.Button_New.setStyleSheet("QPushButton {\n"
 "    border: 1px solid;\n"
 "    background-color: rgb(109, 109, 109);\n"
@@ -154,8 +151,26 @@ class Ui_Dialog(object):
 "    background-color: rgb(85, 170, 255);\n"
 "}")
         self.Button_New.setObjectName("Button_New")
+        self.horizontalLayout_8.addWidget(self.Button_New)
+        self.Button_Reset = QtWidgets.QPushButton(self.frame)
+        self.Button_Reset.setMinimumSize(QtCore.QSize(0, 25))
+        self.Button_Reset.setStyleSheet("QPushButton {\n"
+"    border: 1px solid;\n"
+"    background-color: rgb(109, 109, 109);\n"
+"    border-radius: 3px;\n"
+"    color: rgb(255, 255, 255);\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(136, 136, 136);\n"
+"\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color: rgb(85, 170, 255);\n"
+"}")
+        self.Button_Reset.setObjectName("Button_Reset")
+        self.horizontalLayout_8.addWidget(self.Button_Reset)
         self.Button_All = QtWidgets.QPushButton(self.frame)
-        self.Button_All.setGeometry(QtCore.QRect(160, 10, 75, 23))
+        self.Button_All.setMinimumSize(QtCore.QSize(0, 25))
         self.Button_All.setStyleSheet("QPushButton {\n"
 "    border: 1px solid;\n"
 "    background-color: rgb(109, 109, 109);\n"
@@ -170,6 +185,8 @@ class Ui_Dialog(object):
 "    background-color: rgb(85, 170, 255);\n"
 "}")
         self.Button_All.setObjectName("Button_All")
+        self.horizontalLayout_8.addWidget(self.Button_All)
+        self.horizontalLayout_7.addWidget(self.frame)
         self.horizontalLayout_4.addWidget(self.frame_3)
         self.horizontalLayout_3.addWidget(self.frame_2)
         self.verticalLayout.addWidget(self.menu_up)
@@ -189,19 +206,34 @@ class Ui_Dialog(object):
         self.horizontalLayout_5.setContentsMargins(1, 1, 1, 1)
         self.horizontalLayout_5.setSpacing(1)
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
-        self.scrollArea_Result_Parser = QtWidgets.QScrollArea(self.page_1_All)
-        self.scrollArea_Result_Parser.setStyleSheet("QScrollArea {\n"
-"    border: 1px solid;\n"
-"    border-radius: 3px;\n"
+        self.table_for_cards = QtWidgets.QTableWidget(self.page_1_All)
+        self.table_for_cards.setStyleSheet("QHeaderView::section:horizontal\n"
+"{\n"
+"    border: 1px solid rgb(32, 34, 42);\n"
+"    background-color:rgb(53, 53, 53);\n"
 "    color: rgb(255, 255, 255);\n"
-"}")
-        self.scrollArea_Result_Parser.setWidgetResizable(True)
-        self.scrollArea_Result_Parser.setObjectName("scrollArea_Result_Parser")
-        self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 575, 799))
-        self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
-        self.scrollArea_Result_Parser.setWidget(self.scrollAreaWidgetContents)
-        self.horizontalLayout_5.addWidget(self.scrollArea_Result_Parser)
+"}\n"
+"\n"
+" QScrollBar:vertical {\n"
+"    border: none;\n"
+"    background: rgb(52, 59, 72);\n"
+"    width: 14px;\n"
+"    border-radius: 0px;\n"
+" }")
+        self.table_for_cards.setFrameShape(QtWidgets.QFrame.Shape.Box)
+        self.table_for_cards.setAutoScroll(False)
+        self.table_for_cards.setEditTriggers(QtWidgets.QAbstractItemView.EditTrigger.AnyKeyPressed|QtWidgets.QAbstractItemView.EditTrigger.DoubleClicked|QtWidgets.QAbstractItemView.EditTrigger.EditKeyPressed)
+        self.table_for_cards.setRowCount(5)
+        self.table_for_cards.setColumnCount(4)
+        self.table_for_cards.setObjectName("table_for_cards")
+        self.table_for_cards.horizontalHeader().setVisible(False)
+        self.table_for_cards.horizontalHeader().setCascadingSectionResizes(False)
+        self.table_for_cards.horizontalHeader().setDefaultSectionSize(130)
+        self.table_for_cards.horizontalHeader().setStretchLastSection(True)
+        self.table_for_cards.verticalHeader().setVisible(False)
+        self.table_for_cards.verticalHeader().setHighlightSections(False)
+        self.table_for_cards.verticalHeader().setStretchLastSection(True)
+        self.horizontalLayout_5.addWidget(self.table_for_cards)
         self.menu_right = QtWidgets.QFrame(self.page_1_All)
         self.menu_right.setMinimumSize(QtCore.QSize(120, 0))
         self.menu_right.setMaximumSize(QtCore.QSize(120, 16777215))
@@ -227,9 +259,10 @@ class Ui_Dialog(object):
         self.Button_Exit.setText(_translate("Dialog", "Exit"))
         self.lineEdit_Search.setText(_translate("Dialog", "  Enter words"))
         self.Button_Search.setText(_translate("Dialog", "Search"))
-        self.Button_Reset.setText(_translate("Dialog", "Reset"))
         self.Button_New.setText(_translate("Dialog", "Check New"))
+        self.Button_Reset.setText(_translate("Dialog", "Reset"))
         self.Button_All.setText(_translate("Dialog", "All"))
+        self.table_for_cards.setSortingEnabled(True)
 
 
 if __name__ == "__main__":

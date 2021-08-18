@@ -149,7 +149,10 @@ def start_pars():
     for it in trade_card_pages:
         full_info[class_name.NAME].append(get_info(it))
 
+    print("create data trade24_ru: Success!!!")
+    for it in full_info["ru-trade24.ru"]:
+        print(len(it))
     return full_info
 
 
-print(start_pars())
+#print(start_pars())
