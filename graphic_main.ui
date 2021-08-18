@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>720</width>
-    <height>883</height>
+    <width>834</width>
+    <height>786</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -268,38 +268,99 @@ QPushButton:pressed {
            <property name="frameShadow">
             <enum>QFrame::Raised</enum>
            </property>
-           <widget class="QFrame" name="frame">
-            <property name="geometry">
-             <rect>
-              <x>0</x>
-              <y>0</y>
-              <width>250</width>
-              <height>40</height>
-             </rect>
+           <layout class="QHBoxLayout" name="horizontalLayout_7">
+            <property name="spacing">
+             <number>2</number>
             </property>
-            <property name="minimumSize">
-             <size>
-              <width>250</width>
-              <height>0</height>
-             </size>
+            <property name="leftMargin">
+             <number>0</number>
             </property>
-            <property name="frameShape">
-             <enum>QFrame::StyledPanel</enum>
+            <property name="topMargin">
+             <number>0</number>
             </property>
-            <property name="frameShadow">
-             <enum>QFrame::Raised</enum>
+            <property name="rightMargin">
+             <number>0</number>
             </property>
-            <widget class="QPushButton" name="Button_Reset">
-             <property name="geometry">
-              <rect>
-               <x>80</x>
-               <y>10</y>
-               <width>75</width>
-               <height>23</height>
-              </rect>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">QPushButton {
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QProgressBar" name="progressBar">
+              <property name="minimumSize">
+               <size>
+                <width>10</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="value">
+               <number>10</number>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+              </property>
+              <property name="textVisible">
+               <bool>false</bool>
+              </property>
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="textDirection">
+               <enum>QProgressBar::TopToBottom</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QFrame" name="frame">
+              <property name="minimumSize">
+               <size>
+                <width>250</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>250</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_8">
+               <property name="spacing">
+                <number>5</number>
+               </property>
+               <property name="leftMargin">
+                <number>1</number>
+               </property>
+               <property name="topMargin">
+                <number>1</number>
+               </property>
+               <property name="rightMargin">
+                <number>1</number>
+               </property>
+               <property name="bottomMargin">
+                <number>1</number>
+               </property>
+               <item>
+                <widget class="QPushButton" name="Button_New">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>25</height>
+                  </size>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">QPushButton {
 	border: 1px solid;
 	background-color: rgb(109, 109, 109);
 	border-radius: 3px;
@@ -312,22 +373,22 @@ QPushButton:hover {
 QPushButton:pressed {	
 	background-color: rgb(85, 170, 255);
 }</string>
-             </property>
-             <property name="text">
-              <string>Reset</string>
-             </property>
-            </widget>
-            <widget class="QPushButton" name="Button_New">
-             <property name="geometry">
-              <rect>
-               <x>0</x>
-               <y>10</y>
-               <width>75</width>
-               <height>23</height>
-              </rect>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">QPushButton {
+                 </property>
+                 <property name="text">
+                  <string>Check New</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="Button_Reset">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>25</height>
+                  </size>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">QPushButton {
 	border: 1px solid;
 	background-color: rgb(109, 109, 109);
 	border-radius: 3px;
@@ -340,22 +401,22 @@ QPushButton:hover {
 QPushButton:pressed {	
 	background-color: rgb(85, 170, 255);
 }</string>
-             </property>
-             <property name="text">
-              <string>Check New</string>
-             </property>
-            </widget>
-            <widget class="QPushButton" name="Button_All">
-             <property name="geometry">
-              <rect>
-               <x>160</x>
-               <y>10</y>
-               <width>75</width>
-               <height>23</height>
-              </rect>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">QPushButton {
+                 </property>
+                 <property name="text">
+                  <string>Reset</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="Button_All">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>25</height>
+                  </size>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">QPushButton {
 	border: 1px solid;
 	background-color: rgb(109, 109, 109);
 	border-radius: 3px;
@@ -368,12 +429,16 @@ QPushButton:hover {
 QPushButton:pressed {	
 	background-color: rgb(85, 170, 255);
 }</string>
-             </property>
-             <property name="text">
-              <string>All</string>
-             </property>
-            </widget>
-           </widget>
+                 </property>
+                 <property name="text">
+                  <string>All</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
           </widget>
          </item>
         </layout>
@@ -439,8 +504,8 @@ QPushButton:pressed {
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>575</width>
-               <height>799</height>
+               <width>689</width>
+               <height>702</height>
               </rect>
              </property>
             </widget>

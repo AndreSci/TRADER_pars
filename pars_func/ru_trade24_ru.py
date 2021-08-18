@@ -9,21 +9,35 @@ logger = logging.getLogger('ParsLots')
 
 ''' УСТАНОВЛИНА МАКСИМАЛЬНОЕ КОЛИЧЕСТВО СТРАНИЦ 50!!!'''
 
-NAME = "ru-trade24.ru"
-URL_01 = 'https://www.ru-trade24.ru/Home/Trades?page='
-URL_02 = '&sort=Id&ascending=False&status=1'
-HEADER = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
-MAX_PAGE = 50
-CARDS_NAME = "row row--v-offset trade-card"
+
+class NameSpace:
+    def __init__(self):
+        self.NAME = "ru-trade24.ru"
+        self.URL_01 = 'https://www.ru-trade24.ru/Home/Trades?page='
+        self.URL_02 = '&sort=Id&ascending=False&status=1'
+        self.HEADER = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
+        self.MAX_PAGE = 50
+        self.CARDS_NAME = "row row--v-offset trade-card"
 
 
-def get_html(url, params=None):     # Получаем html данные с сайта
-    req = requests.get(url, params=params, headers=HEADER)
+""" Пояснение к получаемым данным из данной функции """
+# Заполняем лист(result_item) по схеме "Номер /	Имя продавца / тип продажи / Лот №"
+# return list() "result_item_cards"
+# { car_num_dig / name / target / {result_lot(dict)}...}
+# {     0          1        2       3   ...     }
+
+# {result_lot(dict)...}   have structure
+# { index / text / price }
+# {   0      1      2    }
+
+
+def get_html(class_name, url, params=None):     # Получаем html данные с сайта
+    req = requests.get(url, params=params, headers=class_name.HEADER)
     return req
 
 
-def pars(url):  # Соединяемся и проверяем ответ
-    html = get_html(url)
+def pars(url, class_name):  # Соединяемся и проверяем ответ
+    html = get_html(class_name, url)
     if html.status_code >= 200 and html.status_code < 400:
         return html
     else:
@@ -31,9 +45,9 @@ def pars(url):  # Соединяемся и проверяем ответ
         return False
 
 
-def load_page(html: str):   # Получаем нужные участки html
+def load_page(html: str, class_name):   # Получаем нужные участки html
     soup = BeautifulSoup(html, 'html.parser')
-    trade_cards = soup.find_all(class_=CARDS_NAME)
+    trade_cards = soup.find_all(class_=class_name.CARDS_NAME)
 
     return trade_cards
 
@@ -60,6 +74,8 @@ def get_info(cards):    # Получаем данные всех предлож�
         result_item.append(card_number_dig)
         result_item.append(card_name)
         result_item.append(card_target)
+        # { car_num_dig / name / target / result_lot(dict)...}
+        # {     0          1        2       3   ...     }
 
         index_lot = 1
         result_lot = dict()
@@ -79,22 +95,25 @@ def get_info(cards):    # Получаем данные всех предлож�
             result_lot[index_lot].append(index_lot)
             result_lot[index_lot].append(lots_text)
             result_lot[index_lot].append(lots_price)
+            # {result_lot(dict)...}   have structure
+            # { index / text / price }
+            # {   0      1      2    }
 
             index_lot += 1
 
         result_item.append(result_lot)
-        #print(result_item)
-        #print('################################################################')
 
         result_item_cards.append(result_item)
-    #print(result_item_cards[3][2])
+    # print(result_item_cards[3][2])
     return result_item_cards
 
 
 def start_pars():
 
+    class_name = NameSpace()
+
     full_info = dict()
-    full_info[NAME] = list()
+    full_info[class_name.NAME] = list()
 
     next_page = []
     trade_card_pages = []
@@ -102,34 +121,33 @@ def start_pars():
     index = 1
 
     while(page_full):
-        url_f = f'{URL_01}{index}{URL_02}'
-        html_item = pars(url_f)
+        url_f = f'{class_name.URL_01}{index}{class_name.URL_02}'
+        html_item = pars(url_f, class_name)
 
-        if html_item == False and MAX_PAGE > index:
+        if html_item == False and class_name.MAX_PAGE > index:
             index += 1
             continue
-        elif MAX_PAGE <= index:
+        elif class_name.MAX_PAGE <= index:
             print('End work, out of range!')
             page_full = False
             break
 
         next_page.append(html_item)
 
-        card_page = load_page(html_item.text)
+        card_page = load_page(html_item.text, class_name)
 
         if len(card_page) == 0:
             break
 
         trade_card_pages.append(card_page)
 
-        #print(f'done {index} - len = {len(trade_card_pages[index - 1])}')
         index += 1
         time.sleep(1)
 
         break   # Убрать в релизе
 
     for it in trade_card_pages:
-        full_info[NAME].append(get_info(it))
+        full_info[class_name.NAME].append(get_info(it))
 
     return full_info
 

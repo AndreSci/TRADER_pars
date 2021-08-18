@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1250</width>
-    <height>700</height>
+    <height>768</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -136,7 +136,7 @@ QPushButton:pressed {
             </property>
             <property name="icon">
              <iconset>
-              <normaloff>icons/20x20/cil-menu.png</normaloff>icons/20x20/cil-menu.png</iconset>
+              <normaloff>C:/Users/Scitecever/.designer/backup/icons/20x20/cil-menu.png</normaloff>C:/Users/Scitecever/.designer/backup/icons/20x20/cil-menu.png</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -353,7 +353,7 @@ QPushButton:pressed {
             </property>
             <property name="icon">
              <iconset>
-              <normaloff>icons/24x24/cil-user.png</normaloff>icons/24x24/cil-user.png</iconset>
+              <normaloff>C:/Users/Scitecever/.designer/backup/icons/24x24/cil-user.png</normaloff>C:/Users/Scitecever/.designer/backup/icons/24x24/cil-user.png</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -420,7 +420,7 @@ QPushButton:hover {
              </property>
              <property name="icon">
               <iconset>
-               <normaloff>icons/20x20/cil-x.png</normaloff>icons/20x20/cil-x.png</iconset>
+               <normaloff>C:/Users/Scitecever/.designer/backup/icons/20x20/cil-x.png</normaloff>C:/Users/Scitecever/.designer/backup/icons/20x20/cil-x.png</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -466,7 +466,7 @@ QPushButton:hover {
              </property>
              <property name="icon">
               <iconset>
-               <normaloff>icons/20x20/cil-window-minimize.png</normaloff>icons/20x20/cil-window-minimize.png</iconset>
+               <normaloff>C:/Users/Scitecever/.designer/backup/icons/20x20/cil-window-minimize.png</normaloff>C:/Users/Scitecever/.designer/backup/icons/20x20/cil-window-minimize.png</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -512,7 +512,7 @@ QPushButton:hover {
              </property>
              <property name="icon">
               <iconset>
-               <normaloff>icons/24x24/cil-window-restore.png</normaloff>icons/24x24/cil-window-restore.png</iconset>
+               <normaloff>C:/Users/Scitecever/.designer/backup/icons/24x24/cil-window-restore.png</normaloff>C:/Users/Scitecever/.designer/backup/icons/24x24/cil-window-restore.png</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -559,7 +559,7 @@ QPushButton:hover {
        <item>
         <widget class="QStackedWidget" name="stackedWidget">
          <property name="currentIndex">
-          <number>0</number>
+          <number>2</number>
          </property>
          <widget class="QWidget" name="Page_settings">
           <layout class="QHBoxLayout" name="horizontalLayout_7">
@@ -720,7 +720,7 @@ QPushButton:pressed {
                       </property>
                       <property name="icon">
                        <iconset>
-                        <normaloff>icons/20x20/cil-home.png</normaloff>icons/20x20/cil-home.png</iconset>
+                        <normaloff>C:/Users/Scitecever/.designer/backup/icons/20x20/cil-home.png</normaloff>C:/Users/Scitecever/.designer/backup/icons/20x20/cil-home.png</iconset>
                       </property>
                      </widget>
                     </item>
@@ -774,14 +774,14 @@ QPushButton:pressed {
                       <attribute name="verticalHeaderCascadingSectionResizes">
                        <bool>true</bool>
                       </attribute>
-                      <attribute name="verticalHeaderMinimumSectionSize">
-                       <number>25</number>
-                      </attribute>
                       <attribute name="verticalHeaderDefaultSectionSize">
                        <number>25</number>
                       </attribute>
                       <attribute name="verticalHeaderHighlightSections">
                        <bool>true</bool>
+                      </attribute>
+                      <attribute name="verticalHeaderMinimumSectionSize">
+                       <number>25</number>
                       </attribute>
                       <attribute name="verticalHeaderShowSortIndicator" stdset="0">
                        <bool>false</bool>
@@ -1399,8 +1399,8 @@ border: 1px solide;</string>
                               </property>
                               <property name="icon">
                                <iconset>
-                                <normaloff>icons/color/toggle_off.png</normaloff>
-                                <normalon>icons/color/toggle_on.png</normalon>icons/color/toggle_off.png</iconset>
+                                <normaloff>C:/Users/Scitecever/.designer/backup/icons/color/toggle_off.png</normaloff>
+                                <normalon>C:/Users/Scitecever/.designer/backup/icons/color/toggle_on.png</normalon>C:/Users/Scitecever/.designer/backup/icons/color/toggle_off.png</iconset>
                               </property>
                               <property name="iconSize">
                                <size>
@@ -1469,8 +1469,8 @@ border: 1px solide;</string>
                               </property>
                               <property name="icon">
                                <iconset>
-                                <normaloff>icons/color/toggle_off.png</normaloff>
-                                <normalon>icons/color/toggle_on.png</normalon>icons/color/toggle_off.png</iconset>
+                                <normaloff>C:/Users/Scitecever/.designer/backup/icons/color/toggle_off.png</normaloff>
+                                <normalon>C:/Users/Scitecever/.designer/backup/icons/color/toggle_on.png</normalon>C:/Users/Scitecever/.designer/backup/icons/color/toggle_off.png</iconset>
                               </property>
                               <property name="iconSize">
                                <size>
@@ -1569,8 +1569,8 @@ border: 1px solide;</string>
                               </property>
                               <property name="icon">
                                <iconset>
-                                <normaloff>icons/color/toggle_off.png</normaloff>
-                                <normalon>icons/color/toggle_on.png</normalon>icons/color/toggle_off.png</iconset>
+                                <normaloff>C:/Users/Scitecever/.designer/backup/icons/color/toggle_off.png</normaloff>
+                                <normalon>C:/Users/Scitecever/.designer/backup/icons/color/toggle_on.png</normalon>C:/Users/Scitecever/.designer/backup/icons/color/toggle_off.png</iconset>
                               </property>
                               <property name="iconSize">
                                <size>
@@ -1873,7 +1873,7 @@ QPushButton:pressed {
                             </property>
                             <property name="icon">
                              <iconset>
-                              <normalon>icons/16x16/cil-magnifying-glass.png</normalon>
+                              <normalon>C:/Users/Scitecever/.designer/backup/icons/16x16/cil-magnifying-glass.png</normalon>
                              </iconset>
                             </property>
                             <property name="iconSize">
@@ -1912,7 +1912,7 @@ QPushButton:pressed {
                             </property>
                             <property name="icon">
                              <iconset>
-                              <normaloff>icons/16x16/cil-x.png</normaloff>icons/16x16/cil-x.png</iconset>
+                              <normaloff>C:/Users/Scitecever/.designer/backup/icons/16x16/cil-x.png</normaloff>C:/Users/Scitecever/.designer/backup/icons/16x16/cil-x.png</iconset>
                             </property>
                             <property name="iconSize">
                              <size>
@@ -2761,7 +2761,7 @@ QPushButton:pressed {
                       </property>
                       <property name="icon">
                        <iconset>
-                        <normaloff>../PycharmProjects/Simple_PySide_Base-master/icons/16x16/cil-folder-open.png</normaloff>../PycharmProjects/Simple_PySide_Base-master/icons/16x16/cil-folder-open.png</iconset>
+                        <normaloff>C:/Users/Scitecever/.designer/PycharmProjects/Simple_PySide_Base-master/icons/16x16/cil-folder-open.png</normaloff>C:/Users/Scitecever/.designer/PycharmProjects/Simple_PySide_Base-master/icons/16x16/cil-folder-open.png</iconset>
                       </property>
                      </widget>
                     </item>
@@ -3052,11 +3052,11 @@ QPushButton:pressed {
                    <attribute name="horizontalHeaderCascadingSectionResizes">
                     <bool>false</bool>
                    </attribute>
-                   <attribute name="horizontalHeaderMinimumSectionSize">
-                    <number>50</number>
-                   </attribute>
                    <attribute name="horizontalHeaderDefaultSectionSize">
                     <number>130</number>
+                   </attribute>
+                   <attribute name="horizontalHeaderMinimumSectionSize">
+                    <number>50</number>
                    </attribute>
                    <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
                     <bool>false</bool>
@@ -3126,7 +3126,7 @@ QPushButton:pressed {
   </widget>
  </widget>
  <resources>
-  <include location="files_inf.qrc"/>
+  <include location="image_file.qrc"/>
  </resources>
  <connections/>
 </ui>
