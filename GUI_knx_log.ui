@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1250</width>
-    <height>768</height>
+    <height>754</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -559,7 +559,7 @@ QPushButton:hover {
        <item>
         <widget class="QStackedWidget" name="stackedWidget">
          <property name="currentIndex">
-          <number>2</number>
+          <number>1</number>
          </property>
          <widget class="QWidget" name="Page_settings">
           <layout class="QHBoxLayout" name="horizontalLayout_7">
@@ -2613,7 +2613,7 @@ QPushButton:pressed {
                  <bool>true</bool>
                 </property>
                 <property name="rowCount">
-                 <number>0</number>
+                 <number>5</number>
                 </property>
                 <attribute name="horizontalHeaderVisible">
                  <bool>false</bool>
@@ -2648,6 +2648,11 @@ QPushButton:pressed {
                 <attribute name="verticalHeaderStretchLastSection">
                  <bool>true</bool>
                 </attribute>
+                <row/>
+                <row/>
+                <row/>
+                <row/>
+                <row/>
                 <column>
                  <property name="text">
                   <string>№</string>
