@@ -25,6 +25,7 @@ class ImageDialog(QDialog):
         # ---------------------------------------------------------------------------
         # Зона данных парсинга ------------------------------------------------------
         self.Pars_item = dict()
+        self.Filter_words = ""
         # ---------------------------------------------------------------------------
 
     def bt_exit(self):
@@ -35,7 +36,8 @@ class ImageDialog(QDialog):
         print("(NEED #TODO)")
 
     def bt_search(self):
-        print("(NEED #TODO)")
+        self.Filter_words = self.uiMwin.lineEdit_Search.text()
+        print(self.Filter_words)
 
     def bt_new(self):
         print("(NEED #TODO)")
@@ -56,7 +58,7 @@ class ImageDialog(QDialog):
         if not self.Pars_item:
             self.take_pars_file()
 
-        print(self.Pars_item)
+        # print(self.Pars_item)
         "' Очищаем заглавия '"
 
         self.uiMwin.table_for_cards.clear()

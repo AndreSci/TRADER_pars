@@ -207,6 +207,7 @@ class Ui_Dialog(object):
         self.horizontalLayout_5.setSpacing(1)
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
         self.table_for_cards = QtWidgets.QTableWidget(self.page_1_All)
+        self.table_for_cards.setFocusPolicy(QtCore.Qt.FocusPolicy.StrongFocus)
         self.table_for_cards.setStyleSheet("QHeaderView::section:horizontal\n"
 "{\n"
 "    border: 1px solid rgb(32, 34, 42);\n"
@@ -229,6 +230,7 @@ class Ui_Dialog(object):
         self.table_for_cards.horizontalHeader().setVisible(False)
         self.table_for_cards.horizontalHeader().setCascadingSectionResizes(False)
         self.table_for_cards.horizontalHeader().setDefaultSectionSize(130)
+        self.table_for_cards.horizontalHeader().setHighlightSections(False)
         self.table_for_cards.horizontalHeader().setStretchLastSection(True)
         self.table_for_cards.verticalHeader().setVisible(False)
         self.table_for_cards.verticalHeader().setHighlightSections(False)
@@ -241,6 +243,43 @@ class Ui_Dialog(object):
         self.menu_right.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.menu_right.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.menu_right.setObjectName("menu_right")
+        self.frame_7 = QtWidgets.QFrame(self.menu_right)
+        self.frame_7.setGeometry(QtCore.QRect(0, 10, 125, 40))
+        self.frame_7.setMinimumSize(QtCore.QSize(110, 40))
+        self.frame_7.setMaximumSize(QtCore.QSize(16777215, 40))
+        self.frame_7.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.frame_7.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.frame_7.setObjectName("frame_7")
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.frame_7)
+        self.verticalLayout_2.setContentsMargins(1, 1, 1, 1)
+        self.verticalLayout_2.setObjectName("verticalLayout_2")
+        self.Regions_Box = QtWidgets.QComboBox(self.frame_7)
+        self.Regions_Box.setMinimumSize(QtCore.QSize(115, 25))
+        self.Regions_Box.setMaximumSize(QtCore.QSize(115, 25))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        font.setItalic(False)
+        font.setUnderline(False)
+        font.setStrikeOut(False)
+        self.Regions_Box.setFont(font)
+        self.Regions_Box.setStyleSheet("QComboBox {\n"
+"    border: 1px solid;\n"
+"    background-color: rgb(109, 109, 109);\n"
+"    color: rgb(255, 255, 255);\n"
+"}\n"
+"QComboBox:hover {\n"
+"    background-color: rgb(133, 133, 133);\n"
+"    color: rgb(255, 255, 255);\n"
+"}\n"
+"QComboBox:pressed {    \n"
+"    background-color: rgb(133, 133, 133);\n"
+"    color: rgb(255, 255, 255);\n"
+"}")
+        self.Regions_Box.setObjectName("Regions_Box")
+        self.Regions_Box.addItem("")
+        self.Regions_Box.addItem("")
+        self.Regions_Box.addItem("")
+        self.verticalLayout_2.addWidget(self.Regions_Box)
         self.horizontalLayout_5.addWidget(self.menu_right)
         self.stackedWidget.addWidget(self.page_1_All)
         self.page_2 = QtWidgets.QWidget()
@@ -263,6 +302,9 @@ class Ui_Dialog(object):
         self.Button_Reset.setText(_translate("Dialog", "Reset"))
         self.Button_All.setText(_translate("Dialog", "All"))
         self.table_for_cards.setSortingEnabled(True)
+        self.Regions_Box.setItemText(0, _translate("Dialog", "All regions"))
+        self.Regions_Box.setItemText(1, _translate("Dialog", "Moscow"))
+        self.Regions_Box.setItemText(2, _translate("Dialog", "Moscow region"))
 
 
 if __name__ == "__main__":

@@ -142,16 +142,15 @@ def start_pars():
         trade_card_pages.append(card_page)
 
         index += 1
-        time.sleep(1)
+        time.sleep(0.1)
 
-        break   # Убрать в релизе
+        # break   # Убрать в релизе
 
     for it in trade_card_pages:
         full_info[class_name.NAME].append(get_info(it))
 
     print("create data trade24_ru: Success!!!")
-    for it in full_info["ru-trade24.ru"]:
-        print(len(it))
+
     return full_info
 
 
