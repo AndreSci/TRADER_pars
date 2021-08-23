@@ -210,7 +210,7 @@ QLineEdit:focus {
 }</string>
                  </property>
                  <property name="text">
-                  <string>  Enter words</string>
+                  <string>Enter words</string>
                  </property>
                 </widget>
                </item>

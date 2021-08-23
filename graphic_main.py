@@ -296,7 +296,7 @@ class Ui_Dialog(object):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
         self.Button_Exit.setText(_translate("Dialog", "Exit"))
-        self.lineEdit_Search.setText(_translate("Dialog", "  Enter words"))
+        self.lineEdit_Search.setText(_translate("Dialog", "Enter words"))
         self.Button_Search.setText(_translate("Dialog", "Search"))
         self.Button_New.setText(_translate("Dialog", "Check New"))
         self.Button_Reset.setText(_translate("Dialog", "Reset"))

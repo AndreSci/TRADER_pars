@@ -1,9 +1,9 @@
-from PyQt6 import QtCore, QtGui, QtWidgets
+from PyQt6 import QtWidgets
 
 
-def table_new_button(SetupMainWindow, NumberRowItem, listNewButtonTab, Name):
-    listNewButtonTab.append(QtWidgets.QPushButton(str(Name)))
-    listNewButtonTab[NumberRowItem - 1].setStyleSheet("QPushButton {\n"
+def table_new_button(setup_main_window, number_row_item, list_new_button_tab, name_it):
+    list_new_button_tab.append(QtWidgets.QPushButton(str(name_it)))
+    list_new_button_tab[number_row_item - 1].setStyleSheet("QPushButton {\n"
                                                       "    border: 0px solid;\n"
                                                       "    background-color: rgb(109, 109, 109);\n"
                                                       "}\n"
@@ -14,4 +14,6 @@ def table_new_button(SetupMainWindow, NumberRowItem, listNewButtonTab, Name):
                                                       "QPushButton:pressed {    \n"
                                                       "    background-color: rgb(85, 170, 255);\n"
                                                       "}")
-    listNewButtonTab[NumberRowItem - 1].clicked.connect(lambda: SetupMainWindow.table_button_click(NumberRowItem))
+    list_new_button_tab[number_row_item - 1].clicked.connect(lambda:
+                                                             setup_main_window.table_button_click(number_row_item)
+                                                            )

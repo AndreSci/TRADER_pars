@@ -58,7 +58,7 @@ def get_info(cards):    # Получаем данные всех предлож�
 
     for item_card in cards:
 
-        result_item = list()
+        result_item = dict()
 
         card_find = item_card.find('div', class_='col col--xs-9')
 
@@ -71,10 +71,10 @@ def get_info(cards):    # Получаем данные всех предлож�
         card_number_dig = ''.join(filter(lambda x: x.isdigit(), card_target))
 
         # Заполняем лист(result_item) по схеме "Номер /	Имя продавца / тип продажи / Лот №"
-        result_item.append(card_number_dig)
-        result_item.append(card_name)
-        result_item.append(card_target)
-        # { car_num_dig / name / target / result_lot(dict)...}
+        result_item["number"] = card_number_dig
+        result_item["name"] = card_name
+        result_item["target"] = card_target
+        # { "number" / "name" / "target" / "lots" = list() -> (dict)...}
         # {     0          1        2       3   ...     }
 
         index_lot = 1
@@ -91,20 +91,18 @@ def get_info(cards):    # Получаем данные всех предлож�
             except:     # Пропускаем этот цикл
                 continue
 
-            result_lot[index_lot] = list()
-            result_lot[index_lot].append(index_lot)
-            result_lot[index_lot].append(lots_text)
-            result_lot[index_lot].append(lots_price)
+            result_lot[index_lot] = dict()
+            result_lot[index_lot]["text"] = lots_text
+            result_lot[index_lot]["price"] = lots_price
             # {result_lot(dict)...}   have structure
-            # { index / text / price }
-            # {   0      1      2    }
+            # { text / price }
 
             index_lot += 1
 
-        result_item.append(result_lot)
+
+        result_item["lots"] = result_lot
 
         result_item_cards.append(result_item)
-    # print(result_item_cards[3][2])
     return result_item_cards
 
 
