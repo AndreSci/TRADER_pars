@@ -331,7 +331,7 @@ QPushButton:pressed {
                 <number>1</number>
                </property>
                <item>
-                <widget class="QPushButton" name="Button_New">
+                <widget class="QPushButton" name="Button_Show_Check">
                  <property name="minimumSize">
                   <size>
                    <width>0</width>
@@ -354,7 +354,7 @@ QPushButton:pressed {
 }</string>
                  </property>
                  <property name="text">
-                  <string>Check New</string>
+                  <string>Show Check</string>
                  </property>
                 </widget>
                </item>
@@ -387,7 +387,7 @@ QPushButton:pressed {
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="Button_All">
+                <widget class="QPushButton" name="Button_Save_Check">
                  <property name="minimumSize">
                   <size>
                    <width>0</width>
@@ -410,7 +410,7 @@ QPushButton:pressed {
 }</string>
                  </property>
                  <property name="text">
-                  <string>All</string>
+                  <string>Save</string>
                  </property>
                 </widget>
                </item>

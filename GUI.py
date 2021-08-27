@@ -14,10 +14,10 @@ class ImageDialog(QDialog):
         self.uiMwin.setupUi(self)
 
         self.uiMwin.Button_Exit.clicked.connect(self.bt_exit)
-        self.uiMwin.Button_All.clicked.connect(self.bt_all)
+        self.uiMwin.Button_Save_Check.clicked.connect(self.bt_save_check)
         self.uiMwin.Button_Search.clicked.connect(self.bt_search)
         self.uiMwin.Button_Reset.clicked.connect(self.bt_reset)
-        self.uiMwin.Button_New.clicked.connect(self.bt_new)
+        self.uiMwin.Button_Show_Check.clicked.connect(self.bt_show_check)
 
         # Зона новых кнопок в таблице table_for_cards--------------------------------
         self.listNewButtonTable = list()    # База новых кнопок из таблицы
@@ -56,7 +56,7 @@ class ImageDialog(QDialog):
         print("system save all data (NEED #TODO)")
         raise SystemExit(1)
 
-    def bt_all(self):
+    def bt_save_check(self):
         print("(NEED #TODO)")
 
     def bt_search(self):
@@ -66,7 +66,7 @@ class ImageDialog(QDialog):
         else:
             self.filter_pars(word)
 
-    def bt_new(self):
+    def bt_show_check(self):
         print("(NEED #TODO)")
 
     def bt_reset(self):
@@ -125,4 +125,5 @@ class ImageDialog(QDialog):
                     index_row += 1
 
         row = self.uiMwin.table_for_cards.rowCount()  # получаем кол-во строк
-        self.uiMwin.table_for_cards.setRowCount(row + 1)  # создаем новою строку
+        self.uiMwin.table_for_cards.setRowCount(row + 1)  # создаем последнюю строку в таблице
+

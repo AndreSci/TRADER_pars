@@ -135,9 +135,9 @@ class Ui_Dialog(object):
         self.horizontalLayout_8.setContentsMargins(1, 1, 1, 1)
         self.horizontalLayout_8.setSpacing(5)
         self.horizontalLayout_8.setObjectName("horizontalLayout_8")
-        self.Button_New = QtWidgets.QPushButton(self.frame)
-        self.Button_New.setMinimumSize(QtCore.QSize(0, 25))
-        self.Button_New.setStyleSheet("QPushButton {\n"
+        self.Button_Show_Check = QtWidgets.QPushButton(self.frame)
+        self.Button_Show_Check.setMinimumSize(QtCore.QSize(0, 25))
+        self.Button_Show_Check.setStyleSheet("QPushButton {\n"
 "    border: 1px solid;\n"
 "    background-color: rgb(109, 109, 109);\n"
 "    border-radius: 3px;\n"
@@ -150,8 +150,8 @@ class Ui_Dialog(object):
 "QPushButton:pressed {    \n"
 "    background-color: rgb(85, 170, 255);\n"
 "}")
-        self.Button_New.setObjectName("Button_New")
-        self.horizontalLayout_8.addWidget(self.Button_New)
+        self.Button_Show_Check.setObjectName("Button_Show_Check")
+        self.horizontalLayout_8.addWidget(self.Button_Show_Check)
         self.Button_Reset = QtWidgets.QPushButton(self.frame)
         self.Button_Reset.setMinimumSize(QtCore.QSize(0, 25))
         self.Button_Reset.setStyleSheet("QPushButton {\n"
@@ -169,9 +169,9 @@ class Ui_Dialog(object):
 "}")
         self.Button_Reset.setObjectName("Button_Reset")
         self.horizontalLayout_8.addWidget(self.Button_Reset)
-        self.Button_All = QtWidgets.QPushButton(self.frame)
-        self.Button_All.setMinimumSize(QtCore.QSize(0, 25))
-        self.Button_All.setStyleSheet("QPushButton {\n"
+        self.Button_Save_Check = QtWidgets.QPushButton(self.frame)
+        self.Button_Save_Check.setMinimumSize(QtCore.QSize(0, 25))
+        self.Button_Save_Check.setStyleSheet("QPushButton {\n"
 "    border: 1px solid;\n"
 "    background-color: rgb(109, 109, 109);\n"
 "    border-radius: 3px;\n"
@@ -184,8 +184,8 @@ class Ui_Dialog(object):
 "QPushButton:pressed {    \n"
 "    background-color: rgb(85, 170, 255);\n"
 "}")
-        self.Button_All.setObjectName("Button_All")
-        self.horizontalLayout_8.addWidget(self.Button_All)
+        self.Button_Save_Check.setObjectName("Button_Save_Check")
+        self.horizontalLayout_8.addWidget(self.Button_Save_Check)
         self.horizontalLayout_7.addWidget(self.frame)
         self.horizontalLayout_4.addWidget(self.frame_3)
         self.horizontalLayout_3.addWidget(self.frame_2)
@@ -298,9 +298,9 @@ class Ui_Dialog(object):
         self.Button_Exit.setText(_translate("Dialog", "Exit"))
         self.lineEdit_Search.setText(_translate("Dialog", "Enter words"))
         self.Button_Search.setText(_translate("Dialog", "Search"))
-        self.Button_New.setText(_translate("Dialog", "Check New"))
+        self.Button_Show_Check.setText(_translate("Dialog", "Show Check"))
         self.Button_Reset.setText(_translate("Dialog", "Reset"))
-        self.Button_All.setText(_translate("Dialog", "All"))
+        self.Button_Save_Check.setText(_translate("Dialog", "Save"))
         self.table_for_cards.setSortingEnabled(True)
         self.Regions_Box.setItemText(0, _translate("Dialog", "All regions"))
         self.Regions_Box.setItemText(1, _translate("Dialog", "Moscow"))
