@@ -537,6 +537,11 @@ QPushButton:pressed {
             <column/>
             <column/>
             <column/>
+            <item row="0" column="0">
+             <property name="text">
+              <string>123</string>
+             </property>
+            </item>
            </widget>
           </item>
           <item>
