@@ -1,9 +1,13 @@
 import sys
 import take_pars_data
 from create_new_buttons import table_new_button
+import pandas as pd
 
 from PyQt6.QtWidgets import QDialog, QWidget, QApplication, QMainWindow, QTableWidgetItem, QHeaderView
 from graphic_main import Ui_Dialog
+
+NAME_CVS = "saved_info.cvs"
+NAME_CVS_LAST_EXIT = "saved_info_exit.cvs"
 
 class ImageDialog(QDialog):
     def __init__(self):
@@ -17,7 +21,7 @@ class ImageDialog(QDialog):
         self.uiMwin.Button_Save_Check.clicked.connect(self.bt_save_check)
         self.uiMwin.Button_Search.clicked.connect(self.bt_search)
         self.uiMwin.Button_Reset.clicked.connect(self.bt_reset)
-        self.uiMwin.Button_Show_Check.clicked.connect(self.bt_show_check)
+        self.uiMwin.Button_Load_Save.clicked.connect(self.bt_load_save)
 
         # Зона новых кнопок в таблице table_for_cards--------------------------------
         self.listNewButtonTable = list()    # База новых кнопок из таблицы
@@ -53,11 +57,14 @@ class ImageDialog(QDialog):
         self.do_table_cards(True)
 
     def bt_exit(self):
-        print("system save all data (NEED #TODO)")
+        df = pd.DataFrame([self.Pars_item])
+        df.to_csv(NAME_CVS_LAST_EXIT)
         raise SystemExit(1)
 
     def bt_save_check(self):
-        print("(NEED #TODO)")
+        df = pd.DataFrame([self.Pars_item])
+        df.to_csv(NAME_CVS)
+        print("Save done!")
 
     def bt_search(self):
         word = self.uiMwin.lineEdit_Search.text()
@@ -66,14 +73,17 @@ class ImageDialog(QDialog):
         else:
             self.filter_pars(word)
 
-    def bt_show_check(self):
+    def bt_load_save(self):
         print("(NEED #TODO)")
 
     def bt_reset(self):
         self.do_table_cards()
 
     def take_pars_file(self):
-        self.Pars_item = take_pars_data.take_trade24()
+        ptp = take_pars_data.take_ptp_center()
+        t24 = take_pars_data.take_trade24()
+        self.Pars_item["ru-trade24.ru"] = t24["ru-trade24.ru"]
+        self.Pars_item["ptp-center.ru"] = ptp["ptp-center.ru"]
 
     def table_button_click(self, number_row_item):
         self.uiMwin.stackedWidget.setCurrentWidget(self.uiMwin.page_1_All)

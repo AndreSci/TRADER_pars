@@ -12,8 +12,8 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(720, 686)
-        Dialog.setMinimumSize(QtCore.QSize(720, 400))
+        Dialog.resize(962, 709)
+        Dialog.setMinimumSize(QtCore.QSize(800, 600))
         Dialog.setMaximumSize(QtCore.QSize(16777215, 16777215))
         self.verticalLayout = QtWidgets.QVBoxLayout(Dialog)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -135,9 +135,9 @@ class Ui_Dialog(object):
         self.horizontalLayout_8.setContentsMargins(1, 1, 1, 1)
         self.horizontalLayout_8.setSpacing(5)
         self.horizontalLayout_8.setObjectName("horizontalLayout_8")
-        self.Button_Show_Check = QtWidgets.QPushButton(self.frame)
-        self.Button_Show_Check.setMinimumSize(QtCore.QSize(0, 25))
-        self.Button_Show_Check.setStyleSheet("QPushButton {\n"
+        self.Button_Load_Save = QtWidgets.QPushButton(self.frame)
+        self.Button_Load_Save.setMinimumSize(QtCore.QSize(0, 25))
+        self.Button_Load_Save.setStyleSheet("QPushButton {\n"
 "    border: 1px solid;\n"
 "    background-color: rgb(109, 109, 109);\n"
 "    border-radius: 3px;\n"
@@ -150,8 +150,8 @@ class Ui_Dialog(object):
 "QPushButton:pressed {    \n"
 "    background-color: rgb(85, 170, 255);\n"
 "}")
-        self.Button_Show_Check.setObjectName("Button_Show_Check")
-        self.horizontalLayout_8.addWidget(self.Button_Show_Check)
+        self.Button_Load_Save.setObjectName("Button_Load_Save")
+        self.horizontalLayout_8.addWidget(self.Button_Load_Save)
         self.Button_Reset = QtWidgets.QPushButton(self.frame)
         self.Button_Reset.setMinimumSize(QtCore.QSize(0, 25))
         self.Button_Reset.setStyleSheet("QPushButton {\n"
@@ -227,6 +227,8 @@ class Ui_Dialog(object):
         self.table_for_cards.setRowCount(5)
         self.table_for_cards.setColumnCount(4)
         self.table_for_cards.setObjectName("table_for_cards")
+        item = QtWidgets.QTableWidgetItem()
+        self.table_for_cards.setItem(0, 0, item)
         self.table_for_cards.horizontalHeader().setVisible(False)
         self.table_for_cards.horizontalHeader().setCascadingSectionResizes(False)
         self.table_for_cards.horizontalHeader().setDefaultSectionSize(130)
@@ -298,10 +300,15 @@ class Ui_Dialog(object):
         self.Button_Exit.setText(_translate("Dialog", "Exit"))
         self.lineEdit_Search.setText(_translate("Dialog", "Enter words"))
         self.Button_Search.setText(_translate("Dialog", "Search"))
-        self.Button_Show_Check.setText(_translate("Dialog", "Show Check"))
+        self.Button_Load_Save.setText(_translate("Dialog", "Load Save"))
         self.Button_Reset.setText(_translate("Dialog", "Reset"))
         self.Button_Save_Check.setText(_translate("Dialog", "Save"))
         self.table_for_cards.setSortingEnabled(True)
+        __sortingEnabled = self.table_for_cards.isSortingEnabled()
+        self.table_for_cards.setSortingEnabled(False)
+        item = self.table_for_cards.item(0, 0)
+        item.setText(_translate("Dialog", "123"))
+        self.table_for_cards.setSortingEnabled(__sortingEnabled)
         self.Regions_Box.setItemText(0, _translate("Dialog", "All regions"))
         self.Regions_Box.setItemText(1, _translate("Dialog", "Moscow"))
         self.Regions_Box.setItemText(2, _translate("Dialog", "Moscow region"))

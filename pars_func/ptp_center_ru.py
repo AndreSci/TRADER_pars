@@ -84,8 +84,6 @@ def get_info(cards):    # Получаем данные всех предлож�
 
         result_item["lots"] = result_lot
 
-        print(result_item)  # убрать
-
         result_item_cards.append(result_item)
     return result_item_cards
 
@@ -141,4 +139,4 @@ def start_pars():
     return full_info
 
 
-print(start_pars())
+#print(start_pars())
