@@ -56,6 +56,9 @@ class ImageDialog(QDialog):
 
         self.do_table_cards(True)
 
+    # BUTTONS CLICK
+    # Post here your functions for clicked buttons
+    # ///////////////////////////////////////////////////////////////////
     def bt_exit(self):
         df = pd.DataFrame([self.Pars_item])
         df.to_csv(NAME_CVS_LAST_EXIT)
