@@ -2,6 +2,7 @@ import sys
 import take_pars_data
 from create_new_buttons import table_new_button
 import pandas as pd
+import json
 
 from PyQt6.QtWidgets import QDialog, QWidget, QApplication, QMainWindow, QTableWidgetItem, QHeaderView
 from graphic_main import Ui_Dialog
@@ -62,11 +63,18 @@ class ImageDialog(QDialog):
     def bt_exit(self):
         df = pd.DataFrame([self.Pars_item])
         df.to_csv(NAME_CVS_LAST_EXIT)
+        print("Exit save data: done!")
         raise SystemExit(1)
 
     def bt_save_check(self):
         df = pd.DataFrame([self.Pars_item])
         df.to_csv(NAME_CVS)
+
+        j = json.dumps(self.Pars_item)
+        with open("saved_info.json", 'w') as f:
+            f.write(j)
+            f.close()
+
         print("Save done!")
 
     def bt_search(self):
@@ -77,11 +85,18 @@ class ImageDialog(QDialog):
             self.filter_pars(word)
 
     def bt_load_save(self):
-        print("(NEED #TODO)")
+        file_data = json.load(open("saved_info.json"))
+        self.Pars_item = file_data
+        print("load information Success!")
+        self.do_table_cards()
+
 
     def bt_reset(self):
         self.do_table_cards()
 
+    # TABLE CREATING
+    # Post here your functions for control at the table information
+    # ///////////////////////////////////////////////////////////////////
     def take_pars_file(self):
         ptp = take_pars_data.take_ptp_center()
         t24 = take_pars_data.take_trade24()
@@ -99,6 +114,8 @@ class ImageDialog(QDialog):
 
         if not self.Pars_item:
             self.take_pars_file()
+            pars_it_func = self.Pars_item
+        else:
             pars_it_func = self.Pars_item
 
         if use_filter:
@@ -128,7 +145,7 @@ class ImageDialog(QDialog):
 
                 for card in cards:
                     row = self.uiMwin.table_for_cards.rowCount()  # получаем кол-во строк
-                    self.uiMwin.table_for_cards.setRowCount(row + 1)  # создаем новою строку
+                    self.uiMwin.table_for_cards.setRowCount(row + 1)  # создаем новую строку
                     self.uiMwin.table_for_cards.setItem(index_row, 0, QTableWidgetItem(key))
                     self.uiMwin.table_for_cards.setItem(index_row, 1, QTableWidgetItem(card["number"]))
                     self.uiMwin.table_for_cards.setItem(index_row, 2, QTableWidgetItem(card["name"]))
