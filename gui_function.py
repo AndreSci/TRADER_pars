@@ -1,14 +1,16 @@
 import sys
 import take_pars_data
 from create_new_buttons import table_new_button
-import pandas as pd
 import json
 
 from PyQt6.QtWidgets import QDialog, QWidget, QApplication, QMainWindow, QTableWidgetItem, QHeaderView
 from graphic_main import Ui_Dialog
 
+NAME_JSON = "saved_info.json"
+NAME_JSON_EXIT = "saved_info_exit.json"
 NAME_CVS = "saved_info.cvs"
 NAME_CVS_LAST_EXIT = "saved_info_exit.cvs"
+
 
 class ImageDialog(QDialog):
     def __init__(self):
@@ -25,7 +27,7 @@ class ImageDialog(QDialog):
         self.uiMwin.Button_Load_Save.clicked.connect(self.bt_load_save)
 
         # Зона новых кнопок в таблице table_for_cards--------------------------------
-        self.listNewButtonTable = list()    # База новых кнопок из таблицы
+        self.listNewButtonTable = list()  # База новых кнопок из таблицы
         self.feedbackLogButton = dict()  # запись адресов новых кнопок
         # ---------------------------------------------------------------------------
         # Зона данных парсинга ------------------------------------------------------
@@ -61,20 +63,18 @@ class ImageDialog(QDialog):
     # Post here your functions for clicked buttons
     # ///////////////////////////////////////////////////////////////////
     def bt_exit(self):
-        df = pd.DataFrame([self.Pars_item])
-        df.to_csv(NAME_CVS_LAST_EXIT)
+        j = json.dumps(self.Pars_item)
+        with open(NAME_JSON_EXIT, 'w') as f:
+            f.write(j)
+            f.close()
         print("Exit save data: done!")
         raise SystemExit(1)
 
     def bt_save_check(self):
-        df = pd.DataFrame([self.Pars_item])
-        df.to_csv(NAME_CVS)
-
         j = json.dumps(self.Pars_item)
-        with open("saved_info.json", 'w') as f:
+        with open(NAME_JSON, 'w') as f:
             f.write(j)
             f.close()
-
         print("Save done!")
 
     def bt_search(self):
@@ -90,9 +90,8 @@ class ImageDialog(QDialog):
         print("load information Success!")
         self.do_table_cards()
 
-
     def bt_reset(self):
-        self.do_table_cards()
+        self.do_table_cards(use_reset=True)
 
     # TABLE CREATING
     # Post here your functions for control at the table information
@@ -106,13 +105,13 @@ class ImageDialog(QDialog):
     def table_button_click(self, number_row_item):
         self.uiMwin.stackedWidget.setCurrentWidget(self.uiMwin.page_1_All)
 
-    def do_table_cards(self, use_filter=False):
+    def do_table_cards(self, use_filter=False, use_reset=False):
         self.listNewButtonTable.clear()
         self.feedbackLogButton.clear()
 
         pars_it_func = dict()
 
-        if not self.Pars_item:
+        if not self.Pars_item or use_reset == True:
             self.take_pars_file()
             pars_it_func = self.Pars_item
         else:
@@ -156,4 +155,3 @@ class ImageDialog(QDialog):
 
         row = self.uiMwin.table_for_cards.rowCount()  # получаем кол-во строк
         self.uiMwin.table_for_cards.setRowCount(row + 1)  # создаем последнюю строку в таблице
-
