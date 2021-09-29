@@ -8,8 +8,6 @@ from graphic_main import Ui_Dialog
 
 NAME_JSON = "saved_info.json"
 NAME_JSON_EXIT = "saved_info_exit.json"
-NAME_CVS = "saved_info.cvs"
-NAME_CVS_LAST_EXIT = "saved_info_exit.cvs"
 
 
 class ImageDialog(QDialog):
@@ -66,7 +64,6 @@ class ImageDialog(QDialog):
         j = json.dumps(self.Pars_item)
         with open(NAME_JSON_EXIT, 'w') as f:
             f.write(j)
-            f.close()
         print("Exit save data: done!")
         raise SystemExit(1)
 
@@ -74,7 +71,6 @@ class ImageDialog(QDialog):
         j = json.dumps(self.Pars_item)
         with open(NAME_JSON, 'w') as f:
             f.write(j)
-            f.close()
         print("Save done!")
 
     def bt_search(self):
@@ -85,7 +81,7 @@ class ImageDialog(QDialog):
             self.filter_pars(word)
 
     def bt_load_save(self):
-        file_data = json.load(open("saved_info.json"))
+        file_data = json.load(open(NAME_JSON))
         self.Pars_item = file_data
         print("load information Success!")
         self.do_table_cards()
@@ -104,6 +100,7 @@ class ImageDialog(QDialog):
 
     def table_button_click(self, number_row_item):
         self.uiMwin.stackedWidget.setCurrentWidget(self.uiMwin.page_1_All)
+        #TODO
 
     def do_table_cards(self, use_filter=False, use_reset=False):
         self.listNewButtonTable.clear()
