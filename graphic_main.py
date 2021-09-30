@@ -124,6 +124,28 @@ class Ui_Dialog(object):
         self.frame_6.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame_6.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame_6.setObjectName("frame_6")
+        self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.frame_6)
+        self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_4.setSpacing(2)
+        self.verticalLayout_4.setObjectName("verticalLayout_4")
+        self.progressBar = QtWidgets.QProgressBar(self.frame_6)
+        self.progressBar.setStyleSheet("QProgressBar{    \n"
+"    border: 1px solid;\n"
+"    background-color: rgb(230, 210, 185);\n"
+"    border-radius: 5px;\n"
+"    color: rgb(0,0,0);\n"
+"}\n"
+"\n"
+"QProgressBar:chunk{\n"
+"    border-radius: 5px;    \n"
+"    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.295455 rgba(0, 21, 93, 250), stop:0.971751 rgba(205, 25, 89, 248));\n"
+"}")
+        self.progressBar.setProperty("value", 24)
+        self.progressBar.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.progressBar.setTextVisible(True)
+        self.progressBar.setInvertedAppearance(True)
+        self.progressBar.setObjectName("progressBar")
+        self.verticalLayout_4.addWidget(self.progressBar)
         self.horizontalLayout_7.addWidget(self.frame_6)
         self.frame = QtWidgets.QFrame(self.frame_3)
         self.frame.setMinimumSize(QtCore.QSize(250, 0))
@@ -135,6 +157,28 @@ class Ui_Dialog(object):
         self.horizontalLayout_8.setContentsMargins(1, 1, 1, 1)
         self.horizontalLayout_8.setSpacing(5)
         self.horizontalLayout_8.setObjectName("horizontalLayout_8")
+        self.Button_Reset = QtWidgets.QPushButton(self.frame)
+        self.Button_Reset.setMinimumSize(QtCore.QSize(0, 25))
+        self.Button_Reset.setLayoutDirection(QtCore.Qt.LayoutDirection.LeftToRight)
+        self.Button_Reset.setStyleSheet("QPushButton {\n"
+"    border: 1px solid;\n"
+"    background-color: rgb(109, 109, 109);\n"
+"    border-radius: 3px;\n"
+"    color: rgb(255, 255, 255);\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(136, 136, 136);\n"
+"\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color: rgb(85, 170, 255);\n"
+"}")
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("images/icons/cil-reload.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.Button_Reset.setIcon(icon)
+        self.Button_Reset.setCheckable(False)
+        self.Button_Reset.setObjectName("Button_Reset")
+        self.horizontalLayout_8.addWidget(self.Button_Reset)
         self.Button_Load_Save = QtWidgets.QPushButton(self.frame)
         self.Button_Load_Save.setMinimumSize(QtCore.QSize(0, 25))
         self.Button_Load_Save.setStyleSheet("QPushButton {\n"
@@ -152,25 +196,15 @@ class Ui_Dialog(object):
 "}")
         self.Button_Load_Save.setObjectName("Button_Load_Save")
         self.horizontalLayout_8.addWidget(self.Button_Load_Save)
-        self.Button_Reset = QtWidgets.QPushButton(self.frame)
-        self.Button_Reset.setMinimumSize(QtCore.QSize(0, 25))
-        self.Button_Reset.setStyleSheet("QPushButton {\n"
-"    border: 1px solid;\n"
-"    background-color: rgb(109, 109, 109);\n"
-"    border-radius: 3px;\n"
-"    color: rgb(255, 255, 255);\n"
-"}\n"
-"QPushButton:hover {\n"
-"    background-color: rgb(136, 136, 136);\n"
-"\n"
-"}\n"
-"QPushButton:pressed {    \n"
-"    background-color: rgb(85, 170, 255);\n"
-"}")
-        self.Button_Reset.setObjectName("Button_Reset")
-        self.horizontalLayout_8.addWidget(self.Button_Reset)
         self.Button_Save_Check = QtWidgets.QPushButton(self.frame)
         self.Button_Save_Check.setMinimumSize(QtCore.QSize(0, 25))
+        font = QtGui.QFont()
+        font.setBold(False)
+        font.setUnderline(False)
+        font.setWeight(50)
+        self.Button_Save_Check.setFont(font)
+        self.Button_Save_Check.setLayoutDirection(QtCore.Qt.LayoutDirection.LeftToRight)
+        self.Button_Save_Check.setAutoFillBackground(False)
         self.Button_Save_Check.setStyleSheet("QPushButton {\n"
 "    border: 1px solid;\n"
 "    background-color: rgb(109, 109, 109);\n"
@@ -184,6 +218,12 @@ class Ui_Dialog(object):
 "QPushButton:pressed {    \n"
 "    background-color: rgb(85, 170, 255);\n"
 "}")
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap("images/icons/cil-save.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.Button_Save_Check.setIcon(icon1)
+        self.Button_Save_Check.setAutoExclusive(False)
+        self.Button_Save_Check.setDefault(False)
+        self.Button_Save_Check.setFlat(False)
         self.Button_Save_Check.setObjectName("Button_Save_Check")
         self.horizontalLayout_8.addWidget(self.Button_Save_Check)
         self.horizontalLayout_7.addWidget(self.frame)
@@ -196,8 +236,8 @@ class Ui_Dialog(object):
         self.menu_down.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.menu_down.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.menu_down.setObjectName("menu_down")
-        self.horizontalLayout = QtWidgets.QHBoxLayout(self.menu_down)
-        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.menu_down)
+        self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.stackedWidget = QtWidgets.QStackedWidget(self.menu_down)
         self.stackedWidget.setObjectName("stackedWidget")
         self.page_1_All = QtWidgets.QWidget()
@@ -208,26 +248,27 @@ class Ui_Dialog(object):
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
         self.table_for_cards = QtWidgets.QTableWidget(self.page_1_All)
         self.table_for_cards.setFocusPolicy(QtCore.Qt.FocusPolicy.StrongFocus)
-        self.table_for_cards.setStyleSheet("QHeaderView::section:horizontal\n"
-"{\n"
-"    border: 1px solid rgb(32, 34, 42);\n"
-"    background-color:rgb(53, 53, 53);\n"
-"    color: rgb(255, 255, 255);\n"
-"}\n"
-"\n"
-" QScrollBar:vertical {\n"
-"    border: none;\n"
-"    background: rgb(52, 59, 72);\n"
-"    width: 14px;\n"
-"    border-radius: 0px;\n"
-" }")
+        self.table_for_cards.setStyleSheet("QTableWidget{\n"
+"    border: 2px solid;\n"
+"    border-color: rgb(111,111,111);\n"
+"    background-color: rgb(211, 211, 211);\n"
+"    border-radius: 3px;\n"
+"    color: rgb(0, 0, 0);\n"
+"}")
         self.table_for_cards.setFrameShape(QtWidgets.QFrame.Shape.Box)
         self.table_for_cards.setAutoScroll(False)
         self.table_for_cards.setEditTriggers(QtWidgets.QAbstractItemView.EditTrigger.AnyKeyPressed|QtWidgets.QAbstractItemView.EditTrigger.DoubleClicked|QtWidgets.QAbstractItemView.EditTrigger.EditKeyPressed)
+        self.table_for_cards.setShowGrid(True)
+        self.table_for_cards.setGridStyle(QtCore.Qt.PenStyle.DashLine)
         self.table_for_cards.setRowCount(5)
         self.table_for_cards.setColumnCount(4)
         self.table_for_cards.setObjectName("table_for_cards")
         item = QtWidgets.QTableWidgetItem()
+        font = QtGui.QFont()
+        font.setPointSize(9)
+        font.setBold(True)
+        font.setWeight(75)
+        item.setFont(font)
         self.table_for_cards.setItem(0, 0, item)
         self.table_for_cards.horizontalHeader().setVisible(False)
         self.table_for_cards.horizontalHeader().setCascadingSectionResizes(False)
@@ -264,7 +305,8 @@ class Ui_Dialog(object):
         font.setUnderline(False)
         font.setStrikeOut(False)
         self.Regions_Box.setFont(font)
-        self.Regions_Box.setStyleSheet("QComboBox {\n"
+        self.Regions_Box.setStyleSheet("color: rgb(255, 255, 255);\n"
+"QComboBox {\n"
 "    border: 1px solid;\n"
 "    background-color: rgb(109, 109, 109);\n"
 "    color: rgb(255, 255, 255);\n"
@@ -287,7 +329,7 @@ class Ui_Dialog(object):
         self.page_2 = QtWidgets.QWidget()
         self.page_2.setObjectName("page_2")
         self.stackedWidget.addWidget(self.page_2)
-        self.horizontalLayout.addWidget(self.stackedWidget)
+        self.verticalLayout_3.addWidget(self.stackedWidget)
         self.verticalLayout.addWidget(self.menu_down)
 
         self.retranslateUi(Dialog)
@@ -300,8 +342,8 @@ class Ui_Dialog(object):
         self.Button_Exit.setText(_translate("Dialog", "Exit"))
         self.lineEdit_Search.setText(_translate("Dialog", "Enter words"))
         self.Button_Search.setText(_translate("Dialog", "Search"))
+        self.Button_Reset.setText(_translate("Dialog", "Update"))
         self.Button_Load_Save.setText(_translate("Dialog", "Load Save"))
-        self.Button_Reset.setText(_translate("Dialog", "Reset"))
         self.Button_Save_Check.setText(_translate("Dialog", "Save"))
         self.table_for_cards.setSortingEnabled(True)
         __sortingEnabled = self.table_for_cards.isSortingEnabled()

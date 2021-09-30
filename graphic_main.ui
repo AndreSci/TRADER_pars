@@ -292,6 +292,52 @@ QPushButton:pressed {
               <property name="frameShadow">
                <enum>QFrame::Raised</enum>
               </property>
+              <layout class="QVBoxLayout" name="verticalLayout_4">
+               <property name="spacing">
+                <number>2</number>
+               </property>
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QProgressBar" name="progressBar">
+                 <property name="styleSheet">
+                  <string notr="true">QProgressBar{	
+	border: 1px solid;
+	background-color: rgb(230, 210, 185);
+	border-radius: 5px;
+	color: rgb(0,0,0);
+}
+
+QProgressBar:chunk{
+	border-radius: 5px;	
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.295455 rgba(0, 21, 93, 250), stop:0.971751 rgba(205, 25, 89, 248));
+}</string>
+                 </property>
+                 <property name="value">
+                  <number>24</number>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                 <property name="textVisible">
+                  <bool>true</bool>
+                 </property>
+                 <property name="invertedAppearance">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </widget>
             </item>
             <item>
@@ -331,6 +377,44 @@ QPushButton:pressed {
                 <number>1</number>
                </property>
                <item>
+                <widget class="QPushButton" name="Button_Reset">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>25</height>
+                  </size>
+                 </property>
+                 <property name="layoutDirection">
+                  <enum>Qt::LeftToRight</enum>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">QPushButton {
+	border: 1px solid;
+	background-color: rgb(109, 109, 109);
+	border-radius: 3px;
+	color: rgb(255, 255, 255);
+}
+QPushButton:hover {
+	background-color: rgb(136, 136, 136);
+
+}
+QPushButton:pressed {	
+	background-color: rgb(85, 170, 255);
+}</string>
+                 </property>
+                 <property name="text">
+                  <string>Update</string>
+                 </property>
+                 <property name="icon">
+                  <iconset>
+                   <normaloff>images/icons/cil-reload.png</normaloff>images/icons/cil-reload.png</iconset>
+                 </property>
+                 <property name="checkable">
+                  <bool>false</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
                 <widget class="QPushButton" name="Button_Load_Save">
                  <property name="minimumSize">
                   <size>
@@ -359,40 +443,25 @@ QPushButton:pressed {
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="Button_Reset">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>25</height>
-                  </size>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">QPushButton {
-	border: 1px solid;
-	background-color: rgb(109, 109, 109);
-	border-radius: 3px;
-	color: rgb(255, 255, 255);
-}
-QPushButton:hover {
-	background-color: rgb(136, 136, 136);
-
-}
-QPushButton:pressed {	
-	background-color: rgb(85, 170, 255);
-}</string>
-                 </property>
-                 <property name="text">
-                  <string>Reset</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
                 <widget class="QPushButton" name="Button_Save_Check">
                  <property name="minimumSize">
                   <size>
                    <width>0</width>
                    <height>25</height>
                   </size>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <weight>50</weight>
+                   <bold>false</bold>
+                   <underline>false</underline>
+                  </font>
+                 </property>
+                 <property name="layoutDirection">
+                  <enum>Qt::LeftToRight</enum>
+                 </property>
+                 <property name="autoFillBackground">
+                  <bool>false</bool>
                  </property>
                  <property name="styleSheet">
                   <string notr="true">QPushButton {
@@ -411,6 +480,19 @@ QPushButton:pressed {
                  </property>
                  <property name="text">
                   <string>Save</string>
+                 </property>
+                 <property name="icon">
+                  <iconset>
+                   <normaloff>images/icons/cil-save.png</normaloff>images/icons/cil-save.png</iconset>
+                 </property>
+                 <property name="autoExclusive">
+                  <bool>false</bool>
+                 </property>
+                 <property name="default">
+                  <bool>false</bool>
+                 </property>
+                 <property name="flat">
+                  <bool>false</bool>
                  </property>
                 </widget>
                </item>
@@ -443,7 +525,7 @@ QPushButton:pressed {
      <property name="frameShadow">
       <enum>QFrame::Raised</enum>
      </property>
-     <layout class="QHBoxLayout" name="horizontalLayout">
+     <layout class="QVBoxLayout" name="verticalLayout_3">
       <item>
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="currentIndex">
@@ -472,19 +554,13 @@ QPushButton:pressed {
              <enum>Qt::StrongFocus</enum>
             </property>
             <property name="styleSheet">
-             <string notr="true">QHeaderView::section:horizontal
-{
-    border: 1px solid rgb(32, 34, 42);
-	background-color:rgb(53, 53, 53);
-	color: rgb(255, 255, 255);
-}
-
- QScrollBar:vertical {
-	border: none;
-    background: rgb(52, 59, 72);
-    width: 14px;
-	border-radius: 0px;
- }</string>
+             <string notr="true">QTableWidget{
+	border: 2px solid;
+	border-color: rgb(111,111,111);
+	background-color: rgb(211, 211, 211);
+	border-radius: 3px;
+	color: rgb(0, 0, 0);
+}</string>
             </property>
             <property name="frameShape">
              <enum>QFrame::Box</enum>
@@ -494,6 +570,12 @@ QPushButton:pressed {
             </property>
             <property name="editTriggers">
              <set>QAbstractItemView::AnyKeyPressed|QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed</set>
+            </property>
+            <property name="showGrid">
+             <bool>true</bool>
+            </property>
+            <property name="gridStyle">
+             <enum>Qt::DashLine</enum>
             </property>
             <property name="sortingEnabled">
              <bool>true</bool>
@@ -540,6 +622,13 @@ QPushButton:pressed {
             <item row="0" column="0">
              <property name="text">
               <string>123</string>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>9</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
              </property>
             </item>
            </widget>
@@ -630,7 +719,8 @@ QPushButton:pressed {
                  </font>
                 </property>
                 <property name="styleSheet">
-                 <string notr="true">QComboBox {
+                 <string notr="true">color: rgb(255, 255, 255);
+QComboBox {
 	border: 1px solid;
 	background-color: rgb(109, 109, 109);
 	color: rgb(255, 255, 255);

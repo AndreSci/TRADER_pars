@@ -17,7 +17,7 @@ class NameSpace:
         self.URL_01 = 'https://ptp-center.ru/etp/trade/list.html'
         self.URL_02 = '?page='
         self.HEADER = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
-        self.MAX_PAGE = 200
+        self.MAX_PAGE = 10
         self.CARDS_NAME = "data"
 
 
