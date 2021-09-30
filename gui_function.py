@@ -26,7 +26,7 @@ class ProgressHandler(QtCore.QThread):
         self.Pars_item["ru-trade24.ru"] = t24["ru-trade24.ru"]
         self.Pars_item["ptp-center.ru"] = ptp["ptp-center.ru"]
         self.mysignal.emit(["done", 99])
-        time.sleep(2)
+        time.sleep(1)
         self.mysignal.emit(["done", 100])
 
 
