@@ -1,10 +1,11 @@
 import sys
 import take_pars_data
 import time
-from create_new_buttons import table_new_button
+import create_new_buttons
 import json
 
-from PyQt6.QtWidgets import QDialog, QWidget, QApplication, QMainWindow, QTableWidgetItem, QHeaderView
+from PyQt6.QtWidgets import QDialog, QWidget, QApplication, QMainWindow, QTableWidgetItem, QHeaderView, QPushButton, \
+    QFrame
 from PyQt6 import QtCore
 from graphic_main import Ui_Dialog
 
@@ -18,11 +19,13 @@ class ProgressHandler(QtCore.QThread):
     Pars_item = dict()
 
     def run(self):
-        self.mysignal.emit(["progress_increment", 1])
+        self.mysignal.emit(["Begin", 1])
+        time.sleep(1)
+        self.mysignal.emit(["ptp_center_ru", 2])
         ptp = take_pars_data.take_ptp_center()
-        self.mysignal.emit(["progress_increment", 50])
+        self.mysignal.emit(["ru-trade24.ru", 50])
         t24 = take_pars_data.take_trade24()
-        self.mysignal.emit(["progress_increment", 99])
+        self.mysignal.emit(["Creating table", 99])
         self.Pars_item["ru-trade24.ru"] = t24["ru-trade24.ru"]
         self.Pars_item["ptp-center.ru"] = ptp["ptp-center.ru"]
         self.mysignal.emit(["done", 99])
@@ -42,10 +45,12 @@ class ImageDialog(QDialog):
 
         # Блокировка кнопок для выполнения функций (так же является триггером для аварийного выхода кнопкой Exit)
         self.BLOCK_BUTTON = False
+        self.PARS_DONE = False
 
         # Создаем экземпляр класса с потоком и парсинг сайтов
         self.uiMwin.progressBar.setValue(0)
         self.uiMwin.progressBar.hide()
+        self.uiMwin.Load_info.hide()
 
         self.handlerAndParsData = ProgressHandler()
         self.handlerAndParsData.mysignal.connect(self.progress_bar_and_Pars)
@@ -61,22 +66,46 @@ class ImageDialog(QDialog):
         self.listNewButtonTable = list()  # База новых кнопок из таблицы
         self.feedbackLogButton = dict()  # запись адресов новых кнопок
         # ---------------------------------------------------------------------------
+        # Зона новых кнопок в меню доступных сайтов----------------------------------
+        self.list_name_web = list()
+        self.listWebSiteButtons = list()
+        # ---------------------------------------------------------------------------
         # Зона данных парсинга ------------------------------------------------------
         self.Pars_item = dict()
         self.pars_it_filter = dict()
         self.Filter_words = ""
         # ---------------------------------------------------------------------------
 
+    def create_web_list(self):
+        self.list_name_web.append("ru-trade24.ru")
+        self.list_name_web.append("ptp-center.ru")
+
+        self.web_site_buttons()
+
     def progress_bar_and_Pars(self, value):
         self.BLOCK_BUTTON = True
         self.uiMwin.progressBar.show()
+
+        self.progress_info(value[0])
+
         self.uiMwin.progressBar.setValue(value[1])
         if value[1] == 99:
             self.Pars_item = self.handlerAndParsData.Pars_item
             self.do_table_cards()
+            self.progress_info(value[0])
         if value[0] == "done" and value[1] == 100:
             self.BLOCK_BUTTON = False
+            self.progress_info(value[0])
 
+    def progress_info(self, string="if_not"):
+        self.uiMwin.Load_info.show()
+
+        if self.uiMwin.progressBar.value() == 99:
+            self.uiMwin.Load_info.setText("Load info: Finishing pars!")
+        elif self.uiMwin.progressBar.value() == 100:
+            self.uiMwin.Load_info.setText("Load info: Done.")
+        elif string != "if_not":
+            self.uiMwin.Load_info.setText(f"Load info: {string}.")
 
     def filter_pars(self, word="Москва"):
         if self.BLOCK_BUTTON:
@@ -106,6 +135,24 @@ class ImageDialog(QDialog):
     # BUTTONS CLICK
     # Post here your functions for clicked buttons
     # ///////////////////////////////////////////////////////////////////
+
+    def web_site_buttons(self):
+        for it in self.list_name_web:
+            create_new_buttons.web_sites_buttons(self, self.listWebSiteButtons, it)
+
+        frame_8 = QFrame(self.uiMwin.Web_sites)
+        frame_8.setFrameShape(QFrame.Shape.StyledPanel)
+        frame_8.setFrameShadow(QFrame.Shadow.Raised)
+        frame_8.setObjectName("frame_8")
+        self.uiMwin.verticalLayout_6.addWidget(frame_8)
+
+    def web_site_buttons_click(self, row_number=1):
+        if not self.PARS_DONE:
+            return
+        else:
+            print(self.list_name_web[row_number])
+            self.do_table_cards(use_web_but=True, take_only=self.list_name_web[row_number])
+
     def bt_exit(self):
         if self.BLOCK_BUTTON:
             print("Emergency Exit without saving!")
@@ -134,6 +181,7 @@ class ImageDialog(QDialog):
             self.filter_pars(word)
 
     def bt_load_save(self):
+        self.PARS_DONE = True
         if self.BLOCK_BUTTON:
             return
         file_data = json.load(open(NAME_JSON))
@@ -142,6 +190,7 @@ class ImageDialog(QDialog):
         self.do_table_cards()
 
     def bt_reset(self):
+        self.PARS_DONE = True
         if self.BLOCK_BUTTON:
             return
         self.handlerAndParsData.start()
@@ -163,7 +212,7 @@ class ImageDialog(QDialog):
         self.uiMwin.stackedWidget.setCurrentWidget(self.uiMwin.page_1_All)
         #TODO
 
-    def do_table_cards(self, use_filter=False):
+    def do_table_cards(self, use_filter=False, use_web_but=False, take_only="some_word"):
 
         self.listNewButtonTable.clear()
         self.feedbackLogButton.clear()
@@ -172,6 +221,8 @@ class ImageDialog(QDialog):
 
         if use_filter:
             pars_it_func = self.pars_it_filter
+        elif use_web_but:
+            pars_it_func[take_only] = self.Pars_item[take_only]
         else:
             pars_it_func = self.Pars_item
 

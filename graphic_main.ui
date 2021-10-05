@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>962</width>
-    <height>709</height>
+    <width>1201</width>
+    <height>876</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -324,7 +324,7 @@ QProgressBar:chunk{
 }</string>
                  </property>
                  <property name="value">
-                  <number>24</number>
+                  <number>0</number>
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignCenter</set>
@@ -334,6 +334,13 @@ QProgressBar:chunk{
                  </property>
                  <property name="invertedAppearance">
                   <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="Load_info">
+                 <property name="text">
+                  <string>Load info:</string>
                  </property>
                 </widget>
                </item>
@@ -637,7 +644,7 @@ QPushButton:pressed {
            <widget class="QFrame" name="menu_right">
             <property name="minimumSize">
              <size>
-              <width>120</width>
+              <width>200</width>
               <height>0</height>
              </size>
             </property>
@@ -656,70 +663,64 @@ QPushButton:pressed {
             <property name="frameShadow">
              <enum>QFrame::Raised</enum>
             </property>
-            <widget class="QFrame" name="frame_7">
-             <property name="geometry">
-              <rect>
-               <x>0</x>
-               <y>10</y>
-               <width>125</width>
-               <height>40</height>
-              </rect>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>110</width>
-               <height>40</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>16777215</width>
-               <height>40</height>
-              </size>
-             </property>
-             <property name="frameShape">
-              <enum>QFrame::StyledPanel</enum>
-             </property>
-             <property name="frameShadow">
-              <enum>QFrame::Raised</enum>
-             </property>
-             <layout class="QVBoxLayout" name="verticalLayout_2">
-              <property name="leftMargin">
-               <number>1</number>
-              </property>
-              <property name="topMargin">
-               <number>1</number>
-              </property>
-              <property name="rightMargin">
-               <number>1</number>
-              </property>
-              <property name="bottomMargin">
-               <number>1</number>
-              </property>
-              <item>
-               <widget class="QComboBox" name="Regions_Box">
-                <property name="minimumSize">
-                 <size>
-                  <width>115</width>
-                  <height>25</height>
-                 </size>
+            <layout class="QVBoxLayout" name="verticalLayout_5">
+             <item>
+              <widget class="QFrame" name="frame_7">
+               <property name="minimumSize">
+                <size>
+                 <width>110</width>
+                 <height>40</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>40</height>
+                </size>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_2">
+                <property name="leftMargin">
+                 <number>1</number>
                 </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>115</width>
-                  <height>25</height>
-                 </size>
+                <property name="topMargin">
+                 <number>1</number>
                 </property>
-                <property name="font">
-                 <font>
-                  <pointsize>10</pointsize>
-                  <italic>false</italic>
-                  <underline>false</underline>
-                  <strikeout>false</strikeout>
-                 </font>
+                <property name="rightMargin">
+                 <number>1</number>
                 </property>
-                <property name="styleSheet">
-                 <string notr="true">color: rgb(255, 255, 255);
+                <property name="bottomMargin">
+                 <number>1</number>
+                </property>
+                <item>
+                 <widget class="QComboBox" name="Regions_Box">
+                  <property name="minimumSize">
+                   <size>
+                    <width>115</width>
+                    <height>25</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>115</width>
+                    <height>25</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <pointsize>10</pointsize>
+                    <italic>false</italic>
+                    <underline>false</underline>
+                    <strikeout>false</strikeout>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">color: rgb(255, 255, 255);
 QComboBox {
 	border: 1px solid;
 	background-color: rgb(109, 109, 109);
@@ -733,26 +734,61 @@ QComboBox:pressed {
 	background-color: rgb(133, 133, 133);
 	color: rgb(255, 255, 255);
 }</string>
+                  </property>
+                  <item>
+                   <property name="text">
+                    <string>All regions</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Moscow</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Moscow region</string>
+                   </property>
+                  </item>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QFrame" name="Web_sites">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_6">
+                <property name="spacing">
+                 <number>1</number>
                 </property>
-                <item>
-                 <property name="text">
-                  <string>All regions</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Moscow</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Moscow region</string>
-                 </property>
-                </item>
-               </widget>
-              </item>
-             </layout>
-            </widget>
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
+               </layout>
+              </widget>
+             </item>
+            </layout>
            </widget>
           </item>
          </layout>
