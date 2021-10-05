@@ -76,7 +76,9 @@ class ImageDialog(QDialog):
         self.Filter_words = ""
         # ---------------------------------------------------------------------------
 
+    # Подргужаем списко сайтов ------------------------------------------------------
     def create_web_list(self):
+        self.list_name_web.append("All website")
         self.list_name_web.append("ru-trade24.ru")
         self.list_name_web.append("ptp-center.ru")
 
@@ -222,7 +224,10 @@ class ImageDialog(QDialog):
         if use_filter:
             pars_it_func = self.pars_it_filter
         elif use_web_but:
-            pars_it_func[take_only] = self.Pars_item[take_only]
+            if take_only == "All website":
+                pars_it_func = self.Pars_item
+            else:
+                pars_it_func[take_only] = self.Pars_item[take_only]
         else:
             pars_it_func = self.Pars_item
 
