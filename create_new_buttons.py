@@ -28,7 +28,7 @@ def table_new_checkbox(self, number_row_item, list_new_button_tab, name_it):
     v_layout.addWidget(checkBox_1)
 
 
-def web_sites_buttons(self, list_new_button_web, name_it=str):  # Принимает self.uiMwin, list(), имя сайта
+def web_site_but(self, list_new_button_web, name_it=str):  # Принимает self.uiMwin, list(), имя сайта
     number_row_item = len(list_new_button_web)
     list_new_button_web.append(QtWidgets.QPushButton(name_it))
 

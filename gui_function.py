@@ -138,7 +138,7 @@ class ImageDialog(QDialog):
 
     def web_site_buttons(self):
         for it in self.list_name_web:
-            create_new_buttons.web_sites_buttons(self, self.listWebSiteButtons, it)
+            create_new_buttons.web_site_but(self, self.listWebSiteButtons, it)
 
         frame_8 = QFrame(self.uiMwin.Web_sites)
         frame_8.setFrameShape(QFrame.Shape.StyledPanel)
@@ -146,11 +146,11 @@ class ImageDialog(QDialog):
         frame_8.setObjectName("frame_8")
         self.uiMwin.verticalLayout_6.addWidget(frame_8)
 
+    # функция предназначена для кнопок выбора фильтра по сайту
     def web_site_buttons_click(self, row_number=1):
         if not self.PARS_DONE:
             return
         else:
-            print(self.list_name_web[row_number])
             self.do_table_cards(use_web_but=True, take_only=self.list_name_web[row_number])
 
     def bt_exit(self):
