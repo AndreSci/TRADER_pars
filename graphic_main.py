@@ -27,6 +27,7 @@ class Ui_Dialog(object):
         self.menu_up.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.menu_up.setObjectName("menu_up")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.menu_up)
+        self.horizontalLayout_3.setContentsMargins(-1, 0, -1, 0)
         self.horizontalLayout_3.setSpacing(0)
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
         self.frame_2 = QtWidgets.QFrame(self.menu_up)
@@ -125,10 +126,17 @@ class Ui_Dialog(object):
         self.frame_6.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame_6.setObjectName("frame_6")
         self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.frame_6)
-        self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_4.setContentsMargins(5, 0, 5, 0)
         self.verticalLayout_4.setSpacing(2)
         self.verticalLayout_4.setObjectName("verticalLayout_4")
+        self.frame_8 = QtWidgets.QFrame(self.frame_6)
+        self.frame_8.setMaximumSize(QtCore.QSize(16777215, 15))
+        self.frame_8.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.frame_8.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.frame_8.setObjectName("frame_8")
+        self.verticalLayout_4.addWidget(self.frame_8)
         self.progressBar = QtWidgets.QProgressBar(self.frame_6)
+        self.progressBar.setMaximumSize(QtCore.QSize(16777215, 17))
         self.progressBar.setStyleSheet("QProgressBar{    \n"
 "    border: 1px solid;\n"
 "    background-color: rgb(230, 210, 185);\n"
@@ -147,6 +155,7 @@ class Ui_Dialog(object):
         self.progressBar.setObjectName("progressBar")
         self.verticalLayout_4.addWidget(self.progressBar)
         self.Load_info = QtWidgets.QLabel(self.frame_6)
+        self.Load_info.setMaximumSize(QtCore.QSize(16777215, 17))
         self.Load_info.setObjectName("Load_info")
         self.verticalLayout_4.addWidget(self.Load_info)
         self.horizontalLayout_7.addWidget(self.frame_6)
@@ -246,14 +255,14 @@ class Ui_Dialog(object):
         self.page_1_All = QtWidgets.QWidget()
         self.page_1_All.setObjectName("page_1_All")
         self.horizontalLayout_5 = QtWidgets.QHBoxLayout(self.page_1_All)
-        self.horizontalLayout_5.setContentsMargins(1, 1, 1, 1)
-        self.horizontalLayout_5.setSpacing(1)
+        self.horizontalLayout_5.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_5.setSpacing(0)
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
         self.table_for_cards = QtWidgets.QTableWidget(self.page_1_All)
         self.table_for_cards.setFocusPolicy(QtCore.Qt.FocusPolicy.StrongFocus)
         self.table_for_cards.setStyleSheet("QTableWidget{\n"
-"    border: 2px solid;\n"
-"    border-color: rgb(111,111,111);\n"
+"    border: 1px solid;\n"
+"    border-color: rgb(1,1,1);\n"
 "    background-color: rgb(211, 211, 211);\n"
 "    border-radius: 3px;\n"
 "    color: rgb(0, 0, 0);\n"
@@ -283,16 +292,16 @@ class Ui_Dialog(object):
         self.table_for_cards.verticalHeader().setStretchLastSection(True)
         self.horizontalLayout_5.addWidget(self.table_for_cards)
         self.menu_right = QtWidgets.QFrame(self.page_1_All)
-        self.menu_right.setMinimumSize(QtCore.QSize(200, 0))
-        self.menu_right.setMaximumSize(QtCore.QSize(120, 16777215))
-        self.menu_right.setStyleSheet("")
+        self.menu_right.setMinimumSize(QtCore.QSize(175, 0))
+        self.menu_right.setMaximumSize(QtCore.QSize(175, 16777215))
+        self.menu_right.setStyleSheet("background-color: rgb(12, 12, 12);")
         self.menu_right.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.menu_right.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.menu_right.setObjectName("menu_right")
         self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.menu_right)
         self.verticalLayout_5.setObjectName("verticalLayout_5")
         self.frame_7 = QtWidgets.QFrame(self.menu_right)
-        self.frame_7.setMinimumSize(QtCore.QSize(110, 40))
+        self.frame_7.setMinimumSize(QtCore.QSize(160, 40))
         self.frame_7.setMaximumSize(QtCore.QSize(16777215, 40))
         self.frame_7.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame_7.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
@@ -301,28 +310,17 @@ class Ui_Dialog(object):
         self.verticalLayout_2.setContentsMargins(1, 1, 1, 1)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.Regions_Box = QtWidgets.QComboBox(self.frame_7)
-        self.Regions_Box.setMinimumSize(QtCore.QSize(115, 25))
-        self.Regions_Box.setMaximumSize(QtCore.QSize(115, 25))
+        self.Regions_Box.setMinimumSize(QtCore.QSize(150, 25))
+        self.Regions_Box.setMaximumSize(QtCore.QSize(150, 25))
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setItalic(False)
         font.setUnderline(False)
         font.setStrikeOut(False)
         self.Regions_Box.setFont(font)
-        self.Regions_Box.setStyleSheet("color: rgb(255, 255, 255);\n"
-"QComboBox {\n"
-"    border: 1px solid;\n"
-"    background-color: rgb(109, 109, 109);\n"
-"    color: rgb(255, 255, 255);\n"
-"}\n"
-"QComboBox:hover {\n"
-"    background-color: rgb(133, 133, 133);\n"
-"    color: rgb(255, 255, 255);\n"
-"}\n"
-"QComboBox:pressed {    \n"
-"    background-color: rgb(133, 133, 133);\n"
-"    color: rgb(255, 255, 255);\n"
-"}")
+        self.Regions_Box.setStyleSheet("color: rgb(150,150, 150);\n"
+"background-color: rgb(52, 52, 52);\n"
+"selection-background-color: rgb(55, 56, 56);")
         self.Regions_Box.setObjectName("Regions_Box")
         self.Regions_Box.addItem("")
         self.Regions_Box.addItem("")
@@ -364,8 +362,6 @@ class Ui_Dialog(object):
         self.table_for_cards.setSortingEnabled(True)
         __sortingEnabled = self.table_for_cards.isSortingEnabled()
         self.table_for_cards.setSortingEnabled(False)
-        item = self.table_for_cards.item(0, 0)
-        item.setText(_translate("Dialog", "123"))
         self.table_for_cards.setSortingEnabled(__sortingEnabled)
         self.Regions_Box.setItemText(0, _translate("Dialog", "All regions"))
         self.Regions_Box.setItemText(1, _translate("Dialog", "Moscow"))
