@@ -11,6 +11,7 @@ from graphic_main import Ui_Dialog
 
 NAME_JSON = "saved_info.json"
 NAME_JSON_EXIT = "saved_info_exit.json"
+OPEN_ITEM = "Go_to ->"
 
 
 # Максимальный прогресс 99%, больше\равно уже создание таблицы и разблокировка кнопок
@@ -63,6 +64,8 @@ class ImageDialog(QDialog):
         # Зона новых кнопок в таблице table_for_cards--------------------------------
         self.listNewButtonTable = list()  # База новых кнопок из таблицы
         self.feedbackLogButton = dict()  # запись адресов новых кнопок
+        # ---- { "address" -> "number" -> 0 or 1} -----------------------------------
+        self.likedPersonItem = dict()  # Содержит информацию понравившихся объявлений
         # ---------------------------------------------------------------------------
         # Зона новых кнопок в меню доступных сайтов----------------------------------
         self.list_name_web = list()
@@ -72,6 +75,13 @@ class ImageDialog(QDialog):
         self.Pars_item = dict()
         self.pars_it_filter = dict()
         self.Filter_words = ""
+        # ---------------------------------------------------------------------------
+        # Подгоняем размер таблицы --------------------------------------------------
+        self.uiMwin.table_for_cards.setColumnWidth(0, 40)
+        self.uiMwin.table_for_cards.setColumnWidth(1, 60)
+        self.uiMwin.table_for_cards.setColumnWidth(3, 90)
+        self.uiMwin.table_for_cards.setColumnWidth(4, 170)
+        self.uiMwin.table_for_cards.setColumnWidth(5, 60)
         # ---------------------------------------------------------------------------
 
     # Подгружаем список сайтов ------------------------------------------------------
@@ -257,14 +267,14 @@ class ImageDialog(QDialog):
         self.uiMwin.table_for_cards.clear()
         self.uiMwin.table_for_cards.setRowCount(0)
 
-        labels = ['Address', '№', 'Name', 'Lots', 'Comments']
+        labels = ["Like", 'Open_item', 'Address', '№', 'Name', 'Lots', 'Comments']
 
         self.uiMwin.table_for_cards.setColumnCount(len(labels))  # устанавливаем длину таблицы
         self.uiMwin.table_for_cards.setHorizontalHeaderLabels(labels)  # заполняем название столбцов
         # ------------------------------------------------------------------------------------------
         # return list() "result_item_cards"
-        # { "number" / "name" / "target" / "lots" = list() -> (dict)...}
-        # {     0          1        2       3   ...     }
+        # { "number" / "name" / "target" / "lots" = list() -> (dict)... }
+        # {     0          1        2       3   ...                     }
         # ------------------------------------------------------------------------------------------
 
         index_row = 0
@@ -278,13 +288,14 @@ class ImageDialog(QDialog):
                 for card in cards:
                     row = self.uiMwin.table_for_cards.rowCount()  # получаем кол-во строк
                     self.uiMwin.table_for_cards.setRowCount(row + 1)  # создаем новую строку
-                    self.uiMwin.table_for_cards.setItem(index_row, 0, QTableWidgetItem(key))
-                    self.uiMwin.table_for_cards.setItem(index_row, 1, QTableWidgetItem(card["number"]))
-                    self.uiMwin.table_for_cards.setItem(index_row, 2, QTableWidgetItem(card["name"]))
-                    self.uiMwin.table_for_cards.setItem(index_row, 3, QTableWidgetItem(str(len(card["lots"]))))
-                    self.uiMwin.table_for_cards.setItem(index_row, 4, QTableWidgetItem(card["target"]))
+                    self.uiMwin.table_for_cards.setItem(index_row, 1, QTableWidgetItem(OPEN_ITEM))
+                    self.uiMwin.table_for_cards.setItem(index_row, 2, QTableWidgetItem(key))
+                    self.uiMwin.table_for_cards.setItem(index_row, 3, QTableWidgetItem(card["number"]))
+                    self.uiMwin.table_for_cards.setItem(index_row, 4, QTableWidgetItem(card["name"]))
+                    self.uiMwin.table_for_cards.setItem(index_row, 5, QTableWidgetItem(str(len(card["lots"]))))
+                    self.uiMwin.table_for_cards.setItem(index_row, 6, QTableWidgetItem(card["target"]))
 
                     index_row += 1
 
         row = self.uiMwin.table_for_cards.rowCount()  # получаем кол-во строк
-        self.uiMwin.table_for_cards.setRowCount(row + 1)  # создаем последнюю строку в таблице
+        self.uiMwin.table_for_cards.setRowCount(row + 1)  # создаем последнюю строку в таблице для выравнивания

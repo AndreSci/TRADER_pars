@@ -74,8 +74,8 @@ def get_info(cards):    # Получаем данные всех предлож�
         result_item["number"] = card_number_dig
         result_item["name"] = card_name
         result_item["target"] = card_target
-        # { "number" / "name" / "target" / "lots" = list() -> (dict)...}
-        # {     0          1        2       3   ...     }
+        # { "number" / "name" / "target" / "lots" = list() -> (dict)... }
+        # {     0          1        2       3   ...                     }
 
         index_lot = 1
         result_lot = dict()

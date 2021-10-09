@@ -12,7 +12,7 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(1201, 876)
+        Dialog.resize(1201, 880)
         Dialog.setMinimumSize(QtCore.QSize(800, 600))
         Dialog.setMaximumSize(QtCore.QSize(16777215, 16777215))
         self.verticalLayout = QtWidgets.QVBoxLayout(Dialog)
@@ -268,12 +268,13 @@ class Ui_Dialog(object):
 "    color: rgb(0, 0, 0);\n"
 "}")
         self.table_for_cards.setFrameShape(QtWidgets.QFrame.Shape.Box)
+        self.table_for_cards.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.SizeAdjustPolicy.AdjustToContents)
         self.table_for_cards.setAutoScroll(False)
         self.table_for_cards.setEditTriggers(QtWidgets.QAbstractItemView.EditTrigger.AnyKeyPressed|QtWidgets.QAbstractItemView.EditTrigger.DoubleClicked|QtWidgets.QAbstractItemView.EditTrigger.EditKeyPressed)
         self.table_for_cards.setShowGrid(True)
         self.table_for_cards.setGridStyle(QtCore.Qt.PenStyle.DashLine)
         self.table_for_cards.setRowCount(5)
-        self.table_for_cards.setColumnCount(4)
+        self.table_for_cards.setColumnCount(7)
         self.table_for_cards.setObjectName("table_for_cards")
         item = QtWidgets.QTableWidgetItem()
         font = QtGui.QFont()
@@ -288,6 +289,7 @@ class Ui_Dialog(object):
         self.table_for_cards.horizontalHeader().setHighlightSections(False)
         self.table_for_cards.horizontalHeader().setStretchLastSection(True)
         self.table_for_cards.verticalHeader().setVisible(False)
+        self.table_for_cards.verticalHeader().setCascadingSectionResizes(False)
         self.table_for_cards.verticalHeader().setHighlightSections(False)
         self.table_for_cards.verticalHeader().setStretchLastSection(True)
         self.horizontalLayout_5.addWidget(self.table_for_cards)

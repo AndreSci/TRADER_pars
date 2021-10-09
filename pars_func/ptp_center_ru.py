@@ -72,8 +72,8 @@ def get_info(cards):    # Получаем данные всех предлож�
         result_item["name"] = res[1].get_text()
         result_item["target"] = res[3].get_text()
 
-        # { "number" / "name" / "target" / "lots" = list() -> (dict)...}
-        # {     0          1        3       2   ...     }
+        # { "number" / "name" / "target" / "lots" = list() -> (dict)... }
+        # {     0          1        3       2   ...                     }
 
         index_lot = 1
         result_lot = dict()
