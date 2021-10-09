@@ -12,6 +12,8 @@ from graphic_main import Ui_Dialog
 NAME_JSON = "saved_info.json"
 NAME_JSON_EXIT = "saved_info_exit.json"
 OPEN_ITEM = "Go_to ->"
+SHOW_LOVED = "Show loved"
+SHOW_ALL = "All website"
 
 
 # Максимальный прогресс 99%, больше\равно уже создание таблицы и разблокировка кнопок
@@ -87,7 +89,9 @@ class ImageDialog(QDialog):
     # Подгружаем список сайтов ------------------------------------------------------
     # В будущем реализовать функцию получения списка сайтов из файла !!!!------------
     def create_web_list(self):
-        self.list_name_web.append("All website")
+        """ static list """
+        self.list_name_web.append(SHOW_ALL)
+        self.list_name_web.append(SHOW_LOVED)
         self.list_name_web.append("ru-trade24.ru")
         self.list_name_web.append("ptp-center.ru")
 
@@ -247,22 +251,23 @@ class ImageDialog(QDialog):
 
     def do_table_cards(self, use_filter=False, use_web_but=False, take_only="some_word"):
 
-        self.listNewButtonTable.clear()
-        self.feedbackLogButton.clear()
-
         pars_it_func = dict()
 
         if use_filter:
             pars_it_func = self.pars_it_filter
         elif use_web_but:
-            if take_only == "All website":
+            if take_only == SHOW_ALL:
                 pars_it_func = self.Pars_item
+            elif take_only == SHOW_LOVED:
+                return
             else:
                 pars_it_func[take_only] = self.Pars_item[take_only]
         else:
             pars_it_func = self.Pars_item
 
         "' Очищаем заглавия '"
+        self.listNewButtonTable.clear()
+        self.feedbackLogButton.clear()
 
         self.uiMwin.table_for_cards.clear()
         self.uiMwin.table_for_cards.setRowCount(0)
