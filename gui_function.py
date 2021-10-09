@@ -33,8 +33,6 @@ class ProgressHandler(QtCore.QThread):
         self.mysignal.emit(["done", 100])
 
 
-
-
 class ImageDialog(QDialog):
     def __init__(self):
         super().__init__()
@@ -53,7 +51,7 @@ class ImageDialog(QDialog):
         self.uiMwin.Load_info.hide()
 
         self.handlerAndParsData = ProgressHandler()
-        self.handlerAndParsData.mysignal.connect(self.progress_bar_and_Pars)
+        self.handlerAndParsData.mysignal.connect(self.progress_bar_and_pars)
 
         # Подвязываем кнопки к функциям
         self.uiMwin.Button_Exit.clicked.connect(self.bt_exit)
@@ -77,6 +75,7 @@ class ImageDialog(QDialog):
         # ---------------------------------------------------------------------------
 
     # Подгружаем список сайтов ------------------------------------------------------
+    # В будущем реализовать функцию получения списка сайтов из файла !!!!------------
     def create_web_list(self):
         self.list_name_web.append("All website")
         self.list_name_web.append("ru-trade24.ru")
@@ -84,7 +83,9 @@ class ImageDialog(QDialog):
 
         self.web_site_buttons()
 
-    def progress_bar_and_Pars(self, value):
+    # -------------------------------------------------------------------------------
+
+    def progress_bar_and_pars(self, value):
         self.BLOCK_BUTTON = True
         self.uiMwin.progressBar.show()
 
@@ -99,6 +100,8 @@ class ImageDialog(QDialog):
             self.BLOCK_BUTTON = False
             self.progress_info(value[0])
 
+    # -------------------------------------------------------------------------------
+
     def progress_info(self, string="if_not"):
         self.uiMwin.Load_info.show()
 
@@ -108,6 +111,8 @@ class ImageDialog(QDialog):
             self.uiMwin.Load_info.setText("Load info: Done.")
         elif string != "if_not":
             self.uiMwin.Load_info.setText(f"Load info: {string}.")
+
+    # -------------------------------------------------------------------------------
 
     def filter_pars(self, word="Москва"):
         if self.BLOCK_BUTTON:
@@ -134,9 +139,10 @@ class ImageDialog(QDialog):
 
         self.do_table_cards(True)
 
+    # -------------------------------------------------------------------------------
     # BUTTONS CLICK
     # Post here your functions for clicked buttons
-    # ///////////////////////////////////////////////////////////////////
+    # -------------------------------------------------------------------------------
 
     def web_site_buttons(self):
         for it in self.list_name_web:
@@ -148,12 +154,15 @@ class ImageDialog(QDialog):
         frame_8.setObjectName("frame_8")
         self.uiMwin.verticalLayout_6.addWidget(frame_8)
 
-    # функция предназначена для кнопок выбора фильтра по сайту
+    # -------------------------------------------------------------------------------
+    # функция предназначена для кнопок выбора фильтра по сайту ----------------------
     def web_site_buttons_click(self, row_number=1):
         if not self.PARS_DONE:
             return
         else:
             self.do_table_cards(use_web_but=True, take_only=self.list_name_web[row_number])
+
+    # -------------------------------------------------------------------------------
 
     def bt_exit(self):
         if self.BLOCK_BUTTON:
@@ -165,6 +174,7 @@ class ImageDialog(QDialog):
         print("Exit save data: done!")
         raise SystemExit(1)
 
+    # -------------------------------------------------------------------------------
     def bt_save_check(self):
         if self.BLOCK_BUTTON:
             return
@@ -172,6 +182,8 @@ class ImageDialog(QDialog):
         with open(NAME_JSON, 'w') as f:
             f.write(j)
         print("Save done!")
+
+    # -------------------------------------------------------------------------------
 
     def bt_search(self):
         if self.BLOCK_BUTTON:
@@ -182,6 +194,8 @@ class ImageDialog(QDialog):
         else:
             self.filter_pars(word)
 
+    # -------------------------------------------------------------------------------
+
     def bt_load_save(self):
         self.PARS_DONE = True
         if self.BLOCK_BUTTON:
@@ -191,15 +205,18 @@ class ImageDialog(QDialog):
         print("load information Success!")
         self.do_table_cards()
 
+    # -------------------------------------------------------------------------------
+
     def bt_reset(self):
         self.PARS_DONE = True
         if self.BLOCK_BUTTON:
             return
         self.handlerAndParsData.start()
 
+    # -------------------------------------------------------------------------------
     # TABLE CREATING
     # Post here your functions for control at the table information
-    # ///////////////////////////////////////////////////////////////////
+    # -------------------------------------------------------------------------------
     def take_pars_file(self):
         if self.BLOCK_BUTTON:
             return
@@ -208,11 +225,15 @@ class ImageDialog(QDialog):
         self.Pars_item["ru-trade24.ru"] = t24["ru-trade24.ru"]
         self.Pars_item["ptp-center.ru"] = ptp["ptp-center.ru"]
 
+    # -------------------------------------------------------------------------------
+
     def table_button_click(self, number_row_item):
         if self.BLOCK_BUTTON:
             return
         self.uiMwin.stackedWidget.setCurrentWidget(self.uiMwin.page_1_All)
         #TODO
+
+    # -------------------------------------------------------------------------------
 
     def do_table_cards(self, use_filter=False, use_web_but=False, take_only="some_word"):
 
@@ -244,6 +265,7 @@ class ImageDialog(QDialog):
         # return list() "result_item_cards"
         # { "number" / "name" / "target" / "lots" = list() -> (dict)...}
         # {     0          1        2       3   ...     }
+        # ------------------------------------------------------------------------------------------
 
         index_row = 0
         number_row_item = 1
