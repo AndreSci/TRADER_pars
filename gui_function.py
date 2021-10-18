@@ -73,6 +73,10 @@ class ImageDialog(QDialog):
         self.list_name_web = list()
         self.listWebSiteButtons = list()
         # ---------------------------------------------------------------------------
+        # Зона новых кнопок понравившихся торгов-------------------------------------
+        self.dict_new_button_like = dict()
+        self.dict_button_liked = dict()
+        # ---------------------------------------------------------------------------
         # Зона данных парсинга ------------------------------------------------------
         self.Pars_item = dict()
         self.pars_it_filter = dict()
@@ -291,6 +295,7 @@ class ImageDialog(QDialog):
             for cards in pars_it_func[key]:
 
                 for card in cards:
+
                     row = self.uiMwin.table_for_cards.rowCount()  # получаем кол-во строк
                     self.uiMwin.table_for_cards.setRowCount(row + 1)  # создаем новую строку
                     self.uiMwin.table_for_cards.setItem(index_row, 1, QTableWidgetItem(OPEN_ITEM))
@@ -299,6 +304,10 @@ class ImageDialog(QDialog):
                     self.uiMwin.table_for_cards.setItem(index_row, 4, QTableWidgetItem(card["name"]))
                     self.uiMwin.table_for_cards.setItem(index_row, 5, QTableWidgetItem(str(len(card["lots"]))))
                     self.uiMwin.table_for_cards.setItem(index_row, 6, QTableWidgetItem(card["target"]))
+
+                    create_new_buttons.like_table_button(self, self.dict_new_button_like, key, card["number"])
+                    self.uiMwin.table_for_cards.setCellWidget(index_row, 0,
+                                                           self.dict_new_button_like[key][card["number"]])
 
                     index_row += 1
 
