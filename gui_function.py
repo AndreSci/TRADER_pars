@@ -9,6 +9,7 @@ from PyQt6.QtWidgets import QDialog, QWidget, QApplication, QMainWindow, QTableW
 from PyQt6 import QtCore
 from graphic_main import Ui_Dialog
 
+NAME_JSON_LIKE = "saved_liked.json"
 NAME_JSON = "saved_info.json"
 NAME_JSON_EXIT = "saved_info_exit.json"
 OPEN_ITEM = "Go_to ->"
@@ -196,9 +197,15 @@ class ImageDialog(QDialog):
     def bt_save_check(self):
         if self.BLOCK_BUTTON:
             return
-        j = json.dumps(self.Pars_item)
+        # сохраняем полученую базу торгов ---
+        j_b = json.dumps(self.Pars_item)
         with open(NAME_JSON, 'w') as f:
-            f.write(j)
+            f.write(j_b)
+        # сохраняем понравившиеся торги   ---
+        j_l = json.dumps(self.dict_button_liked)
+        with open(NAME_JSON_LIKE, 'w') as l:
+            l.write(j_l)
+
         print("Save done!")
 
     # -------------------------------------------------------------------------------
@@ -218,9 +225,26 @@ class ImageDialog(QDialog):
         self.PARS_DONE = True
         if self.BLOCK_BUTTON:
             return
-        file_data = json.load(open(NAME_JSON))
-        self.Pars_item = file_data
-        print("load information Success!")
+
+        index = 0
+        len_index = 2
+
+        try:
+            file_data = json.load(open(NAME_JSON))
+            self.Pars_item = file_data
+            index += 1
+            print(f"load information {index}/{len_index} Success!")
+        except:
+            print(f"не удалось открыть файл {NAME_JSON}")
+
+        try:
+            file_like = json.load(open(NAME_JSON_LIKE))
+            self.dict_button_liked = file_like
+            index += 1
+            print(f"load information {index}/{len_index} Success!")
+        except:
+            print(f"не удалось открыть файл {NAME_JSON_LIKE}")
+
         self.do_table_cards()
 
     # -------------------------------------------------------------------------------
@@ -252,6 +276,7 @@ class ImageDialog(QDialog):
         #TODO
 
     # -------------------------------------------------------------------------------
+
 
     def do_table_cards(self, use_filter=False, use_web_but=False, take_only="some_word"):
 
@@ -305,7 +330,7 @@ class ImageDialog(QDialog):
                     self.uiMwin.table_for_cards.setItem(index_row, 5, QTableWidgetItem(str(len(card["lots"]))))
                     self.uiMwin.table_for_cards.setItem(index_row, 6, QTableWidgetItem(card["target"]))
 
-                    create_new_buttons.like_table_button(self, self.dict_new_button_like, key, card["number"])
+                    create_new_buttons.like_table_button(self, key, card["number"])
                     self.uiMwin.table_for_cards.setCellWidget(index_row, 0,
                                                            self.dict_new_button_like[key][card["number"]])
 

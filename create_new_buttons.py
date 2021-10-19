@@ -19,6 +19,8 @@ def table_new_button(self, number_row_item, list_new_button_tab, name_it):
                                                              self.table_button_click(number_row_item)
                                                             )
 
+# ------------------------------------------------------------------------------
+
 
 def table_new_checkbox(self, number_row_item, list_new_button_tab, name_it):
     # только пример и ничего более!
@@ -26,6 +28,8 @@ def table_new_checkbox(self, number_row_item, list_new_button_tab, name_it):
 
     v_layout = QtWidgets.QVBoxLayout()  # поле для размещения
     v_layout.addWidget(checkBox_1)
+
+# ------------------------------------------------------------------------------
 
 
 def web_site_but(self, list_new_button_web, name_it=str):  # Принимает self.uiMwin, list(), имя сайта
@@ -49,6 +53,8 @@ def web_site_but(self, list_new_button_web, name_it=str):  # Принимает 
 
     list_new_button_web[number_row_item].clicked.connect(lambda: self.web_site_buttons_click(number_row_item))
 
+# ------------------------------------------------------------------------------
+
 
 def like_but_conf(self, name_it_web, number):
     print(f"push = {name_it_web}: {number}")
@@ -62,7 +68,10 @@ def like_but_conf(self, name_it_web, number):
         self.dict_button_liked[name_it_web][number] = 1
 
 
-def like_table_button(self, dict_new_button_like, name_it_web=str, number=str):
+# ------------------------------------------------------------------------------
+
+
+def like_table_button(self, name_it_web=str, number=str):
     # Принимает self.uiMwin, dict(), сайт и номер объявления
 
     self.dict_new_button_like[name_it_web] = dict()
@@ -75,10 +84,19 @@ def like_table_button(self, dict_new_button_like, name_it_web=str, number=str):
     self.dict_new_button_like[name_it_web][number].setText("")
     self.dict_new_button_like[name_it_web][number].setCheckable(True)
 
-    self.dict_button_liked[name_it_web] = dict()
-    self.dict_button_liked[name_it_web][number] = int()
-    self.dict_button_liked[name_it_web][number] = 0
-    self.dict_new_button_like[name_it_web][number].setChecked(False)
+    try:
+        if self.dict_button_liked[name_it_web][number] == 1:
+            self.dict_new_button_like[name_it_web][number].setChecked(True)
+        else:
+            self.dict_new_button_like[name_it_web][number].setChecked(False)
+    except:
+        if name_it_web not in self.dict_button_liked:
+            self.dict_button_liked[name_it_web] = dict()
+        if number not in self.dict_button_liked[name_it_web]:
+            self.dict_button_liked[name_it_web][number] = int()
+
+        self.dict_button_liked[name_it_web][number] = 0
+        self.dict_new_button_like[name_it_web][number].setChecked(False)
 
     icon2 = QtGui.QIcon()
     icon2.addPixmap(QtGui.QPixmap("image_file/like_off.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
@@ -87,6 +105,6 @@ def like_table_button(self, dict_new_button_like, name_it_web=str, number=str):
     self.dict_new_button_like[name_it_web][number].setIconSize(QtCore.QSize(18, 18))
     self.dict_new_button_like[name_it_web][number].setObjectName(f"Button_Like_{str(number)}")
 
-    self.dict_new_button_like[name_it_web][number].clicked.connect(lambda: like_but_conf(self, str(name_it_web),
-                                                                                         str(number)))
+    self.dict_new_button_like[name_it_web][number].clicked.connect(lambda: like_but_conf(self, name_it_web,
+                                                                                         number))
 
