@@ -111,6 +111,7 @@ class ImageDialog(QDialog):
         self.progress_info(value[0])
 
         self.uiMwin.progressBar.setValue(value[1])
+
         if value[1] == 99:
             self.Pars_item = self.handlerAndParsData.Pars_item
             self.do_table_cards()
@@ -187,7 +188,9 @@ class ImageDialog(QDialog):
         if self.BLOCK_BUTTON:
             print("Emergency Exit without saving!")
             raise SystemExit(1)
+
         j = json.dumps(self.Pars_item)
+
         with open(NAME_JSON_EXIT, 'w') as f:
             f.write(j)
         print("Exit save data: done!")
@@ -197,10 +200,12 @@ class ImageDialog(QDialog):
     def bt_save_check(self):
         if self.BLOCK_BUTTON:
             return
+
         # сохраняем полученую базу торгов ---
         j_b = json.dumps(self.Pars_item)
         with open(NAME_JSON, 'w') as f:
             f.write(j_b)
+
         # сохраняем понравившиеся торги   ---
         j_l = json.dumps(self.dict_button_liked)
         with open(NAME_JSON_LIKE, 'w') as l:
@@ -213,7 +218,9 @@ class ImageDialog(QDialog):
     def bt_search(self):
         if self.BLOCK_BUTTON:
             return
+
         word = self.uiMwin.lineEdit_Search.text()
+
         if word == "Enter words" or word == "Please enter your question":
             self.uiMwin.lineEdit_Search.setText("Please enter your question")
         else:
@@ -223,6 +230,7 @@ class ImageDialog(QDialog):
 
     def bt_load_save(self):
         self.PARS_DONE = True
+
         if self.BLOCK_BUTTON:
             return
 
@@ -251,6 +259,7 @@ class ImageDialog(QDialog):
 
     def bt_reset(self):
         self.PARS_DONE = True
+
         if self.BLOCK_BUTTON:
             return
         self.handlerAndParsData.start()
@@ -262,6 +271,7 @@ class ImageDialog(QDialog):
     def take_pars_file(self):
         if self.BLOCK_BUTTON:
             return
+
         ptp = take_pars_data.take_ptp_center()
         t24 = take_pars_data.take_trade24()
         self.Pars_item["ru-trade24.ru"] = t24["ru-trade24.ru"]
@@ -272,6 +282,7 @@ class ImageDialog(QDialog):
     def table_button_click(self, number_row_item):
         if self.BLOCK_BUTTON:
             return
+
         self.uiMwin.stackedWidget.setCurrentWidget(self.uiMwin.page_1_All)
         #TODO
 
